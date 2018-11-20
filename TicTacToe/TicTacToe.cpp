@@ -12,8 +12,10 @@ void TicTacToe::start(){
 		menuChoice = menu();
 
 		switch(menuChoice){
-			case 1: play(false); break;   	// Singleplayer game
-			case 2: play(true); break;		// 2 player game
+			case 11: play(false, easy); break;   	// Singleplayer game (Easy)
+			case 12: play(false, hard); break;   	// Singleplayer game (Hard)
+			case 13: play(false, unbeatable); break;   	// Singleplayer game (Unbeatable)
+			case 2: play(true, multiplayer); break;		// 2 player game
 			case 3: rules(); break;			// Rules
 			default: break;
 		}
@@ -23,6 +25,7 @@ void TicTacToe::start(){
 // Main manu for tic tac toe options
 int TicTacToe::menu(){
 	int menuChoice;
+	bool diffMenu = false;
 	while(true){
 		// Print header and change text attributes
 		printHeader(); 
@@ -33,12 +36,24 @@ int TicTacToe::menu(){
 		cout << "                        Welcome to Tic Tac Toe!                        \n" 
 				"               Please select an option from the menu below:            \n" << endl;
 
-		cout << "               (1) Play Tic Tac Toe vs. the CPU    (1 Player)          \n" 
-				"               (2) Play Tic Tac Toe vs. a friend   (2 Player)          \n"
-				"               (3) View game rules and controls 				        \n"<< endl;
+		if(!diffMenu){
+			cout << "               (1) Play Tic Tac Toe vs. the CPU    (1 Player)          \n"
+					"               (2) Play Tic Tac Toe vs. a friend   (2 Player)          \n"
+					"               (3) View game rules and controls 				        \n"<< endl;
 
-		cout << "               (0) Return to GameHub							        " << endl;
-		ansi.textReset();
+			cout << "               (0) Return to GameHub							        " << endl;
+			ansi.textReset();
+		}
+		else{
+			ansi.textAttr("-bold");
+			cout << "               ( ) Play Tic Tac Toe vs. the CPU                        \n";
+			ansi.textAttr("bold");
+			cout <<	"               Please choose a difficulty:					            \n"
+					"               (1) Easy | (2) Hard | (3) Unbeatable			        \n"<< endl;
+
+			cout << "               (0) Return to menu							        " << endl;
+			ansi.textReset();
+		}
 
 		// Accept the user's input
 		cin >> menuChoice;
@@ -47,14 +62,23 @@ int TicTacToe::menu(){
 			cin.clear();
         	cin.ignore();
 		}
-		else if(menuChoice <=3 && menuChoice >= 0){
-			return menuChoice;		// Return the mune choice to start()
+		else if(!diffMenu){
+			if(menuChoice == 1)
+				diffMenu = true;
+			else if(menuChoice<=3 && menuChoice>=0)
+				return menuChoice;		// Return the mune choice to start()
+		}
+		else{
+			if(menuChoice == 0)
+				diffMenu = 0;
+			else if(menuChoice<=3 && menuChoice>=1)
+				return menuChoice + 10;
 		}
 	}
 }
 
 // Main game logic for tic tac toe
-void TicTacToe::play(bool multiplayer){
+void TicTacToe::play(bool multiplayer, Difficulty diff){
 	TTTBoard gameBoard;				// Create the game board
 	bool gameOver = false;			// keep track of if the game is over
 	int moveKey;					// input variable for character key inputs
@@ -88,22 +112,7 @@ void TicTacToe::play(bool multiplayer){
 
 		// CPU's turn 
 		if(!multiplayer && !Xturn){
-			// Pick a random available space on the board
-			int space = rand()%(movesRemaining);
-			// Find the position on the board, ignoring occupied spaces
-			for(int i=0; i<size*size; i++){
-				if(gameBoard.isEmpty(i)){			// isEmpty checks if spot i on the board is available
-					if(space == 0){
-						Sleep(1000);				// Sleep for 1s for immersion
-						gameBoard.placeCPU(i);		// Place the 'O' on the board
-						Xturn = !Xturn;				// Update to next turn in game
-						movesRemaining--;
-						break;
-					}
-					else
-						space--;
-				}
-			}
+			gameBoard.placeCPU(cpuTurn(diff, gameBoard));
 		}
 		else{
 			// Get character key input from user and update the gameboard accordingly
@@ -124,6 +133,88 @@ void TicTacToe::play(bool multiplayer){
 			endgame(winner, gameBoard);
 		}
 	}
+}
+
+// Simulates the CPU's turn based on the chosen difficulty
+int TicTacToe::cpuTurn(Difficulty diff, TTTBoard gameBoard){
+	// If difficulty is not set to easy, the cpu should place at a space that will immediately 
+	// win them the game or block the player from winning
+	if(diff == hard || diff == unbeatable){
+		// Search for spaces that will immediately win the game for the cpu
+		int space = winningMove('O', gameBoard);
+		if(space>=0){
+			Sleep(1000);				// Sleep for 1s for immersion
+			Xturn = !Xturn;				// Update to next turn in game
+			movesRemaining--;
+			return space;
+		}
+
+		// Search for spaces that will block the player from winning
+		space = winningMove('X', gameBoard);
+		if(space>=0){
+			Sleep(1000);				// Sleep for 1s for immersion
+			Xturn = !Xturn;				// Update to next turn in game
+			movesRemaining--;
+			return space;
+		}
+	}
+
+	// If difficulty is either easy or hard, the cpu should choose a random spot at this point
+	if(diff != unbeatable){
+		// Pick a random available space on the board
+		int space = rand()%(movesRemaining);
+		// Find the position on the board, ignoring occupied spaces
+		for(int i=0; i<size*size; i++){
+			if(gameBoard.isEmpty(i)){			// isEmpty checks if spot i on the board is available
+				if(space == 0){
+					Sleep(1000);				// Sleep for 1s for immersion
+					Xturn = !Xturn;				// Update to next turn in game
+					movesRemaining--;
+					return i;
+				}
+				else
+					space--;
+			}
+		}
+	}
+}
+
+// Find potential winning moves for character, returns the index
+int TicTacToe::winningMove(char character, TTTBoard gameBoard){
+	// Checking for potential diagonal 3 in a rows
+	if(gameBoard.board[0]==gameBoard.board[4] && gameBoard.board[0] == character && gameBoard.board[8]==' ')
+		return 8;
+	else if(gameBoard.board[0]==gameBoard.board[8] && gameBoard.board[0] == character && gameBoard.board[4]==' ')
+		return 4;
+	else if(gameBoard.board[4]==gameBoard.board[8] && gameBoard.board[4] == character && gameBoard.board[0]==' ')
+		return 0;
+	else if(gameBoard.board[2]==gameBoard.board[4] && gameBoard.board[2] == character && gameBoard.board[6]==' ')
+		return 6;
+	else if(gameBoard.board[2]==gameBoard.board[6] && gameBoard.board[2] == character && gameBoard.board[4]==' ')
+		return 4;
+	else if(gameBoard.board[4]==gameBoard.board[6] && gameBoard.board[4] == character && gameBoard.board[2]==' ')
+		return 2;
+
+	// Checking for potential horizontal and vertical 3 in a rows
+	for(int i=0; i<size; i++){
+		//  Horizontal
+		if(gameBoard.board[0+i*size]==gameBoard.board[1+i*size] && gameBoard.board[0+i*size] == character && gameBoard.board[2+i*size]==' ')
+			return 2+i*size;
+		if(gameBoard.board[0+i*size]==gameBoard.board[2+i*size] && gameBoard.board[0+i*size] == character && gameBoard.board[1+i*size]==' ')
+			return 1+i*size;
+		if(gameBoard.board[1+i*size]==gameBoard.board[2+i*size] && gameBoard.board[1+i*size] == character && gameBoard.board[0+i*size]==' ')
+			return 0+i*size;
+
+		// Vertical
+		if(gameBoard.board[i+0*size]==gameBoard.board[i+1*size] && gameBoard.board[i+0*size] == character && gameBoard.board[i+2*size]==' ')
+			return i+2*size;
+		if(gameBoard.board[i+0*size]==gameBoard.board[i+2*size] && gameBoard.board[i+0*size] == character && gameBoard.board[i+1*size]==' ')
+			return i+1*size;
+		if(gameBoard.board[i+1*size]==gameBoard.board[i+2*size] && gameBoard.board[i+1*size] == character && gameBoard.board[i+0*size]==' ')
+			return i+0*size;
+	}
+
+	return -1;
 }
 
 //Checks if the game is over and finds out who won

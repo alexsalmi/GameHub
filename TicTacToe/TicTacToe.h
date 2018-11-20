@@ -11,6 +11,7 @@
 using namespace std;
 
 enum Winner {X, O, CPU, Player, Draw, NA};	// Used for determining who won the game
+enum Difficulty {easy, hard, unbeatable, multiplayer};
 
 class TicTacToe{
 public:
@@ -24,7 +25,11 @@ private:
 	// Displays menu and takes input from user	
 	int menu();
 	// Main game loop 
-	void play(bool multiplayer);
+	void play(bool multiplayer, Difficulty diff);
+	// Plays the CPU's turn of the game
+	int cpuTurn(Difficulty diff, TTTBoard gameBoard);
+	// Find potential winning moves, returns the index
+	int winningMove(char character, TTTBoard gameBoard);
 	// Checks if the game is over or not
 	Winner isGameOver(TTTBoard gameBoard, bool multiplayer);
 	// Displays post game screen
