@@ -3,16 +3,32 @@
 using namespace std;
 
 dispANSI ansi;
+string _name;
 
 void printTitle();
 string mainScreen();
-void mainMenu();
+int mainMenu();
 
 int main(){
 	system("CLS");
-	string name = mainScreen();
+	_name = mainScreen();
 
-	mainMenu();
+	int menuChoice;
+	do{
+		menuChoice = mainMenu();
+
+		switch(menuChoice){
+			case 1: 
+				TicTacToe game;
+				game.start();
+				delete &game;
+				break;
+		}
+
+	}while(menuChoice!=0);
+
+	ansi.textReset();
+	ansi.clearScreen();
 
 	return 0;
 }
@@ -32,29 +48,51 @@ string mainScreen(){
 	return name;
 }
 
-void mainMenu(){
-	printTitle();
+int mainMenu(){
+	int menuChoice;
+	while(true){
+		// Print header and change text attributes
+		printTitle();
+		ansi.textColor("green");
+		ansi.textAttr("bold");
 
-	TicTacToe game;
-	game.start();
-	delete &game;
+		// Print the menu options to the cmd window
+		cout << "               Welcome to GameHub, " << _name << "!                    \n" 
+				"               What game would you like to play?                       \n" << endl;
+
+		cout << "               (1) Tic Tac Toe                                         \n"
+				"               ( ) More games coming soon!   				        \n"<< endl;
+
+		cout << "               (0) Quit GameHub							        " << endl;
+		ansi.textReset();
+
+		// Accept the user's input
+		cin >> menuChoice;
+		// Error check for invalid input
+		if(cin.fail()){
+			cin.clear();
+        	cin.ignore();
+		}
+		else if(menuChoice <= 1 || menuChoice >= 0)
+			return menuChoice;		
+	}
 }
 
 void printTitle(){
     ansi.clearScreen();
     ansi.textAttr("bold");
     ansi.textColor("green");
-		cout << "  ___________________________________________________________________  " << endl;
-		cout << "//                                                                   \\\\" << endl;
-		cout << "++-------------------------------------------------------------------++" << endl;
-		cout << "||    XXXXXXXX                           XXX  XXX                    ||" << endl;
-		cout << "||    XXXXXXXX  XXXXXX  XXX XXX  XXXXXX  XXX  XXX  X    X  XXXXX     ||" << endl;
-		cout << "||    XXX       X    X  X  X  X  X       XXX  XXX  X    X  X    X    ||" << endl;
-		cout << "||    XXX XXXX  XXXXXX  X  X  X  XXXX    XXXXXXXX  X    X  XXXXX     ||" << endl;
-		cout << "||    XXX   XX  X    X  X  X  X  X       XXXXXXXX  X    X  X    X    ||" << endl;
-		cout << "||    XXXXXXXX  X    X  X  X  X  XXXXXX  XXX  XXX  XXXXXX  XXXXX     ||" << endl;
-		cout << "||    XXXXXXXX                           XXX  XXX                    ||" << endl;
-		cout << "++-------------------------------------------------------------------++" << endl;
-		cout << "\\\\___________________________________________________________________//" << endl;
+		cout << "  ___________________________________________________________________  \n"
+				"//                                                                   \\\\\n"
+				"++-------------------------------------------------------------------++\n"
+				"||    XXXXXXXX                           XXX  XXX                    ||\n"
+				"||    XXXXXXXX  XXXXXX  XXX XXX  XXXXXX  XXX  XXX  X    X  XXXXX     ||\n"
+				"||    XXX       X    X  X  X  X  X       XXX  XXX  X    X  X    X    ||\n"
+				"||    XXX XXXX  XXXXXX  X  X  X  XXXX    XXXXXXXX  X    X  XXXXX     ||\n"
+				"||    XXX   XX  X    X  X  X  X  X       XXXXXXXX  X    X  X    X    ||\n"
+				"||    XXXXXXXX  X    X  X  X  X  XXXXXX  XXX  XXX  XXXXXX  XXXXX     ||\n"
+				"||    XXXXXXXX                           XXX  XXX                    ||\n"
+				"++-------------------------------------------------------------------++\n"
+				"\\\\___________________________________________________________________//\n" << endl;
 	ansi.textReset();
 }
