@@ -2,6 +2,7 @@
 #define TTT_BOARD_H
 
 #include <iostream>
+#include "../libs/dispANSI.h"
 using namespace std;
 
 // Constants for character key inputs
@@ -34,6 +35,7 @@ private:
 
 	const int size=3;	// Size of the rows/columns 
 	int cursorPos;		// Cursor position on the board
+	dispANSI ansi;
 };
 
 #endif

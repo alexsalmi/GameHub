@@ -37,6 +37,7 @@ private:
 	bool Xturn;				// keep track of who's turn it is
 	int movesRemaining;		// keep track of how many spaces are left on board
 	const int size=3;		// number of rows/cols on board
+	dispANSI ansi;
 };
 
 #endif

@@ -24,7 +24,11 @@ void TicTacToe::start(){
 int TicTacToe::menu(){
 	int menuChoice;
 	while(true){
-		printHeader(); // Print header
+		// Print header and change text attributes
+		printHeader(); 
+		ansi.textColor("green");
+		ansi.textAttr("bold");
+
 		// Print the menu options to the cmd window
 		cout << "                        Welcome to Tic Tac Toe!                        \n" 
 				"               Please select an option from the menu below:            \n" << endl;
@@ -34,15 +38,17 @@ int TicTacToe::menu(){
 				"               (3) View game rules and controls 				        \n"<< endl;
 
 		cout << "               (0) Return to GameHub							        " << endl;
+		ansi.textReset();
 
 		// Accept the user's input
 		cin >> menuChoice;
 		// Error check for invalid input
-		if(menuChoice <=3 && menuChoice >= 0)
-			return menuChoice;		// Return the mune choice to start()
-		else if(cin.fail()){
+		if(cin.fail()){
 			cin.clear();
         	cin.ignore();
+		}
+		else if(menuChoice <=3 && menuChoice >= 0){
+			return menuChoice;		// Return the mune choice to start()
 		}
 	}
 }
@@ -60,9 +66,10 @@ void TicTacToe::play(bool multiplayer){
 		srand((unsigned)time(0));
 	// Start game loop
 	while(!gameOver){
-		// Print header and current game board to the cmd window
+		// Print header and current game board to the cmd window, as well as change text attributes
 		printHeader();
 		gameBoard.print();
+		ansi.textColor("green");
 		cout << endl << endl;
 
 		// Print out game info under game board
@@ -77,6 +84,7 @@ void TicTacToe::play(bool multiplayer){
 
 			cout << "     [Arrow Keys] - Move     [Spacebar] - Place X/O     [q] - Quit     " << endl;
 
+		ansi.textReset();
 
 		// CPU's turn 
 		if(!multiplayer && !Xturn){
@@ -166,9 +174,10 @@ Winner TicTacToe::isGameOver(TTTBoard gameBoard, bool multiplayer){
 
 // Post game screen
 void TicTacToe::endgame(Winner winner, TTTBoard gameBoard){
-	// Print the board of the finished game
+	// Print the board of the finished game and change text atrributes
 	printHeader();
 	gameBoard.print();	
+	ansi.textColor("green");
 	cout << endl << endl;
 
 	// Print out who won the game
@@ -191,11 +200,14 @@ void TicTacToe::endgame(Winner winner, TTTBoard gameBoard){
 	cout << endl;
 	cout << "                   Press any key to return to the menu                    " << endl;
 	getch();
+	ansi.textReset();
 }
 
 // Print the header to the cmd window
 void TicTacToe::printHeader(){
-    std::cout << "\x1b[2J";
+    ansi.clearScreen();
+    ansi.textColor("green");
+    ansi.textAttr("bold");
 	cout << "+---------------------------------------------------------------------+\n"
 			"|                                                                     |\n" 
 			"|   XXXXX  XXXXX  XXXXX   XXXXX  XXXXX  XXXXX   XXXXX  XXXXX  XXXXX   |\n" 
@@ -205,10 +217,12 @@ void TicTacToe::printHeader(){
 			"|     X    XXXXX  XXXXX     X    X   X  XXXXX     X    XXXXX  XXXXX   |\n"
 			"|                                                                     |\n"
 			"+---------------------------------------------------------------------+\n" << endl;
+	ansi.textReset();
 }
 
 void TicTacToe::rules(){
 	printHeader();
+	ansi.textColor("green");
 	cout << "                                RULES:                                 \n" << endl;
 	
 	cout << "Tic tac toe is a two player game, each playing either X or O, where the\n" 
@@ -227,4 +241,5 @@ void TicTacToe::rules(){
 
 	cout << "                  Press any key to return to the menu                  \n" << endl;
 	getch();
+	ansi.textReset();
 }

@@ -2,6 +2,8 @@
 
 using namespace std;
 
+dispANSI ansi;
+
 void printTitle();
 string mainScreen();
 void mainMenu();
@@ -18,12 +20,15 @@ int main(){
 string mainScreen(){
 	string name;
 	printTitle();
+    ansi.textColor("green");
 	cout << " |          Version 1.0          |    Created By: Alexander Salmi    |" << endl;
 	cout << " \\_______________________________|___________________________________/" << endl;
 	cout << endl << endl << endl;
+	ansi.textAttr("bold");
 	cout << "                       Enter your name to begin: ";
 
 	cin >> name; 
+	ansi.textReset();
 	return name;
 }
 
@@ -36,7 +41,9 @@ void mainMenu(){
 }
 
 void printTitle(){
-    std::cout << "\x1b[2J";
+    ansi.clearScreen();
+    ansi.textAttr("bold");
+    ansi.textColor("green");
 		cout << "  ___________________________________________________________________  " << endl;
 		cout << "//                                                                   \\\\" << endl;
 		cout << "++-------------------------------------------------------------------++" << endl;
@@ -49,4 +56,5 @@ void printTitle(){
 		cout << "||    XXXXXXXX                           XXX  XXX                    ||" << endl;
 		cout << "++-------------------------------------------------------------------++" << endl;
 		cout << "\\\\___________________________________________________________________//" << endl;
+	ansi.textReset();
 }

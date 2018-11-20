@@ -84,6 +84,8 @@ void TTTBoard::placeCPU(int pos){
 
 // Prints the board to the cmd window
 void TTTBoard::print(){
+	ansi.textAttr("bold");
+	ansi.textColor("green");
 	cout << "                              |         |                              " << endl;
 	cout << "                         " << board[0] << "    |    " << board[1] << "    |    " << board[2] << endl;
 	cout << "                              |         |                              " << endl;
@@ -93,4 +95,5 @@ void TTTBoard::print(){
 		cout << "                         " << board[0+i*size] << "    |    " << board[1+i*size] << "    |    " << board[2+i*size] << endl;
 		cout << "                              |         |                              " << endl;
 	}
+	ansi.textReset();
 }
