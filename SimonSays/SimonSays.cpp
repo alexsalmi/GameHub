@@ -55,19 +55,11 @@ void SimonSays::play(){
 	bool gameOver = false;			// keep track of if the game is over
 	int moveKey;
 	moves = {};
-
-	// Print header and change text attributes
-	printHeader(); 
-	ansi.textColor("green");
-	ansi.textAttr("bold");
+	score = 0;
 
 	srand((unsigned)time(0));
 	while(!gameOver){
-		printHeader(); 
-		ansi.textColor("green");
-		ansi.textAttr("bold");
-
-		printKeys(movenone);
+		printKeys(movenone, gameOver);
 
 		Sleep(500);
 
@@ -80,94 +72,94 @@ void SimonSays::play(){
 		}
 
 		for(Move& m : moves){
-			printHeader(); 
-			ansi.textColor("green");
-			ansi.textAttr("bold");
-
-			printKeys(m);
+			printKeys(m, gameOver);
 			Sleep(500);
 
-			printHeader(); 
-			ansi.textColor("green");
-			ansi.textAttr("bold");
-
-			printKeys(movenone);
+			printKeys(movenone, gameOver);
 			Sleep(100);
 		}
 
-		printHeader(); 
-		ansi.textColor("green");
-		ansi.textAttr("bold");
-
-		printKeys(movenone);		
+		printKeys(movenone, gameOver);		
 
 		for(Move& m : moves){
 			moveKey = getch();
 			if(moveKey == 224)
 				moveKey = getch();
-
-			printHeader(); 
-			ansi.textColor("green");
-			ansi.textAttr("bold");
 			
 			if((moveKey == KEY_UP && m == moveup)||
 				(moveKey == KEY_DOWN && m == movedown)||
 				(moveKey == KEY_LEFT && m == moveleft)||
 				(moveKey == KEY_RIGHT && m == moveright)){
-				printKeys(m);
+				printKeys(m, gameOver);
 			}
 			else{
-				printKeys(movenone);
-				endgame();
 				gameOver = true;
+				printKeys(movenone, gameOver);
+				endgame();
 				break;
 			}
 		}
-		if(!gameOver){			
-			cout << "          Nice! Wait for simon to show you the updated sequence.          " << endl;
+		if(!gameOver){
+			score++;
+			cout << "                       Nice! Simon is impressed.                        " << endl;
 
-			Sleep(1500);
+			Sleep(1000);
 		}
 	}
 }
 
 // Prints the images of the keys to the cmd window
-void SimonSays::printKeys(Move dir){
-	if(dir==moveup)
-		ansi.textAttr("reverse");
-	cout << "                               ^^^^^^^                                 \n"
-			"                               ^^^^^^^                                 \n"
-			"                               ^^^^^^^                                 \n";
+void SimonSays::printKeys(Move dir, bool gameOver){
+	printHeader(); 
+	ansi.textColor("green");
+	ansi.textAttr("bold");
 
 	for(int i=0; i<3; i++){
+		cout << "                               ";
+		if(dir==moveup)
+			ansi.textAttr("reverse");
+		cout << "^^^^^^^\n";
 		if(dir==moveup)
 			ansi.textAttr("-reverse");
+	}
 
+
+	for(int i=0; i<3; i++){
+		cout << "                        ";
 		if(dir==moveleft)
 			ansi.textAttr("reverse");
-		cout << "                        <<<<<<<";
+		cout << "<<<<<<<";
 		if(dir==moveleft)
 			ansi.textAttr("-reverse");
+
+		cout << "       ";
 		if(dir==moveright)
 			ansi.textAttr("reverse");
-		cout << "       >>>>>>>                         " << endl;
+		cout << ">>>>>>>" << endl;
 		if(dir==moveright)
 			ansi.textAttr("-reverse");
 	}
 
-	if(dir==movedown)
-		ansi.textAttr("reverse");
-	cout << "                               vvvvvvv                                 \n"
-			"                               vvvvvvv                                 \n"
-			"                               vvvvvvv                                 \n" << endl << endl;
-	if(dir==movedown)
-		ansi.textAttr("-reverse");
+	for(int i=0; i<3; i++){
+		cout << "                               ";
+		if(dir==movedown)
+			ansi.textAttr("reverse");
+		cout << "vvvvvvv\n";
+		if(dir==movedown)
+			ansi.textAttr("-reverse");
+	}
+
+	cout << endl << endl;
+
+	if(!gameOver)
+		cout << "                               Score: " << score << endl;
 }
 
 void SimonSays::endgame(){
-	cout << "                     Sorry, wrong button. Game over!                      " << endl << endl;
+	cout << "                    Sorry, wrong button. Game over!                      " << endl << endl;
+	cout << "                            Final score: " << score << endl << endl;
 	// Exit to Simon Says menu
-	cout << "                   Press any key to return to the menu                    " << endl;
+	cout << "                  Press any key to return to the menu                    " << endl;
 	getch();
 	ansi.textReset();
 }

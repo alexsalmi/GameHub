@@ -32,7 +32,7 @@ private:
 	// Main game loop 
 	void play();
 	// Prints the images of the keys to the cmd window
-	void printKeys(Move dir);
+	void printKeys(Move dir, bool gameOver);
 	// Prints the post game screen to the cmd window
 	void endgame();
 	// Prints tic tac toe header to cmd window
@@ -42,6 +42,7 @@ private:
 
 	dispANSI ansi;
 	std::vector<Move> moves;
+	int score;
 };
 
 #endif
