@@ -2,16 +2,16 @@
 #define TIC_TAC_TOE_H
 
 #include "TTTBoard.h"			// Gameboard
-#include <iostream>
 #include <conio.h>				// Used for getch() (reading character key inputs)
-#include <windows.h>			// Used for Sleep()
 #include <cstdlib> 				// Used for rng 
 #include <ctime>				// Used for setting seeds in rng
+#include <iostream>
+#include <windows.h>			// Used for Sleep()
 
 using namespace std;
 
 enum Winner {X, O, CPU, Player, Draw, NA};	// Used for determining who won the game
-enum Difficulty {easy, medium, hard, multiplayer};
+enum Difficulty {easy, medium, hard, multiplayer}; // Used to keep track of the difficulty of the CPU
 
 class TicTacToe{
 public:
