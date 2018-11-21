@@ -1,4 +1,5 @@
 #include "TicTacToe/TicTacToe.h"
+#include "SimonSays/SimonSays.h"
 
 using namespace std;
 
@@ -18,11 +19,19 @@ int main(){
 		menuChoice = mainMenu();
 
 		switch(menuChoice){
-			case 1: 
+			case 1: {
 				TicTacToe game;
 				game.start();
 				delete &game;
+				}
 				break;
+			case 2: {
+				SimonSays game;
+				game.start();
+				delete &game;
+				}
+				break;
+			default: break;
 		}
 
 	}while(menuChoice!=0);
@@ -41,7 +50,7 @@ string mainScreen(){
 	cout << " \\_______________________________|___________________________________/" << endl;
 	cout << endl << endl << endl;
 	ansi.textAttr("bold");
-	cout << "                       Enter your name to begin: ";
+	cout << "               Enter your name to begin: ";
 
 	cin >> name; 
 	ansi.textReset();
@@ -61,6 +70,7 @@ int mainMenu(){
 				"               What game would you like to play?                       \n" << endl;
 
 		cout << "               (1) Tic Tac Toe                                         \n"
+				"               (2) Simon Says                                          \n"
 				"               ( ) More games coming soon!   				        \n"<< endl;
 
 		cout << "               (0) Quit GameHub							        " << endl;
@@ -93,6 +103,6 @@ void printTitle(){
 				"||    XXXXXXXX  X    X  X  X  X  XXXXXX  XXX  XXX  XXXXXX  XXXXX     ||\n"
 				"||    XXXXXXXX                           XXX  XXX                    ||\n"
 				"++-------------------------------------------------------------------++\n"
-				"\\\\___________________________________________________________________//\n" << endl;
+				"\\\\___________________________________________________________________//\n";
 	ansi.textReset();
 }
