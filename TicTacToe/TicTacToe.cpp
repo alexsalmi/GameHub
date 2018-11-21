@@ -119,6 +119,8 @@ void TicTacToe::play(bool multiplayer, Difficulty diff){
 		else{
 			// Get character key input from user and update the gameboard accordingly
 			moveKey = getch();
+			if(moveKey == 224)
+				moveKey = getch();
 			gameBoard.update(moveKey, Xturn);
 			if(moveKey==' '){			// If User pressed spacebar, update to next turn in game
 				Xturn = !Xturn;

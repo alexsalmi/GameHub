@@ -64,6 +64,7 @@ int mainMenu(){
 		printTitle();
 		ansi.textColor("green");
 		ansi.textAttr("bold");
+		cou << endl;
 
 		// Print the menu options to the cmd window
 		cout << "               Welcome to GameHub, " << _name << "!                    \n" 

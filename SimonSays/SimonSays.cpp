@@ -50,7 +50,124 @@ int SimonSays::menu(){
 }
 
 void SimonSays::play(){
+	bool gameOver = false;			// keep track of if the game is over
+	int moveKey;
+	moves = {};
 
+	// Print header and change text attributes
+	printHeader(); 
+	ansi.textColor("green");
+	ansi.textAttr("bold");
+
+	srand((unsigned)time(0));
+	while(!gameOver){
+		printHeader(); 
+		ansi.textColor("green");
+		ansi.textAttr("bold");
+
+		printKeys(movenone);
+
+		Sleep(500);
+
+		int pickMove = rand()%(4);
+		switch(pickMove){
+			case 0: moves.push_back(moveup); break;
+			case 1: moves.push_back(movedown); break;
+			case 2: moves.push_back(moveleft); break;
+			case 3: moves.push_back(moveright); break;
+		}
+
+		for(Move& m : moves){
+			printHeader(); 
+			ansi.textColor("green");
+			ansi.textAttr("bold");
+
+			printKeys(m);
+			Sleep(500);
+
+			printHeader(); 
+			ansi.textColor("green");
+			ansi.textAttr("bold");
+
+			printKeys(movenone);
+			Sleep(100);
+		}
+
+		printHeader(); 
+		ansi.textColor("green");
+		ansi.textAttr("bold");
+
+		printKeys(movenone);		
+
+		for(Move& m : moves){
+			moveKey = getch();
+			if(moveKey == 224)
+				moveKey = getch();
+
+			printHeader(); 
+			ansi.textColor("green");
+			ansi.textAttr("bold");
+			
+			if((moveKey == KEY_UP && m == moveup)||
+				(moveKey == KEY_DOWN && m == movedown)||
+				(moveKey == KEY_LEFT && m == moveleft)||
+				(moveKey == KEY_RIGHT && m == moveright)){
+				printKeys(m);
+			}
+			else{
+				printKeys(movenone);
+				endgame();
+				gameOver = true;
+				break;
+			}
+		}
+		if(!gameOver){			
+			cout << "          Nice! Wait for simon to show you the updated sequence.          " << endl;
+
+			Sleep(1500);
+		}
+	}
+}
+
+// Prints the images of the keys to the cmd window
+void SimonSays::printKeys(Move dir){
+	if(dir==moveup)
+		ansi.textAttr("reverse");
+	cout << "                               ^^^^^^^                                 \n"
+			"                               ^^^^^^^                                 \n"
+			"                               ^^^^^^^                                 \n";
+
+	for(int i=0; i<3; i++){
+		if(dir==moveup)
+			ansi.textAttr("-reverse");
+
+		if(dir==moveleft)
+			ansi.textAttr("reverse");
+		cout << "                        <<<<<<<";
+		if(dir==moveleft)
+			ansi.textAttr("-reverse");
+		if(dir==moveright)
+			ansi.textAttr("reverse");
+		cout << "       >>>>>>>                         " << endl;
+		if(dir==moveright)
+			ansi.textAttr("-reverse");
+	}
+
+	if(dir==movedown)
+		ansi.textAttr("reverse");
+	cout << "                               vvvvvvv                                 \n"
+			"                               vvvvvvv                                 \n"
+			"                               vvvvvvv                                 \n" << endl << endl;
+	if(dir==movedown)
+		ansi.textAttr("-reverse");
+}
+
+void SimonSays::endgame(){
+	cout << "                     Sorry, wrong button. Game over!                      " << endl << endl;
+	// Exit to Simon Says menu
+	cout << "                   Press any key to return to the menu                    " << endl;
+	getch();
+	ansi.textReset();
 }
 
 void SimonSays::printHeader(){
