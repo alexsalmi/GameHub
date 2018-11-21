@@ -31,8 +31,10 @@ int SimonSays::menu(){
 		cout << "                         Welcome to Simon Says!                        \n" 
 				"               Please select an option from the menu below:            \n" << endl;
 
-		cout << "               (1) Play Simon Says                                     \n"
-				"               (2) View game rules and controls 				        \n"<< endl;
+		cout << "               (1) Play Simon Says                                     \n" << endl;
+		
+		cout << "               (2) View high scores 				 			        \n"
+				"               (3) View game rules and controls 				        \n" << endl;
 
 		cout << "               (0) Return to GameHub							        " << endl;
 		ansi.textReset();

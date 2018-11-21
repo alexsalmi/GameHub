@@ -71,8 +71,9 @@ int mainMenu(){
 				"               What game would you like to play?                       \n" << endl;
 
 		cout << "               (1) Tic Tac Toe                                         \n"
-				"               (2) Simon Says                                          \n"
-				"               ( ) More games coming soon!   				        \n"<< endl;
+				"               (2) Simon Says                                          \n" << endl;
+		
+		cout << "               ( ) More games coming soon!   				        \n"<< endl;
 
 		cout << "               (0) Quit GameHub							        " << endl;
 		ansi.textReset();

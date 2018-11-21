@@ -38,8 +38,9 @@ int TicTacToe::menu(){
 
 		if(!diffMenu){
 			cout << "               (1) Play Tic Tac Toe vs. the CPU    (1 Player)          \n"
-					"               (2) Play Tic Tac Toe vs. a friend   (2 Player)          \n"
-					"               (3) View game rules and controls 				        \n"<< endl;
+					"               (2) Play Tic Tac Toe vs. a friend   (2 Player)          \n" << endl;
+					
+			cout << "               (3) View game rules and controls 				        \n" << endl;
 
 			cout << "               (0) Return to GameHub							        " << endl;
 			ansi.textReset();
