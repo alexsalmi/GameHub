@@ -13,8 +13,8 @@ void TicTacToe::start(){
 
 		switch(menuChoice){
 			case 11: play(false, easy); break;   	// Singleplayer game (Easy)
-			case 12: play(false, hard); break;   	// Singleplayer game (Hard)
-			case 13: play(false, unbeatable); break;   	// Singleplayer game (Unbeatable)
+			case 12: play(false, medium); break;   	// Singleplayer game (Medium)
+			case 13: play(false, hard); break;   	// Singleplayer game (Hard)
 			case 2: play(true, multiplayer); break;		// 2 player game
 			case 3: rules(); break;			// Rules
 			default: break;
@@ -49,7 +49,7 @@ int TicTacToe::menu(){
 			cout << "               ( ) Play Tic Tac Toe vs. the CPU                        \n";
 			ansi.textAttr("bold");
 			cout <<	"               Please choose a difficulty:					            \n"
-					"               (1) Easy | (2) Hard | (3) Unbeatable			        \n"<< endl;
+					"               (1) Easy | (2) Medium | (3) Hard       			        \n"<< endl;
 
 			cout << "               (0) Return to menu							        " << endl;
 			ansi.textReset();
@@ -94,6 +94,7 @@ void TicTacToe::play(bool multiplayer, Difficulty diff){
 		printHeader();
 		gameBoard.print();
 		ansi.textColor("green");
+		ansi.textAttr("bold");
 		cout << endl << endl;
 
 		// Print out game info under game board
@@ -105,6 +106,7 @@ void TicTacToe::play(bool multiplayer, Difficulty diff){
 			cout << "                               X's turn                                " << endl;
 		else if(!Xturn && multiplayer)
 			cout << "                               O's turn                                " << endl;
+		ansi.textAttr("-bold");
 
 			cout << "     [Arrow Keys] - Move     [Spacebar] - Place X/O     [q] - Quit     " << endl;
 
@@ -137,9 +139,9 @@ void TicTacToe::play(bool multiplayer, Difficulty diff){
 
 // Simulates the CPU's turn based on the chosen difficulty
 int TicTacToe::cpuTurn(Difficulty diff, TTTBoard gameBoard){
-	// If difficulty is not set to easy, the cpu should place at a space that will immediately 
+	// If difficulty is set to hard, the cpu should place at a space that will immediately 
 	// win them the game or block the player from winning
-	if(diff == hard || diff == unbeatable){
+	if(diff == medium || diff == hard){
 		// Search for spaces that will immediately win the game for the cpu
 		int space = winningMove('O', gameBoard);
 		if(space>=0){
@@ -159,24 +161,46 @@ int TicTacToe::cpuTurn(Difficulty diff, TTTBoard gameBoard){
 		}
 	}
 
-	// If difficulty is either easy or hard, the cpu should choose a random spot at this point
-	if(diff != unbeatable){
-		// Pick a random available space on the board
-		int space = rand()%(movesRemaining);
-		// Find the position on the board, ignoring occupied spaces
-		for(int i=0; i<size*size; i++){
-			if(gameBoard.isEmpty(i)){			// isEmpty checks if spot i on the board is available
-				if(space == 0){
-					Sleep(1000);				// Sleep for 1s for immersion
-					Xturn = !Xturn;				// Update to next turn in game
-					movesRemaining--;
-					return i;
-				}
-				else
-					space--;
+	if(diff == hard){
+		if(movesRemaining == 8){
+			if(gameBoard.board[4] == 'X'){
+				Sleep(1000);				// Sleep for 1s for immersion
+				Xturn = !Xturn;				// Update to next turn in game
+				movesRemaining--;
+				return 0;
+			}
+			else{
+				Sleep(1000);				// Sleep for 1s for immersion
+				Xturn = !Xturn;				// Update to next turn in game
+				movesRemaining--;
+				return 4;
 			}
 		}
+
+		if(movesRemaining == 6 && gameBoard.board[4]=='X' && gameBoard.board[8]=='X'){
+			Sleep(1000);				// Sleep for 1s for immersion
+			Xturn = !Xturn;				// Update to next turn in game
+			movesRemaining--;
+			return 6;
+		}
 	}
+
+	// Pick a random available space on the board
+	int space = rand()%(movesRemaining);
+	// Find the position on the board, ignoring occupied spaces
+	for(int i=0; i<size*size; i++){
+		if(gameBoard.isEmpty(i)){			// isEmpty checks if spot i on the board is available
+			if(space == 0){
+				Sleep(1000);				// Sleep for 1s for immersion
+				Xturn = !Xturn;				// Update to next turn in game
+				movesRemaining--;
+				return i;
+			}
+			else
+				space--;
+		}
+	}
+	return -1;
 }
 
 // Find potential winning moves for character, returns the index
@@ -314,7 +338,9 @@ void TicTacToe::printHeader(){
 void TicTacToe::rules(){
 	printHeader();
 	ansi.textColor("green");
+	ansi.textAttr("bold");
 	cout << "                                RULES:                                 \n" << endl;
+	ansi.textAttr("-bold");
 	
 	cout << "Tic tac toe is a two player game, each playing either X or O, where the\n" 
 			"players take turns to place their character in a 3x3 grid. The player  \n"
@@ -325,12 +351,16 @@ void TicTacToe::rules(){
 			"If you choose to play 2 player, you will take turns playing as X and O.\n"
 			"X will start the game. 												\n" << endl;
 
+	ansi.textAttr("bold");
 	cout << "                              CONTROLS:                                \n" << endl;
+	ansi.textAttr("-bold");
 
 	cout << "                      [Arrow keys] - Move cursor                       \n"
 			"                       [Spacebar]  - Place X/O characters              \n\n" << endl;
 
+	ansi.textAttr("bold");
 	cout << "                  Press any key to return to the menu                  \n" << endl;
+	ansi.textAttr("-bold");
 	getch();
 	ansi.textReset();
 }

@@ -33,12 +33,12 @@ void TTTBoard::update(int moveKey, bool Xturn){
 			break;
 		// Move curser to the right on board if possible
 		case KEY_RIGHT:
-			if(cursorPos+1%size!=0)
+			if((cursorPos+1)%size!=0)
 				newPos = cursorPos+1;
 			break;
 		// Move curser to the left on board if possible
 		case KEY_LEFT:
-			if(cursorPos+1%size!=1)
+			if((cursorPos+1)%size!=1)
 				newPos = cursorPos-1;
 			break;
 		// Places the piece on the board
@@ -79,7 +79,8 @@ bool TTTBoard::isEmpty(int pos){
 
 // Places the CPU's move on the board
 void TTTBoard::placeCPU(int pos){
-	board[pos] = 'O';
+	if(pos>=0 && pos<size*size && isEmpty(pos))
+		board[pos] = 'O';
 }
 
 // Prints the board to the cmd window

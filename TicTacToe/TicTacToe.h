@@ -11,7 +11,7 @@
 using namespace std;
 
 enum Winner {X, O, CPU, Player, Draw, NA};	// Used for determining who won the game
-enum Difficulty {easy, hard, unbeatable, multiplayer};
+enum Difficulty {easy, medium, hard, multiplayer};
 
 class TicTacToe{
 public:
