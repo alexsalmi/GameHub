@@ -18,22 +18,16 @@ int main(){
 	do{
 		menuChoice = mainMenu();
 
-		switch(menuChoice){
-			case 1: {
-				TicTacToe game;
-				game.start();
-				delete &game;
-				}
-				break;
-			case 2: {
-				SimonSays game;
-				game.start();
-				delete &game;
-				}
-				break;
-			default: break;
+		if(menuChoice==1){
+			TicTacToe game;
+			game.start();
+			delete &game;
 		}
-
+		else if(menuChoice==2){
+			SimonSays game;
+			game.start();
+			delete &game;
+		}
 	}while(menuChoice!=0);
 
 	ansi.textReset();
@@ -85,7 +79,7 @@ int mainMenu(){
 			cin.clear();
         	cin.ignore();
 		}
-		else if(menuChoice <= 1 || menuChoice >= 0)
+		else if(menuChoice <= 2 && menuChoice >= 0)
 			return menuChoice;		
 	}
 }

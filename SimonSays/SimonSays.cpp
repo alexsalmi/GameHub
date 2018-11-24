@@ -46,7 +46,7 @@ int SimonSays::menu(){
 			cin.clear();
         	cin.ignore();
 		}
-		else if(menuChoice<=2 || menuChoice>=0)
+		else if(menuChoice<=2 && menuChoice>=0)
 			return menuChoice;
 	}
 }
@@ -95,6 +95,7 @@ void SimonSays::play(){
 			else{
 				gameOver = true;
 				printKeys(movenone, gameOver);
+				//updateHighScores(score, "alex");
 				endgame();
 				break;
 			}
@@ -160,8 +161,62 @@ void SimonSays::endgame(){
 	cout << "                            Final score: " << score << endl << endl;
 	// Exit to Simon Says menu
 	cout << "                  Press any key to return to the menu                    " << endl;
-	getch();
+	updateHighScores("alex");
+	int moveKey = getch();
+	if(moveKey == 224)
+		moveKey = getch();
 	ansi.textReset();
+}
+
+// Updates the high score file with a new score
+void SimonSays::updateHighScores(string name){
+	vector<string> n;
+	string in, numname;
+	int num;
+	bool recorded = false;
+	inFile.open(HSFile);
+
+	if(!inFile.is_open()){
+		inFile.close();
+		outFile.open(HSFile, ios::out | ios::trunc);
+		outFile << name << " " << score;
+		outFile.close();
+	}
+	else{
+		while(getline(inFile, in)){
+			istringstream iss(in);
+			iss >> numname >> num;
+
+			if(score>num && !recorded){
+				n.push_back(name + " " + to_string(score));
+				recorded = true;
+			}
+			n.push_back(in);
+		}
+
+		if(!recorded)
+			n.push_back(name + " " + to_string(score));
+
+		inFile.close();
+
+		outFile.open(HSFile, ios::out | ios::trunc);
+
+		if(outFile.is_open()){
+			for(int i=0; i<n.size() || i<10; i++){
+				outFile << n[i] << endl;
+			}
+		}
+		else{
+			cout << "outFile is not open" << endl;
+		}
+
+		outFile.close();
+	}
+}
+
+// Prints all the high scores
+void SimonSays::printHighScores(){
+
 }
 
 void SimonSays::printHeader(){

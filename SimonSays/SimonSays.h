@@ -5,7 +5,10 @@
 #include <conio.h>				// Used for getch() (reading character key inputs)
 #include <cstdlib> 				// Used for rng 
 #include <ctime>				// Used for setting seeds in rng
+#include <fstream>
 #include <iostream>
+#include <sstream>
+#include <string>
 #include <vector>
 #include <windows.h>			// Used for Sleep()
 
@@ -35,6 +38,10 @@ private:
 	void printKeys(Move dir, bool gameOver);
 	// Prints the post game screen to the cmd window
 	void endgame();
+	// Updates the high score file with a new score
+	void updateHighScores(string name);
+	// Prints all the high scores
+	void printHighScores();
 	// Prints tic tac toe header to cmd window
 	void printHeader();	
 	// Displays the rules of the game
@@ -43,6 +50,9 @@ private:
 	dispANSI ansi;
 	std::vector<Move> moves;
 	int score;
+	ifstream inFile;
+	ofstream outFile;
+	string HSFile = "./SimonSays/SimonSaysHighScores.txt";
 };
 
 #endif

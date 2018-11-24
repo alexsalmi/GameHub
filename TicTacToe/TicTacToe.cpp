@@ -71,7 +71,7 @@ int TicTacToe::menu(){
 		}
 		else{
 			if(menuChoice == 0)
-				diffMenu = 0;
+				diffMenu = false;
 			else if(menuChoice<=3 && menuChoice>=1)
 				return menuChoice + 10;
 		}
