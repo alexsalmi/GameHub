@@ -202,14 +202,17 @@ void SimonSays::updateHighScores(string name){
 		outFile.open(HSFile, ios::out | ios::trunc);
 
 		if(outFile.is_open()){
-			for(int i=0; i<n.size() || i<10; i++){
-				outFile << n[i] << endl;
+			if(n.size()<10){
+				for(int i=0; i<n.size(); i++){
+					outFile << n[i] << endl;
+				}
+			}
+			else{
+				for(int i=0; i<10; i++){
+					outFile << n[i] << endl;
+				}				
 			}
 		}
-		else{
-			cout << "outFile is not open" << endl;
-		}
-
 		outFile.close();
 	}
 }
