@@ -20,7 +20,7 @@
 
 using namespace std;
 
-enum Move {moveup, movedown, moveleft, moveright, movenone}; // Used to keep track of the moves to be played
+enum Move {moveup, movedown, moveleft, moveright, movenone, moveall}; // Used to keep track of the moves to be played
 
 class SimonSays{
 public:

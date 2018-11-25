@@ -12,8 +12,9 @@ void SimonSays::start(){
 		menuChoice = menu();
 
 		switch(menuChoice){
-			case 1: play(); break;			// Play Simon Says
-			case 2: rules(); break;			// Rules
+			case 1: play(); break;				// Play Simon Says
+			case 2: printHighScores(); break;	// Show the high scored for Simon Says
+			case 3: rules(); break;				// Rules of Simon Says
 			default: break;
 		}
 	}while(menuChoice!=0);
@@ -46,7 +47,7 @@ int SimonSays::menu(){
 			cin.clear();
         	cin.ignore();
 		}
-		else if(menuChoice<=2 && menuChoice>=0)
+		else if(menuChoice<=3 && menuChoice>=0)
 			return menuChoice;
 	}
 }
@@ -95,14 +96,13 @@ void SimonSays::play(){
 			else{
 				gameOver = true;
 				printKeys(movenone, gameOver);
-				//updateHighScores(score, "alex");
 				endgame();
 				break;
 			}
 		}
 		if(!gameOver){
 			score++;
-			cout << "                       Nice! Simon is impressed.                        " << endl;
+			printKeys(moveall, gameOver);
 
 			Sleep(1000);
 		}
@@ -117,50 +117,59 @@ void SimonSays::printKeys(Move dir, bool gameOver){
 
 	for(int i=0; i<3; i++){
 		cout << "                               ";
-		if(dir==moveup)
+		if(dir==moveup || dir==moveall)
 			ansi.textAttr("reverse");
 		cout << "^^^^^^^\n";
-		if(dir==moveup)
+		if(dir==moveup || dir==moveall)
 			ansi.textAttr("-reverse");
 	}
 
 
 	for(int i=0; i<3; i++){
 		cout << "                        ";
-		if(dir==moveleft)
+		if(dir==moveleft || dir==moveall)
 			ansi.textAttr("reverse");
 		cout << "<<<<<<<";
-		if(dir==moveleft)
+		if(dir==moveleft || dir==moveall)
 			ansi.textAttr("-reverse");
 
 		cout << "       ";
-		if(dir==moveright)
+		if(dir==moveright || dir==moveall)
 			ansi.textAttr("reverse");
 		cout << ">>>>>>>" << endl;
-		if(dir==moveright)
+		if(dir==moveright || dir==moveall)
 			ansi.textAttr("-reverse");
 	}
 
 	for(int i=0; i<3; i++){
 		cout << "                               ";
-		if(dir==movedown)
+		if(dir==movedown || dir==moveall)
 			ansi.textAttr("reverse");
 		cout << "vvvvvvv\n";
-		if(dir==movedown)
+		if(dir==movedown || dir==moveall)
 			ansi.textAttr("-reverse");
 	}
 
 	cout << endl << endl;
 
-	if(!gameOver)
-		cout << "                               Score: " << score << endl;
+	if(!gameOver){
+		cout << "                               Score: " << score << endl << endl;
+		ansi.textAttr("-bold");
+		cout << "                  [Arrow Keys] - Copy Simon's moves                     " << endl << endl;
+	}
+	
+	ansi.textReset();
 }
 
 void SimonSays::endgame(){
+	ansi.textColor("green");
+	ansi.textAttr("bold");
 	cout << "                    Sorry, wrong button. Game over!                      " << endl << endl;
 	cout << "                            Final score: " << score << endl << endl;
 	// Exit to Simon Says menu
 	cout << "                  Press any key to return to the menu                    " << endl;
+	ansi.textReset();
+	
 	updateHighScores("alex");
 	int moveKey = getch();
 	if(moveKey == 224)
@@ -170,7 +179,7 @@ void SimonSays::endgame(){
 
 // Updates the high score file with a new score
 void SimonSays::updateHighScores(string name){
-	vector<string> n;
+	vector<string> hsList;
 	string in, numname;
 	int num;
 	bool recorded = false;
@@ -178,7 +187,7 @@ void SimonSays::updateHighScores(string name){
 
 	if(!inFile.is_open()){
 		inFile.close();
-		outFile.open(HSFile, ios::out | ios::trunc);
+		outFile.open(HSFile);
 		outFile << name << " " << score;
 		outFile.close();
 	}
@@ -188,28 +197,28 @@ void SimonSays::updateHighScores(string name){
 			iss >> numname >> num;
 
 			if(score>num && !recorded){
-				n.push_back(name + " " + to_string(score));
+				hsList.push_back(name + " " + to_string(score));
 				recorded = true;
 			}
-			n.push_back(in);
+			hsList.push_back(in);
 		}
 
 		if(!recorded)
-			n.push_back(name + " " + to_string(score));
+			hsList.push_back(name + " " + to_string(score));
 
 		inFile.close();
 
 		outFile.open(HSFile, ios::out | ios::trunc);
 
 		if(outFile.is_open()){
-			if(n.size()<10){
-				for(int i=0; i<n.size(); i++){
-					outFile << n[i] << endl;
+			if(hsList.size()<10){
+				for(int i=0; i<hsList.size(); i++){
+					outFile << hsList[i] << endl;
 				}
 			}
 			else{
 				for(int i=0; i<10; i++){
-					outFile << n[i] << endl;
+					outFile << hsList[i] << endl;
 				}				
 			}
 		}
@@ -219,7 +228,51 @@ void SimonSays::updateHighScores(string name){
 
 // Prints all the high scores
 void SimonSays::printHighScores(){
+	string numsname, in;
+	vector<string> hsList;
+	int num, i=1;
 
+	printHeader();
+    ansi.textColor("green");
+    ansi.textAttr("bold");
+
+    cout << "                            High Scores                              \n" << endl << endl;
+
+    ansi.textAttr("-bold");
+
+    inFile.open(HSFile);
+
+    if(!inFile.is_open()){
+    	cout << "              There are no high score records available.               \n"
+    			"            Please play the game to save some high scores.             \n" << endl;
+
+    	// Exit to Simon Says menu
+		cout << "                  Press any key to return to the menu                    " << endl;
+		getch();
+    }
+    else{
+    	while(getline(inFile, in)){
+			istringstream iss(in);
+			iss >> numsname >> num;
+			ansi.textAttr("bold");
+			if(i<10)
+				cout << "                       " << i << ". " << num ;
+			else
+				cout << "                      " << i << ". " << num ;
+
+			ansi.textAttr("-bold");
+			cout << " ........... by " << numsname << endl;
+
+			i++;
+    	}
+
+    	inFile.close();
+
+    	cout << endl << endl;
+
+    	cout << "                  Press any key to return to the menu                    " << endl;
+    	getch();
+    }
 }
 
 void SimonSays::printHeader(){
@@ -247,11 +300,14 @@ void SimonSays::rules(){
 	
 	cout << "Simon Says is a game where you will be shown a series of button presses\n" 
 			"which you must then repeat back. The buttons used will be the four     \n"
-			"arrow keys, presented to you in a random order. You must repeat back   \n"
-			"the same arrow keys in the exact same order they were presented to you.\n"
-			"When you fail to press the currect buttons in the correct order, the   \n"
-			"game will be over, and your final score will be the number of turns you\n"
-			"survived.                                                              \n"<< endl;
+			"arrow keys, presented to you in a random order.                        \n"
+			"You must repeat back the same arrow keys in the exact same order they  \n"
+			"were presented to you.\n"
+			"Every turn, if you correctly enter the keys in the correct order, the  \n"
+			"displayed keys will all flash to signify that you repeated the sequence\n"
+			"correctly.\n"
+			"When you fail to press the keys in the correct order, the game will be \n"
+			"over, and your final score will be the number of turns you survived.   \n"<< endl;
 
 	ansi.textAttr("bold");
 	cout << "                              CONTROLS:                                \n" << endl;
