@@ -86,6 +86,8 @@ void SimonSays::play(){
 			moveKey = getch();
 			if(moveKey == 224)
 				moveKey = getch();
+			else if(moveKey == 'q')
+				return;
 			
 			if((moveKey == KEY_UP && m == moveup)||
 				(moveKey == KEY_DOWN && m == movedown)||
@@ -155,7 +157,7 @@ void SimonSays::printKeys(Move dir, bool gameOver){
 	if(!gameOver){
 		cout << "                               Score: " << score << endl << endl;
 		ansi.textAttr("-bold");
-		cout << "                  [Arrow Keys] - Copy Simon's moves                     " << endl << endl;
+		cout << "          [Arrow Keys] - Copy Simon's moves         [q] - Quit          " << endl << endl;
 	}
 	
 	ansi.textReset();
