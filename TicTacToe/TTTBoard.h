@@ -20,7 +20,7 @@ public:
 	// Prints the board to the cmd window
 	void print();
 	// Updates the board after a move is made or the cursor is movec
-	void update(int moveKey, bool Xturn);
+	bool update(int moveKey, bool Xturn);
 	// Place the CPU's move on the board
 	void placeCPU(int pos);
 	// Checks if position pos on the board is available

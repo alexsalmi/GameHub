@@ -81,7 +81,8 @@ int TicTacToe::menu(){
 // Main game logic for tic tac toe
 void TicTacToe::play(bool multiplayer, Difficulty diff){
 	TTTBoard gameBoard;				// Create the game board
-	bool gameOver = false;			// keep track of if the game is over
+	bool gameOver = false,			// keep track of if the game is over
+		didPlace;					// keep track of whether the a move was made on calling the TTTboard function update()
 	int moveKey;					// input variable for character key inputs
 	movesRemaining = size*size;		// set moves remaining to the number of places on the board
 	Xturn = true;					// start game off as X's turn
@@ -109,7 +110,8 @@ void TicTacToe::play(bool multiplayer, Difficulty diff){
 			cout << "                               O's turn                                " << endl;
 		ansi.textAttr("-bold");
 
-			cout << "     [Arrow Keys] - Move     [Spacebar] - Place X/O     [q] - Quit     " << endl;
+		cout << endl;
+		cout << "     [Arrow Keys] - Move     [Spacebar] - Place X/O     [q] - Quit     " << endl;
 
 		ansi.textReset();
 
@@ -122,13 +124,14 @@ void TicTacToe::play(bool multiplayer, Difficulty diff){
 			moveKey = getch();
 			if(moveKey == 224)
 				moveKey = getch();
-			gameBoard.update(moveKey, Xturn);
-			if(moveKey==' '){			// If User pressed spacebar, update to next turn in game
+			didPlace = gameBoard.update(moveKey, Xturn);
+			if(moveKey==' ' && didPlace){			// If User pressed spacebar and they were able to make a valid move, update to next turn in game
 				Xturn = !Xturn;
 				movesRemaining--;
 			}
 			else if(moveKey=='q')		// If user pressed 'q', quit out of the game
 				gameOver=true;
+
 		}
 		
 		// Check if game is over, and if it is, move to the endgame screen

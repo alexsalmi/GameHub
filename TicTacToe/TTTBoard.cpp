@@ -16,8 +16,8 @@ void TTTBoard::init(){
 	cursorPos = size*size/2;
 }
 
-// Update the board when a move is made or the cursor is moved
-void TTTBoard::update(int moveKey, bool Xturn){
+// Update the board when a move is made or the cursor is moved, returns true when a move was made
+bool TTTBoard::update(int moveKey, bool Xturn){
 	int newPos = cursorPos;
 
 	switch(moveKey){
@@ -49,7 +49,7 @@ void TTTBoard::update(int moveKey, bool Xturn){
 					board[cursorPos] = 'X';
 				else
 					board[cursorPos] = 'O';
-
+				return true;
 			}
 			break;
 		default:break;
@@ -70,6 +70,7 @@ void TTTBoard::update(int moveKey, bool Xturn){
 		}
 		cursorPos = newPos;
 	}
+	return false;
 }
 
 // Checks to see if position pos on the board is available
