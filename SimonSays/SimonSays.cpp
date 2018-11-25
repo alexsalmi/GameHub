@@ -164,19 +164,45 @@ void SimonSays::printKeys(Move dir, bool gameOver){
 }
 
 void SimonSays::endgame(){
+	string in, scoreName;
+	int num;
+
 	ansi.textColor("green");
 	ansi.textAttr("bold");
 	cout << "                    Sorry, wrong button. Game over!                      " << endl << endl;
-	cout << "                            Final score: " << score << endl << endl;
-	// Exit to Simon Says menu
-	cout << "                  Press any key to return to the menu                    " << endl;
-	ansi.textReset();
+	cout << "                            Final score: " << score << endl;
 	
-	updateHighScores("alex");
-	int moveKey = getch();
-	if(moveKey == 224)
-		moveKey = getch();
-	ansi.textReset();
+	inFile.open(HSFile);
+	if(!inFile.is_open()){
+		cout << "                           ";
+		ansi.textAttr("reverse");
+		cout << "New high score!";
+		ansi.textAttr("-reverse");
+		cout << "                               " << endl << endl;
+	}
+	else{
+		getline(inFile, in);
+		istringstream iss(in);
+		iss >> in >> num;
+
+		if(score>num){
+			cout << "                           ";
+			ansi.textAttr("reverse");
+			cout << "New high score!";
+			ansi.textAttr("-reverse");
+			cout << "                               " << endl << endl;
+		}
+		else
+			cout << "                        High score to beat: " << num << endl << endl;
+	}
+	inFile.close();
+
+	cout << "   Enter your name to save your score and view high scores: ";
+	cin >> scoreName;
+
+	updateHighScores(scoreName);
+
+	printHighScores();
 }
 
 // Updates the high score file with a new score
