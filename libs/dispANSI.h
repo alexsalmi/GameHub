@@ -31,6 +31,10 @@ public:
 	void saveCursor();
 	void loadCursor();
 
+	void windowSize(int w, int h);
+
+	void showCursor(bool show);
+
 private:	
 	const char ESC = '\x1b';
 };
