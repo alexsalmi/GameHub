@@ -47,7 +47,7 @@ void mainScreen(){
     ansi.textColor("green");
 	cout << " |          Version 1.0          |    Created By: Alexander Salmi    |" << endl;
 	cout << " \\_______________________________|___________________________________/" << endl;
-	cout << endl << endl << endl;
+	cout << "\n\n\n\n\n\n\n\n";
 	ansi.textAttr("bold");
 	cout << "                      Press any button to begin                       " << endl;
 	ansi.textReset();
