@@ -174,7 +174,7 @@ void SimonSays::endgame(){
 	
 	inFile.open(HSFile);
 	if(!inFile.is_open()){
-		cout << "                           ";
+		cout << "                            ";
 		ansi.textAttr("reverse");
 		cout << "New high score!";
 		ansi.textAttr("-reverse");
@@ -186,7 +186,7 @@ void SimonSays::endgame(){
 		iss >> in >> num;
 
 		if(score>num){
-			cout << "                           ";
+			cout << "                            ";
 			ansi.textAttr("reverse");
 			cout << "New high score!";
 			ansi.textAttr("-reverse");
@@ -197,12 +197,10 @@ void SimonSays::endgame(){
 	}
 	inFile.close();
 
-	cout << "   Enter your name to save your score and view high scores: ";
+	cout << "                Enter your name to save your score: ";
 	cin >> scoreName;
 
 	updateHighScores(scoreName);
-
-	printHighScores();
 }
 
 // Updates the high score file with a new score
@@ -284,9 +282,14 @@ void SimonSays::printHighScores(){
 			iss >> numsname >> num;
 			ansi.textAttr("bold");
 			if(i<10)
-				cout << "                       " << i << ". " << num ;
+				cout << "                      " << i << ". " ;
 			else
-				cout << "                      " << i << ". " << num ;
+				cout << "                     " << i << ". ";
+
+			if(num<10)
+				cout << " " << num;
+			else
+				cout << num;
 
 			ansi.textAttr("-bold");
 			cout << " ........... by " << numsname << endl;

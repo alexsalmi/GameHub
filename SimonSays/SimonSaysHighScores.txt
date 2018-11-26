@@ -1,3 +1,7 @@
+Alex 11
+Alex 10
 al 2
 alex 1
+alex 1
 alex 0
+a 0
