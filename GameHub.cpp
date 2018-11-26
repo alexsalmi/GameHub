@@ -4,21 +4,25 @@
 using namespace std;
 
 dispANSI ansi;
-string _name;
 
 void printTitle();
-string mainScreen();
+void mainScreen();
 int mainMenu();
 
 int main(){
 	system("CLS");
-	_name = mainScreen();
+	ansi.windowSize(72, 33);
+	ansi.showCursor(false);
+
+	mainScreen();
 
 	int menuChoice;
 	do{
 		menuChoice = mainMenu();
 
-		if(menuChoice==1){
+		if(menuChoice==0){
+		}
+		else if(menuChoice==1){
 			TicTacToe game;
 			game.start();
 			delete &game;
@@ -32,11 +36,12 @@ int main(){
 
 	ansi.textReset();
 	ansi.clearScreen();
+	ansi.showCursor(true);
 
 	return 0;
 }
 
-string mainScreen(){
+void mainScreen(){
 	string name;
 	printTitle();
     ansi.textColor("green");
@@ -44,11 +49,10 @@ string mainScreen(){
 	cout << " \\_______________________________|___________________________________/" << endl;
 	cout << endl << endl << endl;
 	ansi.textAttr("bold");
-	cout << "               Enter your name to begin: ";
-
-	cin >> name; 
+	cout << "                      Press any button to begin                       " << endl;
 	ansi.textReset();
-	return name;
+
+	getch();
 }
 
 int mainMenu(){
@@ -61,7 +65,7 @@ int mainMenu(){
 		cout << endl;
 
 		// Print the menu options to the cmd window
-		cout << "               Welcome to GameHub, " << _name << "!                    \n" 
+		cout << "                      Welcome to GameHub!                              \n" 
 				"               What game would you like to play?                       \n" << endl;
 
 		cout << "               (1) Tic Tac Toe                                         \n"
