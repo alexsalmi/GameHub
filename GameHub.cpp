@@ -20,17 +20,13 @@ int main(){
 	do{
 		menuChoice = mainMenu();
 
-		if(menuChoice==0){
-		}
-		else if(menuChoice==1){
-			TicTacToe game;
-			game.start();
-			delete &game;
+		if(menuChoice==1){
+			TicTacToe ticTac;
+			ticTac.start();
 		}
 		else if(menuChoice==2){
-			SimonSays game;
-			game.start();
-			delete &game;
+			SimonSays simonSays;
+			simonSays.start();
 		}
 	}while(menuChoice!=0);
 
