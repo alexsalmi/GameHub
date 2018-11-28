@@ -5,9 +5,9 @@
 #include <conio.h>				// Used for getch() (reading character key inputs)
 #include <cstdlib> 				// Used for rng 
 #include <ctime>				// Used for setting seeds in rng
-#include <fstream>
+#include <fstream>				// Used for reading/writing to high score file
 #include <iostream>
-#include <sstream>
+#include <sstream>				// Used for reading/writing to high score file
 #include <string>
 #include <vector>
 #include <windows.h>			// Used for Sleep()
@@ -47,12 +47,12 @@ private:
 	// Displays the rules of the game
 	void rules();
 
-	dispANSI ansi;
-	std::vector<Move> moves;
-	int score;
-	ifstream inFile;
-	ofstream outFile;
-	string HSFile = "./SimonSays/SimonSaysHighScores.txt";
+	dispANSI ansi;						// For ansi excape commands
+	std::vector<Move> moves;			// To keep track of the order of moves simon plays
+	int score;							// To keep track of the score
+	ifstream inFile;					// To read from the high score file
+	ofstream outFile;					// To write to the high score file
+	string HSFile = "./SimonSays/SimonSaysHighScores.txt";		// High score file
 };
 
 #endif
