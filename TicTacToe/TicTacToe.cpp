@@ -33,26 +33,27 @@ int TicTacToe::menu(){
 		ansi.textAttr("bold");
 
 		// Print the menu options to the cmd window
-		cout << "                        Welcome to Tic Tac Toe!                        \n" 
-				"               Please select an option from the menu below:            \n" << endl;
+		cout << endl;
+		cout << "                                      Welcome to Tic Tac Toe!                                      \n" 
+				"                            Please select an option from the menu below:                           \n" << endl << endl;
 
 		if(!diffMenu){
-			cout << "               (1) Play Tic Tac Toe vs. the CPU    (1 Player)          \n"
-					"               (2) Play Tic Tac Toe vs. a friend   (2 Player)          \n" << endl;
-					
-			cout << "               (3) View game rules and controls 				        \n" << endl;
+			cout << "                            (1) Play Tic Tac Toe vs. the CPU    (1 Player)                         \n"
+					"                            (2) Play Tic Tac Toe vs. a friend   (2 Player)                         \n" << endl;
+				 	
+			cout << "                            (3) View game rules and controls 				                        \n" << endl;
 
-			cout << "               (0) Return to GameHub							        " << endl;
+			cout << "                            (0) Return to GameHub							                          " << endl;
 			ansi.textReset();
 		}
 		else{
 			ansi.textAttr("-bold");
-			cout << "               ( ) Play Tic Tac Toe vs. the CPU                        \n";
+			cout << "                            ( ) Play Tic Tac Toe vs. the CPU                                       \n";
 			ansi.textAttr("bold");
-			cout <<	"               Please choose a difficulty:					            \n"
-					"               (1) Easy | (2) Medium | (3) Hard       			        \n"<< endl;
+			cout <<	"                            Please choose a difficulty:\n"
+					"                            (1) Easy | (2) Medium | (3) Hard       			                    \n"<< endl << endl;
 
-			cout << "               (0) Return to menu							        " << endl;
+			cout << "                            (0) Return to menu							                              " << endl;
 			ansi.textReset();
 		}
 
@@ -97,21 +98,21 @@ void TicTacToe::play(bool multiplayer, Difficulty diff){
 		gameBoard.print();
 		ansi.textColor("green");
 		ansi.textAttr("bold");
-		cout << endl << endl;
+		cout << "\n\n\n";
 
 		// Print out game info under game board
 		if(Xturn && !multiplayer)
-			cout << "                              Your turn!                               " << endl;
+			cout << "                                             Your turn!                                           " << endl;
 		else if(!Xturn && !multiplayer)
-			cout << "                              CPU's turn                               " << endl;
+			cout << "                                             CPU's turn                                           " << endl;
 		else if(Xturn && multiplayer)
-			cout << "                               X's turn                                " << endl;
+			cout << "                                              X's turn                                            " << endl;
 		else if(!Xturn && multiplayer)
-			cout << "                               O's turn                                " << endl;
+			cout << "                                              O's turn                                            " << endl;
 		ansi.textAttr("-bold");
 
-		cout << endl;
-		cout << "     [Arrow Keys] - Move     [Spacebar] - Place X/O     [q] - Quit     " << endl;
+		cout << "\n\n\n";
+		cout << "                   [Arrow Keys] - Move     [Spacebar] - Place X/O     [q] - Quit                   " << endl;
 
 		ansi.textReset();
 
@@ -299,27 +300,27 @@ void TicTacToe::endgame(Winner winner, TTTBoard gameBoard){
 	printHeader();
 	gameBoard.print();	
 	ansi.textColor("green");
-	cout << endl << endl;
+	cout << "\n\n\n";
 
 	// Print out who won the game
 	if(winner == Draw)
-		cout << "                         Bummer, it's a draw!                          " << endl;
+		cout << "                                       Bummer, it's a draw!                                        " << endl;
 	else if(winner == CPU)
-		cout << "                           Sorry, you lost.                            " << endl;
+		cout << "                                         Sorry, you lost.                                          " << endl;
 	else{
-		cout << "                        Congratulations, ";
+		cout << "                                     Congratulations, ";
 		if(winner==X)
 			cout << 'X';
 		else if(winner==O)
 			cout << 'O';
 		else if(winner==Player)
-			cout << "You";
-		cout <<" won!                        " << endl;
+			cout << "you";
+		cout <<" won!                        ";
 	}
 
 	// Exit to tic tac toe menu
-	cout << endl;
-	cout << "                   Press any key to return to the menu                    " << endl;
+	cout << "\n\n\n";
+	cout << "                                 Press any key to return to the menu                                 " << endl;
 	getch();
 	ansi.textReset();
 }
@@ -329,15 +330,16 @@ void TicTacToe::printHeader(){
     ansi.clearScreen();
     ansi.textColor("green");
     ansi.textAttr("bold");
-	cout << "+---------------------------------------------------------------------+\n"
-			"|                                                                     |\n" 
-			"|   XXXXX  XXXXX  XXXXX   XXXXX  XXXXX  XXXXX   XXXXX  XXXXX  XXXXX   |\n" 
-			"|     X      X    X         X    X   X  X         X    X   X  X       |\n" 
-			"|     X      X    X         X    XXXXX  X         X    X   X  XXX     |\n"
-			"|     X      X    X         X    X   X  X         X    X   X  X       |\n"
-			"|     X    XXXXX  XXXXX     X    X   X  XXXXX     X    XXXXX  XXXXX   |\n"
-			"|                                                                     |\n"
-			"+---------------------------------------------------------------------+\n" << endl;
+
+	cout << "+-------------------------------------------------------------------------------------------------+\n"
+			"|                                                                                                 |\n" 
+			"|                 XXXXX  XXXXX  XXXXX   XXXXX  XXXXX  XXXXX   XXXXX  XXXXX  XXXXX                 |\n" 
+			"|                   X      X    X         X    X   X  X         X    X   X  X                     |\n" 
+			"|                   X      X    X         X    XXXXX  X         X    X   X  XXX                   |\n"
+			"|                   X      X    X         X    X   X  X         X    X   X  X                     |\n"
+			"|                   X    XXXXX  XXXXX     X    X   X  XXXXX     X    XXXXX  XXXXX                 |\n"
+			"|                                                                                                 |\n"
+			"+-------------------------------------------------------------------------------------------------+\n" << endl;
 	ansi.textReset();
 }
 
@@ -345,27 +347,27 @@ void TicTacToe::rules(){
 	printHeader();
 	ansi.textColor("green");
 	ansi.textAttr("bold");
-	cout << "                                RULES:                                 \n" << endl;
+	cout << "                                              RULES:                                               \n" << endl;
 	ansi.textAttr("-bold");
 	
-	cout << "Tic tac toe is a two player game, each playing either X or O, where the\n" 
-			"players take turns to place their character in a 3x3 grid. The player  \n"
-			"who gets three of their characters in a row first wins. The three char-\n"
-			"acters can be horizontal, vertical, or diagonal.						\n"
-			"If you choose to play single player, you will play against the computer.\n"
-			"You will play as X, the cpu will be O.									\n"
-			"If you choose to play 2 player, you will take turns playing as X and O.\n"
-			"X will start the game. 												\n" << endl;
+	cout << "              Tic tac toe is a two player game, each playing either X or O, where the              \n" 
+			"              players take turns to place their character in a 3x3 grid. The player                \n"
+			"              who gets three of their characters in a row first wins. The three char-              \n"
+			"              acters can be horizontal, vertical, or diagonal.						                \n"
+			"              If you choose to play single player, you will play against the computer.             \n"
+			"              You will play as X, the cpu will be O.									            \n"
+			"              If you choose to play 2 player, you will take turns playing as X and O.              \n"
+			"              X will start the game. 												                \n" << endl;
 
 	ansi.textAttr("bold");
-	cout << "                              CONTROLS:                                \n" << endl;
+	cout << "                                             CONTROLS:                                             \n" << endl;
 	ansi.textAttr("-bold");
 
-	cout << "                      [Arrow keys] - Move cursor                       \n"
-			"                       [Spacebar]  - Place X/O characters              \n\n" << endl;
+	cout << "                                    [Arrow keys] - Move cursor                                     \n"
+			"                                     [Spacebar]  - Place X/O characters                          \n\n" << endl;
 
 	ansi.textAttr("bold");
-	cout << "                  Press any key to return to the menu                  \n" << endl;
+	cout << "                                Press any key to return to the menu                                \n" << endl;
 	ansi.textAttr("-bold");
 	getch();
 	ansi.textReset();

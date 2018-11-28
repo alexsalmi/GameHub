@@ -29,15 +29,16 @@ int SimonSays::menu(){
 		ansi.textAttr("bold");
 
 		// Print the menu options to the cmd window
-		cout << "                         Welcome to Simon Says!                        \n" 
-				"               Please select an option from the menu below:            \n" << endl;
+		cout << endl;
+		cout << "                                       Welcome to Simon Says!                                      \n" 
+				"                             Please select an option from the menu below:                          \n" << endl << endl;
 
-		cout << "               (1) Play Simon Says                                     \n" << endl;
+		cout << "                             (1) Play Simon Says                                                   \n" << endl;
 		
-		cout << "               (2) View high scores 				 			        \n"
-				"               (3) View game rules and controls 				        \n" << endl;
+		cout << "                             (2) View high scores\n"
+				"                             (3) View game rules and controls\n" << endl;
 
-		cout << "               (0) Return to GameHub							        " << endl;
+		cout << "                             (0) Return to GameHub							                         " << endl;
 		ansi.textReset();
 
 		// Accept the user's input
@@ -117,37 +118,38 @@ void SimonSays::printKeys(Move dir, bool gameOver){
 	ansi.textColor("green");
 	ansi.textAttr("bold");
 
-	for(int i=0; i<3; i++){
-		cout << "                               ";
+	cout << endl;
+	for(int i=0; i<4; i++){
+		cout << "                                            ";
 		if(dir==moveup || dir==moveall)
 			ansi.textAttr("reverse");
-		cout << "^^^^^^^\n";
+		cout << "^^^^^^^^^\n";
 		if(dir==moveup || dir==moveall)
 			ansi.textAttr("-reverse");
 	}
 
 
-	for(int i=0; i<3; i++){
-		cout << "                        ";
+	for(int i=0; i<4; i++){
+		cout << "                                   ";
 		if(dir==moveleft || dir==moveall)
 			ansi.textAttr("reverse");
-		cout << "<<<<<<<";
+		cout << "<<<<<<<<<";
 		if(dir==moveleft || dir==moveall)
 			ansi.textAttr("-reverse");
 
-		cout << "       ";
+		cout << "         ";
 		if(dir==moveright || dir==moveall)
 			ansi.textAttr("reverse");
-		cout << ">>>>>>>" << endl;
+		cout << ">>>>>>>>>" << endl;
 		if(dir==moveright || dir==moveall)
 			ansi.textAttr("-reverse");
 	}
 
-	for(int i=0; i<3; i++){
-		cout << "                               ";
+	for(int i=0; i<4; i++){
+		cout << "                                            ";
 		if(dir==movedown || dir==moveall)
 			ansi.textAttr("reverse");
-		cout << "vvvvvvv\n";
+		cout << "vvvvvvvvv\n";
 		if(dir==movedown || dir==moveall)
 			ansi.textAttr("-reverse");
 	}
@@ -155,9 +157,10 @@ void SimonSays::printKeys(Move dir, bool gameOver){
 	cout << endl << endl;
 
 	if(!gameOver){
-		cout << "                               Score: " << score << endl << endl;
+		cout << endl;
+		cout << "                                             Score: " << score << endl << endl << endl << endl;
 		ansi.textAttr("-bold");
-		cout << "          [Arrow Keys] - Copy Simon's moves         [q] - Quit          " << endl << endl;
+		cout << "                        [Arrow Keys] - Copy Simon's moves         [q] - Quit                        " << endl << endl;
 	}
 	
 	ansi.textReset();
@@ -169,12 +172,12 @@ void SimonSays::endgame(){
 
 	ansi.textColor("green");
 	ansi.textAttr("bold");
-	cout << "                    Sorry, wrong button. Game over!                      " << endl << endl;
-	cout << "                            Final score: " << score << endl;
+	cout << "                                  Sorry, wrong button. Game over!                                  " << endl << endl;
+	cout << "                                          Final score: " << score << endl;
 	
 	inFile.open(HSFile);
 	if(!inFile.is_open()){
-		cout << "                            ";
+		cout << "                                          ";
 		ansi.textAttr("reverse");
 		cout << "New high score!";
 		ansi.textAttr("-reverse");
@@ -186,18 +189,18 @@ void SimonSays::endgame(){
 		iss >> in >> num;
 
 		if(score>num){
-			cout << "                            ";
+			cout << "                                          ";
 			ansi.textAttr("reverse");
 			cout << "New high score!";
 			ansi.textAttr("-reverse");
 			cout << "                               " << endl << endl;
 		}
 		else
-			cout << "                        High score to beat: " << num << endl << endl;
+			cout << "                                      High score to beat: " << num << endl << endl;
 	}
 	inFile.close();
 
-	cout << "                Enter your name to save your score: ";
+	cout << "                              Enter your name to save your score: ";
 	cin >> scoreName;
 
 	updateHighScores(scoreName);
@@ -262,18 +265,19 @@ void SimonSays::printHighScores(){
     ansi.textColor("green");
     ansi.textAttr("bold");
 
-    cout << "                            High Scores                              \n" << endl << endl;
+    cout << "                                          High Scores                                            \n" << endl << endl;
 
     ansi.textAttr("-bold");
 
     inFile.open(HSFile);
 
     if(!inFile.is_open()){
-    	cout << "              There are no high score records available.               \n"
-    			"            Please play the game to save some high scores.             \n" << endl;
+    	cout << "                            There are no high score records available.                             \n"
+    			"                          Please play the game to save some high scores.                           \n" << endl;
 
     	// Exit to Simon Says menu
-		cout << "                  Press any key to return to the menu                    " << endl;
+    	cout << "\n\n\n";
+		cout << "                               Press any key to return to the menu                                   " << endl;
 		getch();
     }
     else{
@@ -282,9 +286,9 @@ void SimonSays::printHighScores(){
 			iss >> numsname >> num;
 			ansi.textAttr("bold");
 			if(i<10)
-				cout << "                      " << i << ". " ;
+				cout << "                                    " << i << ". " ;
 			else
-				cout << "                     " << i << ". ";
+				cout << "                                   " << i << ". ";
 
 			if(num<10)
 				cout << " " << num;
@@ -299,9 +303,9 @@ void SimonSays::printHighScores(){
 
     	inFile.close();
 
-    	cout << endl << endl;
-
-    	cout << "                  Press any key to return to the menu                    " << endl;
+    	
+    	cout << "\n\n\n";
+    	cout << "                                Press any key to return to the menu                                  " << endl;
     	getch();
     }
 }
@@ -310,15 +314,15 @@ void SimonSays::printHeader(){
     ansi.clearScreen();
     ansi.textColor("green");
     ansi.textAttr("bold");
-	cout << "+---------------------------------------------------------------------+\n"
-			"|                                                                     |\n" 
-			"|   XXXXX  XXXXX  XXXXX  XXXXX  X   X    XXXXX  XXXXX  X   X  XXXXX   |\n" 
-			"|   X        X    X X X  X   X  XX  X    X      X   X  X   X  X       |\n" 
-			"|   XXXXX    X    X X X  X   X  X X X    XXXXX  XXXXX  XXXXX  XXXXX   |\n"
-			"|       X    X    X X X  X   X  X  XX        X  X   X    X        X   |\n"
-			"|   XXXXX  XXXXX  X X X  XXXXX  X   X    XXXXX  X   X    X    XXXXX   |\n"
-			"|                                                                     |\n"
-			"+---------------------------------------------------------------------+\n" << endl;
+	cout << "+-------------------------------------------------------------------------------------------------+\n"
+			"|                                                                                                 |\n" 
+			"|                 XXXXX  XXXXX  XXXXX  XXXXX  X   X    XXXXX  XXXXX  X   X  XXXXX                 |\n" 
+			"|                 X        X    X X X  X   X  XX  X    X      X   X  X   X  X                     |\n" 
+			"|                 XXXXX    X    X X X  X   X  X X X    XXXXX  XXXXX  XXXXX  XXXXX                 |\n"
+			"|                     X    X    X X X  X   X  X  XX        X  X   X    X        X                 |\n"
+			"|                 XXXXX  XXXXX  X X X  XXXXX  X   X    XXXXX  X   X    X    XXXXX                 |\n"
+			"|                                                                                                 |\n"
+			"+-------------------------------------------------------------------------------------------------+\n" << endl;
 	ansi.textReset();
 }
 
@@ -326,28 +330,29 @@ void SimonSays::rules(){
 	printHeader();
 	ansi.textColor("green");
 	ansi.textAttr("bold");
-	cout << "                                RULES:                                 \n" << endl;
+	cout << "                                              RULES:                                               \n" << endl;
 	ansi.textAttr("-bold");
 	
-	cout << "Simon Says is a game where you will be shown a series of button presses\n" 
-			"which you must then repeat back. The buttons used will be the four     \n"
-			"arrow keys, presented to you in a random order.                        \n"
-			"You must repeat back the same arrow keys in the exact same order they  \n"
-			"were presented to you.\n"
-			"Every turn, if you correctly enter the keys in the correct order, the  \n"
-			"displayed keys will all flash to signify that you repeated the sequence\n"
-			"correctly.\n"
-			"When you fail to press the keys in the correct order, the game will be \n"
-			"over, and your final score will be the number of turns you survived.   \n"<< endl;
+	cout << "              Simon Says is a game where you will be shown a series of button presses              \n" 
+			"              which you must then repeat back. The buttons used will be the four                   \n"
+			"              arrow keys, presented to you in a random order.                                      \n"
+			"              You must repeat back the same arrow keys in the exact same order they                \n"
+			"              were presented to you.\n"
+			"              Every turn, if you correctly enter the keys in the correct order, the                \n"
+			"              displayed keys will all flash to signify that you repeated the sequence              \n"
+			"              correctly.\n"
+			"              When you fail to press the keys in the correct order, the game will be               \n"
+			"              over, and your final score will be the number of turns you survived.                 \n"<< endl;
 
 	ansi.textAttr("bold");
-	cout << "                              CONTROLS:                                \n" << endl;
+	cout << "                                            CONTROLS:                                              \n" << endl;
 	ansi.textAttr("-bold");
 
-	cout << "                   [Arrow keys] - Copy Simon's moves                   \n" << endl;
+	cout << "                                 [Arrow keys] - Copy Simon's moves                                 \n" << endl;
 
 	ansi.textAttr("bold");
-	cout << "                  Press any key to return to the menu                  \n" << endl;
+    cout << "\n\n\n";
+	cout << "                                Press any key to return to the menu                                \n" << endl;
 	ansi.textAttr("-bold");
 	getch();
 	ansi.textReset();

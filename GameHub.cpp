@@ -11,7 +11,7 @@ int mainMenu();
 
 int main(){
 	system("CLS");
-	ansi.windowSize(72, 33);
+	ansi.windowSize(100, 33);
 	ansi.showCursor(false);
 
 	mainScreen();
@@ -41,11 +41,11 @@ void mainScreen(){
 	string name;
 	printTitle();
     ansi.textColor("green");
-	cout << " |          Version 1.0          |    Created By: Alexander Salmi    |" << endl;
-	cout << " \\_______________________________|___________________________________/" << endl;
-	cout << "\n\n\n\n\n\n\n\n";
+	cout << " |                 Version 1.0                 |           Created By: Alex Salmi                |" << endl;
+	cout << " \\_____________________________________________|_________________________________________________/" << endl;
+	cout << "\n\n\n\n\n\n";
 	ansi.textAttr("bold");
-	cout << "                      Press any button to begin                       " << endl;
+	cout << "                                    Press any button to begin                                     " << endl;
 	ansi.textReset();
 
 	getch();
@@ -58,18 +58,18 @@ int mainMenu(){
 		printTitle();
 		ansi.textColor("green");
 		ansi.textAttr("bold");
-		cout << endl;
+		cout << "\n\n";
 
 		// Print the menu options to the cmd window
-		cout << "                      Welcome to GameHub!                              \n" 
-				"               What game would you like to play?                       \n" << endl;
+		cout << "                                        Welcome to GameHub!                                        \n" 
+				"                                 What game would you like to play?                                 \n" << endl;
 
-		cout << "               (1) Tic Tac Toe                                         \n"
-				"               (2) Simon Says                                          \n" << endl;
+		cout << "                                 (1) Tic Tac Toe                                                   \n"
+				"                                 (2) Simon Says                                                    \n" << endl;
 		
-		cout << "               ( ) More games coming soon!   				        \n"<< endl;
+		cout << "                                 ( ) More games coming soon!                    				    \n"<< endl;
 
-		cout << "               (0) Quit GameHub							        " << endl;
+		cout << "                                 (0) Quit GameHub			                                         " << endl;
 		ansi.textReset();
 
 		// Accept the user's input
@@ -88,17 +88,17 @@ void printTitle(){
     ansi.clearScreen();
     ansi.textAttr("bold");
     ansi.textColor("green");
-		cout << "  ___________________________________________________________________  \n"
-				"//                                                                   \\\\\n"
-				"++-------------------------------------------------------------------++\n"
-				"||    XXXXXXXX                           XXX  XXX                    ||\n"
-				"||    XXXXXXXX  XXXXXX  XXX XXX  XXXXXX  XXX  XXX  X    X  XXXXX     ||\n"
-				"||    XXX       X    X  X  X  X  X       XXX  XXX  X    X  X    X    ||\n"
-				"||    XXX XXXX  XXXXXX  X  X  X  XXXX    XXXXXXXX  X    X  XXXXX     ||\n"
-				"||    XXX   XX  X    X  X  X  X  X       XXXXXXXX  X    X  X    X    ||\n"
-				"||    XXXXXXXX  X    X  X  X  X  XXXXXX  XXX  XXX  XXXXXX  XXXXX     ||\n"
-				"||    XXXXXXXX                           XXX  XXX                    ||\n"
-				"++-------------------------------------------------------------------++\n"
-				"\\\\___________________________________________________________________//\n";
+		cout << "  _______________________________________________________________________________________________  \n"
+				"//                                                                                               \\\\\n"
+				"++-----------------------------------------------------------------------------------------------++\n"
+				"||                  XXXXXXXX                           XXX  XXX                                  ||\n"
+				"||                  XXXXXXXX  XXXXXX  XXX XXX  XXXXXX  XXX  XXX  X    X  XXXXX                   ||\n"
+				"||                  XXX       X    X  X  X  X  X       XXX  XXX  X    X  X    X                  ||\n"
+				"||                  XXX XXXX  XXXXXX  X  X  X  XXXX    XXXXXXXX  X    X  XXXXX                   ||\n"
+				"||                  XXX   XX  X    X  X  X  X  X       XXXXXXXX  X    X  X    X                  ||\n"
+				"||                  XXXXXXXX  X    X  X  X  X  XXXXXX  XXX  XXX  XXXXXX  XXXXX                   ||\n"
+				"||                  XXXXXXXX                           XXX  XXX                                  ||\n"
+				"++-----------------------------------------------------------------------------------------------++\n"
+				"\\\\_______________________________________________________________________________________________//\n";
 	ansi.textReset();
 }

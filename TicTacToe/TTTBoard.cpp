@@ -88,14 +88,15 @@ void TTTBoard::placeCPU(int pos){
 void TTTBoard::print(){
 	ansi.textAttr("bold");
 	ansi.textColor("green");
-	cout << "                              |         |                              " << endl;
-	cout << "                         " << board[0] << "    |    " << board[1] << "    |    " << board[2] << endl;
-	cout << "                              |         |                              " << endl;
+	cout << endl;
+	cout << "                                            |         |                                            " << endl;
+	cout << "                                       " << board[0] << "    |    " << board[1] << "    |    " << board[2] << endl;
+	cout << "                                            |         |                              " << endl;
 	for(int i=1; i<size; i++){
-		cout << "                     _____________________________                     " << endl;
-		cout << "                              |         |                              " << endl;
-		cout << "                         " << board[0+i*size] << "    |    " << board[1+i*size] << "    |    " << board[2+i*size] << endl;
-		cout << "                              |         |                              " << endl;
+		cout << "                                   _____________________________                                   " << endl;
+		cout << "                                            |         |                              " << endl;
+		cout << "                                       " << board[0+i*size] << "    |    " << board[1+i*size] << "    |    " << board[2+i*size] << endl;
+		cout << "                                            |         |                              " << endl;
 	}
 	ansi.textReset();
 }

@@ -1,7 +1,10 @@
 Alex 11
 Alex 10
+Alex 8
+1 3
 al 2
 alex 1
 alex 1
+Alex 1
 alex 0
 a 0
