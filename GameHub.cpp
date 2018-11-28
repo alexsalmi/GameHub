@@ -1,5 +1,6 @@
 #include "TicTacToe/TicTacToe.h"
 #include "SimonSays/SimonSays.h"
+#include "Memory/Memory.h"
 
 using namespace std;
 
@@ -27,6 +28,10 @@ int main(){
 		else if(menuChoice==2){
 			SimonSays simonSays;
 			simonSays.start();
+		}
+		else if(menuChoice==3){
+			Memory memory;
+			memory.start();
 		}
 	}while(menuChoice!=0);
 
@@ -65,7 +70,8 @@ int mainMenu(){
 				"                                 What game would you like to play?                                 \n" << endl;
 
 		cout << "                                 (1) Tic Tac Toe                                                   \n"
-				"                                 (2) Simon Says                                                    \n" << endl;
+				"                                 (2) Simon Says                                                    \n" 
+				"                                 (3) Memory                                                        \n" << endl;
 		
 		cout << "                                 ( ) More games coming soon!                    				    \n"<< endl;
 
@@ -79,7 +85,7 @@ int mainMenu(){
 			cin.clear();
         	cin.ignore();
 		}
-		else if(menuChoice <= 2 && menuChoice >= 0)
+		else if(menuChoice <= 3 && menuChoice >= 0)
 			return menuChoice;		
 	}
 }
