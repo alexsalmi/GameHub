@@ -42,7 +42,7 @@ private:
 	void updateHighScores(string name);
 	// Prints all the high scores
 	void printHighScores();
-	// Prints tic tac toe header to cmd window
+	// Prints simon says header to cmd window
 	void printHeader();	
 	// Displays the rules of the game
 	void rules();
