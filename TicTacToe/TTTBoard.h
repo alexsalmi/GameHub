@@ -30,8 +30,6 @@ public:
 	char board[9];
 
 private:
-	// Initializes the board
-	void init();
 
 	const int size=3;	// Size of the rows/columns 
 	int cursorPos;		// Cursor position on the board
