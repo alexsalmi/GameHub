@@ -13,7 +13,7 @@ TicTacToe: .\TicTacToe\TicTacToe.cpp .\TicTacToe\TicTacToe.h .\TicTacToe\TTTBoar
 SimonSays: .\SimonSays\SimonSays.cpp .\SimonSays\SimonSays.h
 	+$(MAKE) -C SimonSays
 
-Memory: .\Memory\Memory.cpp .\Memory\Memory.h
+Memory: .\Memory\Memory.cpp .\Memory\Memory.h .\Memory\MemoryBoard.cpp .\Memory\MemoryBoard.h
 	+$(MAKE) -C Memory
 
 # Cleans solution

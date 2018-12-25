@@ -1,7 +1,8 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
-#include "..\libs\dispANSI.h"
+#include "MemoryBoard.h"
+#include <conio.h>				// Used for getch() (reading character key inputs)
 #include <cstdlib> 				// Used for rng 
 #include <ctime>				// Used for setting seeds in rng
 #include <iostream>
