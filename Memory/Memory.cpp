@@ -173,5 +173,31 @@ void Memory::printHeader(){
 
 // Displays the rules of the game
 void Memory::rules(){
+	printHeader();
+	ansi.textColor("green");
+	ansi.textAttr("bold");
+	cout << "                                              RULES:                                               \n" << endl;
+	ansi.textAttr("-bold");
+	
+	cout << "              Memory is a one-player game where the goal is to uncover all of the                  \n" 
+			"              tiles on the board by finding all pairs of matching tiles. You choose                \n"
+			"              two tiles to flip at a time. If the two tiles show the same symbol, then             \n"
+			"              they stay uncovered, and you move on to choosing your next pair of tiles.            \n"
+			"              If the two tiles show different symbols, they are flipped back to be                 \n"
+			"              face down, and you move on to choosing your next pair of tiles, using                \n"
+			"              your knowledge of the tiles you hav already flipped to find pairs.                   \n" << endl;
 
+	ansi.textAttr("bold");
+	cout << "                                             CONTROLS:                                             \n" << endl;
+	ansi.textAttr("-bold");
+
+	cout << "                                    [Arrow keys] - Move cursor                                     \n"
+			"                                     [Spacebar]  - Choose tile                                   \n\n" << endl;
+	cout << "\n\n\n\n";
+
+	ansi.textAttr("bold");
+	cout << "                                Press any key to return to the menu                                \n" << endl;
+	ansi.textAttr("-bold");
+	getch();
+	ansi.textReset();
 }
