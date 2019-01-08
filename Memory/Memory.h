@@ -9,6 +9,8 @@
 
 using namespace std;
 
+enum Difficult {e, m, h}; // Used to keep track of the difficulty of the CPU
+
 class Memory{
 public:
 	// Constructor
@@ -20,7 +22,7 @@ private:
 	// Displays menu and takes input from user	
 	int menu();
 	// Main game loop 
-	void play();
+	void play(Difficult diff);
 	// Displays post game screen
 	void endgame(MemoryBoard gameBoard);
 	// Prints memory header to cmd window

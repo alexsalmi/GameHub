@@ -12,7 +12,9 @@ void Memory::start(){
 		menuChoice = menu();
 
 		switch(menuChoice){
-			case 1: play(); break;				// Play Memory
+			case 11: play(e); break;				// Play Memory on Easy Difficulty
+			case 12: play(m); break;				// Play Memory on Medium Difficulty
+			case 13: play(h); break;				// Play Memory on Hard Difficulty
 			case 2: rules(); break;				// Rules of Memory
 			default: break;
 		}
@@ -22,6 +24,7 @@ void Memory::start(){
 // Displays menu and takes input from user
 int Memory::menu(){
 	int menuChoice;
+	bool diffMenu = false;
 	while(true){
 		// Print header and change text attributes
 		printHeader(); 
@@ -33,12 +36,23 @@ int Memory::menu(){
 		cout << "                                           Welcome to Memory!                                      \n" 
 				"                             Please select an option from the menu below:                          \n" << endl << endl;
 
-		cout << "                             (1) Play Memory                                                       \n" << endl;
-		
-		cout <<	"                             (2) View game rules and controls\n" << endl;
+		if(!diffMenu){
+			cout << "                             (1) Play Memory                                                       \n" << endl;
+			
+			cout <<	"                             (2) View game rules and controls\n" << endl;
 
-		cout << "                             (0) Return to GameHub							                         " << endl;
-		ansi.textReset();
+			cout << "                             (0) Return to GameHub							                         " << endl;
+			ansi.textReset();
+		}
+		else{
+			ansi.textAttr("-bold");
+			cout << "                             ( ) Play Memory                                                       \n";
+			ansi.textAttr("bold");
+			cout << "                             (1) Easy | (2) Medium | (3) Hard       			                    \n"<< endl;
+
+			cout << "                             (0) Return to menu							                         " << endl;
+			ansi.textReset();
+		}
 
 		// Accept the user's input
 		cin >> menuChoice;
@@ -47,29 +61,48 @@ int Memory::menu(){
 			cin.clear();
         	cin.ignore();
 		}
-		else if(menuChoice<=2 && menuChoice>=0)
-			return menuChoice;
+		else if(!diffMenu){
+			if(menuChoice == 1)
+				diffMenu = true;
+			else if(menuChoice<=2 && menuChoice>=0)
+				return menuChoice;		// Return the mune choice to start()
+		}
+		else if(menuChoice<=3 && menuChoice>=0){
+			if(menuChoice == 0)
+				diffMenu = false;
+			else if(menuChoice<=3 && menuChoice>=1)
+				return menuChoice + 10;
+		}
 	}
 }
 
 // Main game loop 
-void Memory::play(){
-	MemoryBoard gameBoard;			// Create the game board
+void Memory::play(Difficult diff){
 	bool gameOver = false;			// keep track of if the game is over
 	int moveKey;					// input variable for character key inputs
-	int pairs = gameBoard.pairsLeft; // number of pairs left to be matched
+	MemoryBoard* gameBoard;
 
-	while(gameBoard.pairsLeft>0){
+	// Create the game board based on difficulty
+	if(diff==e)
+		gameBoard = new MemoryBoard(3, 3);
+	else if(diff==m)
+		gameBoard = new MemoryBoard(5, 5);
+	else if(diff==h)
+		gameBoard = new MemoryBoard(7, 7);
+
+	int pairs = gameBoard->pairsLeft; // number of pairs left to be matched
+
+	while(gameBoard->pairsLeft>0){
 		// Print header and current game board to the cmd window, as well as change text attributes
 		printHeader();
-		gameBoard.print();
+		gameBoard->print();
 		ansi.textColor("green");
 		ansi.textAttr("bold");
-		cout << "\n\n\n";
+		cout << "\n";
 
-		switch(gameBoard.choice){
+		switch(gameBoard->choice){
 			case first:
-				cout << "                                       Choose your first tile                                      " << endl;
+				cout << "                                      Choose your first tile                                       " << endl;
 				break;
 			case second:
 				cout << "                                      Choose your second tile                                     " << endl;
@@ -83,8 +116,8 @@ void Memory::play(){
 
 		}
 		cout << "\n";
-		cout << "                                         Pairs remaining: " << gameBoard.pairsLeft << endl;
-		cout << "\n\n\n";
+		cout << "                                        Pairs remaining: " << gameBoard->pairsLeft << endl;
+		cout << "\n\n";
 		ansi.textAttr("-bold");
 		cout << "                  [Arrow Keys] - Move     [Spacebar] - Choose tile     [q] - Quit                  " << endl;
 
@@ -94,13 +127,14 @@ void Memory::play(){
 		moveKey = getch();		
 		if(moveKey==224)
 			moveKey = getch();
-		gameBoard.update(moveKey);
+		gameBoard->update(moveKey);
 
 		if(moveKey=='q')
 			return;
 	}
 
-	endgame(gameBoard);
+	endgame(*gameBoard);
+	delete gameBoard;
 }
 // Displays post game screen
 void Memory::endgame(MemoryBoard gameBoard){

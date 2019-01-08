@@ -50,15 +50,23 @@ void MemoryBoard::init(){
 	}
 
 	for(i=0; i<(rows*cols)/2; i++){
-		do{
-			r = rand()%(rows);
-			c = rand()%(cols);
-		}while(board[r][c]!=' ');
+		r = rand()%(rows);
+		c = rand()%(cols);
+		while(board[r][c]!=' '){
+			c++;
+			if(c==cols){
+				c=0;
+				r=(r+1)%rows;
+			}
+		}
 		board[r][c] = syms[i];
-		do{
-			r = rand()%(rows);
-			c = rand()%(cols);
-		}while(board[r][c]!=' ');
+		while(board[r][c]!=' '){
+			c++;
+			if(c==cols){
+				c=0;
+				r=(r+1)%rows;
+			}
+		}
 		board[r][c] = syms[i];
 	}
 }
@@ -128,12 +136,23 @@ void MemoryBoard::print(){
 	ansi.textAttr("bold");
 	ansi.textColor("green");
 
-	cout << "                                        ";
+	if(rows==3)
+		cout << "                                            ";
+	else if(rows==5)
+		cout << "                                        ";
+	else if(rows==7)
+		cout << "                                    ";
+
 	for(i=0; i<cols*4-1; i++)
 		cout << "_";
 	cout << "\n";
 	for(i=0; i<rows; i++){
-		cout << "                                       |";
+		if(rows==3)
+			cout << "                                           |";
+		else if(rows==5)
+			cout << "                                       |";
+		else if(rows==7)
+			cout << "                                   |";
 		for(j=0; j<cols; j++){
 			if(cursY==i && cursX==j)
 				ansi.textAttr("reverse");
@@ -146,7 +165,12 @@ void MemoryBoard::print(){
 			cout << "|";
 		}
 		cout << "\n";
-		cout << "                                       |";
+		if(rows==3)
+			cout << "                                           |";
+		else if(rows==5)
+			cout << "                                       |";
+		else if(rows==7)
+			cout << "                                   |";
 		for(j=0; j<cols; j++){
 			if(cursY==i && cursX==j)
 				ansi.textAttr("reverse");
