@@ -59,7 +59,7 @@ void Memory::play(){
 	int moveKey;					// input variable for character key inputs
 	int pairs = gameBoard.pairsLeft; // number of pairs left to be matched
 
-	while(!gameOver){
+	while(gameBoard.pairsLeft>0){
 		// Print header and current game board to the cmd window, as well as change text attributes
 		printHeader();
 		gameBoard.print();
@@ -67,24 +67,56 @@ void Memory::play(){
 		ansi.textAttr("bold");
 		cout << "\n\n\n";
 
-		cout << "                                        Pairs remaining: " << gameBoard.pairsLeft << endl;
+		switch(gameBoard.choice){
+			case first:
+				cout << "                                       Choose your first tile                                      " << endl;
+				break;
+			case second:
+				cout << "                                      Choose your second tile                                     " << endl;
+				break;
+			case waitingSuccess:
+				cout << "                             That's a match! Press any button to continue                          " << endl;
+				break;
+			case waitingFail:
+				cout << "                          Bummer, not a match. Press any button to continue                        " << endl;
+				break;
+
+		}
+		cout << "\n";
+		cout << "                                         Pairs remaining: " << gameBoard.pairsLeft << endl;
 		cout << "\n\n\n";
+		ansi.textAttr("-bold");
 		cout << "                  [Arrow Keys] - Move     [Spacebar] - Choose tile     [q] - Quit                  " << endl;
 
 		ansi.textReset();
 
 		// Get character key input from user and update the gameboard accordingly
-		moveKey = getch();
-		if(moveKey=='q')
-			return;
-		
+		moveKey = getch();		
 		if(moveKey==224)
 			moveKey = getch();
 		gameBoard.update(moveKey);
 
-		if(gameBoard.pairsLeft==0)
+		if(moveKey=='q')
 			return;
 	}
+
+	endgame(gameBoard);
+}
+// Displays post game screen
+void Memory::endgame(MemoryBoard gameBoard){
+	printHeader();
+	gameBoard.print();
+
+	ansi.textColor("green");
+	ansi.textAttr("bold");
+	cout << "\n\n\n";
+	cout << "                                Congratulations, you won! Good memory                                " << endl;
+
+	// Exit to memory menu
+	cout << "\n\n\n";
+	cout << "                                 Press any key to return to the menu                                 " << endl;
+	getch();
+	ansi.textReset();
 }
 
 // Prints memory header to cmd window

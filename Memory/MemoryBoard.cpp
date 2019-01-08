@@ -64,9 +64,10 @@ void MemoryBoard::init(){
 }
 
 void MemoryBoard::update(int moveKey){
-	if(choice==waiting){
+	if(choice==waitingSuccess || choice==waitingFail){
+		if(choice==waitingFail)
+			showBoard = tempBoard;
 		choice = first;
-		showBoard = tempBoard;
 		return;
 	}
 	switch(moveKey){
@@ -91,27 +92,35 @@ void MemoryBoard::update(int moveKey){
 				cursX--;
 			break;
 		case ' ':
-			if(!showBoard[cursY][cursX]){
-				if(choice==first){
-					tempBoard = showBoard;
-					showBoard[cursY][cursX] = true; 
-					choice = second;
-					firstChoice = board[cursY][cursX];
-				}
-				else if(choice==second){
-					showBoard[cursY][cursX] = true; 
-					if(firstChoice == board[cursY][cursX]){
-						pairsLeft--;
-						choice = first;
-					}
-					else
-						choice = waiting;
-				}
-			}
+			makeMove();
 			break;
 		default:break;
 	}
 	return;
+}
+
+void MemoryBoard::makeMove(){
+	if(!showBoard[cursY][cursX]){
+		if(choice==first){
+			tempBoard = showBoard;
+			showBoard[cursY][cursX] = true; 
+			choice = second;
+			firstChoice = board[cursY][cursX];
+		}
+		else if(choice==second){
+			showBoard[cursY][cursX] = true; 
+			if(firstChoice == board[cursY][cursX]){
+				choice = waitingSuccess;
+				pairsLeft--;
+				if(pairsLeft==0){
+					cursX = cols/2;
+					cursY = rows/2;
+				}
+			}
+			else
+				choice = waitingFail;
+		}
+	}
 }
 
 void MemoryBoard::print(){

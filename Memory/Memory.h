@@ -21,6 +21,8 @@ private:
 	int menu();
 	// Main game loop 
 	void play();
+	// Displays post game screen
+	void endgame(MemoryBoard gameBoard);
 	// Prints memory header to cmd window
 	void printHeader();	
 	// Displays the rules of the game

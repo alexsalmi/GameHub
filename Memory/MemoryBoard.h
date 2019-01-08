@@ -18,7 +18,7 @@ using namespace std;
 const string SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~@$%&+?!#ÅÄÖåäö";
 const int NUMSYMBOLS = 67;
 
-enum Choice {first, second, waiting};
+enum Choice {first, second, waitingSuccess, waitingFail};
 
 class MemoryBoard{
 public:
@@ -31,6 +31,8 @@ public:
 	void print();
 	// Updates the board after a move is made or the cursor is moved
 	void update(int moveKey);
+	// Decides wether a move is a match and resets the board if not
+	void makeMove();
 
 	std::vector<std::vector<char>> board;
 	std::vector<std::vector<bool>> showBoard, tempBoard;
