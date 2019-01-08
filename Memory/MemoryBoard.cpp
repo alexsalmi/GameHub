@@ -19,16 +19,21 @@ MemoryBoard::MemoryBoard(int r, int c){
 }
 
 void MemoryBoard::init(){
-	std::vector<char> vec;
+	std::vector<char> vecChar;
+	std::vector<bool> vecBool;
 	int i, symbol, r, c;
 	for(int i=0; i<rows; i++){
-		vec = {};
+		vecChar = {};
+		vecBool = {};
 		for(int j=0; j<cols; j++){
-			vec.push_back(' ');
+			vecChar.push_back(' ');
+			vecBool.push_back(false);
 		}
-		board.push_back(vec);
+		board.push_back(vecChar);
+		showBoard.push_back(vecBool);
 	}
 	board[rows/2][cols/2] = '-';
+	showBoard[rows/2][cols/2] = true;
 
 	for(i=0; i<NUMSYMBOLS; i++)
 		symbolsUsed[SYMBOLS[i]] = false;
@@ -41,7 +46,7 @@ void MemoryBoard::init(){
 		}while(symbolsUsed[SYMBOLS[symbol]]);
 		symbolsUsed[SYMBOLS[symbol]] = true;
 		syms[i] = SYMBOLS[symbol];
-		symbolsRemaining++;
+		pairsLeft++;
 	}
 
 	for(i=0; i<(rows*cols)/2; i++){
@@ -59,6 +64,11 @@ void MemoryBoard::init(){
 }
 
 void MemoryBoard::update(int moveKey){
+	if(choice==waiting){
+		choice = first;
+		showBoard = tempBoard;
+		return;
+	}
 	switch(moveKey){
 		// Move curser up on board if possible
 		case KEY_UP:
@@ -80,6 +90,25 @@ void MemoryBoard::update(int moveKey){
 			if(cursX>0)
 				cursX--;
 			break;
+		case ' ':
+			if(!showBoard[cursY][cursX]){
+				if(choice==first){
+					tempBoard = showBoard;
+					showBoard[cursY][cursX] = true; 
+					choice = second;
+					firstChoice = board[cursY][cursX];
+				}
+				else if(choice==second){
+					showBoard[cursY][cursX] = true; 
+					if(firstChoice == board[cursY][cursX]){
+						pairsLeft--;
+						choice = first;
+					}
+					else
+						choice = waiting;
+				}
+			}
+			break;
 		default:break;
 	}
 	return;
@@ -99,7 +128,10 @@ void MemoryBoard::print(){
 		for(j=0; j<cols; j++){
 			if(cursY==i && cursX==j)
 				ansi.textAttr("reverse");
-			cout << " " << board[i][j] << " ";
+			if(showBoard[i][j])
+				cout << " " << board[i][j] << " ";
+			else
+				cout << "   ";
 			if(cursY==i && cursX==j)
 				ansi.textAttr("-reverse");
 			cout << "|";

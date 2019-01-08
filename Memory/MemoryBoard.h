@@ -18,6 +18,8 @@ using namespace std;
 const string SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~@$%&+?!#ÅÄÖåäö";
 const int NUMSYMBOLS = 67;
 
+enum Choice {first, second, waiting};
+
 class MemoryBoard{
 public:
 	MemoryBoard();
@@ -31,13 +33,17 @@ public:
 	void update(int moveKey);
 
 	std::vector<std::vector<char>> board;
+	std::vector<std::vector<bool>> showBoard, tempBoard;
+	Choice choice = first;	// Choosing the first or second tile in a pair
+	int pairsLeft = 0; // Number of pairs of symbols that still need to be matched
 
 private:	
 	int rows;		// Size of the board
 	int cols;
 	int cursX;		// Current x position of cursor
 	int cursY;		// Current y position of cursor
-	int symbolsRemaining = 0; // Number of pairs of symbols that still need to be matched
+	char firstChoice;
+	bool didMatch;
 	unordered_map<char, bool> symbolsUsed;
 
 

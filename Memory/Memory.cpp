@@ -55,9 +55,9 @@ int Memory::menu(){
 // Main game loop 
 void Memory::play(){
 	MemoryBoard gameBoard;			// Create the game board
-	bool gameOver = false,			// keep track of if the game is over
-		didPlace;					// keep track of whether the a move was made on calling the TTTboard function update()
+	bool gameOver = false;			// keep track of if the game is over
 	int moveKey;					// input variable for character key inputs
+	int pairs = gameBoard.pairsLeft; // number of pairs left to be matched
 
 	while(!gameOver){
 		// Print header and current game board to the cmd window, as well as change text attributes
@@ -67,21 +67,24 @@ void Memory::play(){
 		ansi.textAttr("bold");
 		cout << "\n\n\n";
 
-		cout << "                                      Choose your first tile.                                     " << endl;
-		cout << "                            Press any key to return to the Memory menu.                           " << endl;
+		cout << "                                        Pairs remaining: " << gameBoard.pairsLeft << endl;
+		cout << "\n\n\n";
+		cout << "                  [Arrow Keys] - Move     [Spacebar] - Choose tile     [q] - Quit                  " << endl;
 
 		ansi.textReset();
 
 		// Get character key input from user and update the gameboard accordingly
 		moveKey = getch();
-		if(moveKey == ' ')
+		if(moveKey=='q')
 			return;
 		
-		if(moveKey == 224)
+		if(moveKey==224)
 			moveKey = getch();
-		gameBoard.update(moveKey);		
-	}
+		gameBoard.update(moveKey);
 
+		if(gameBoard.pairsLeft==0)
+			return;
+	}
 }
 
 // Prints memory header to cmd window
