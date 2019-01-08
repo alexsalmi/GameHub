@@ -27,8 +27,8 @@ public:
 
 	// Prints the board to the cmd window
 	void print();
-	// Updates the board after a move is made or the cursor is movec
-	bool update(int moveKey, bool Xturn);
+	// Updates the board after a move is made or the cursor is moved
+	void update(int moveKey);
 
 	std::vector<std::vector<char>> board;
 
@@ -37,6 +37,7 @@ private:
 	int cols;
 	int cursX;		// Current x position of cursor
 	int cursY;		// Current y position of cursor
+	int symbolsRemaining = 0; // Number of pairs of symbols that still need to be matched
 	unordered_map<char, bool> symbolsUsed;
 
 

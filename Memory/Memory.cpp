@@ -74,8 +74,12 @@ void Memory::play(){
 
 		// Get character key input from user and update the gameboard accordingly
 		moveKey = getch();
-		return;
+		if(moveKey == ' ')
+			return;
 		
+		if(moveKey == 224)
+			moveKey = getch();
+		gameBoard.update(moveKey);		
 	}
 
 }

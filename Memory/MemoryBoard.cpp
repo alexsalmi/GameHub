@@ -41,6 +41,7 @@ void MemoryBoard::init(){
 		}while(symbolsUsed[SYMBOLS[symbol]]);
 		symbolsUsed[SYMBOLS[symbol]] = true;
 		syms[i] = SYMBOLS[symbol];
+		symbolsRemaining++;
 	}
 
 	for(i=0; i<(rows*cols)/2; i++){
@@ -55,6 +56,33 @@ void MemoryBoard::init(){
 		}while(board[r][c]!=' ');
 		board[r][c] = syms[i];
 	}
+}
+
+void MemoryBoard::update(int moveKey){
+	switch(moveKey){
+		// Move curser up on board if possible
+		case KEY_UP:
+			if(cursY>0)
+				cursY--;
+			break;
+		// Move curser down on board if possible
+		case KEY_DOWN:
+			if(cursY<rows-1)
+				cursY++;
+			break;
+		// Move curser to the right on board if possible
+		case KEY_RIGHT:
+			if(cursX<cols-1)
+				cursX++;
+			break;
+		// Move curser to the left on board if possible
+		case KEY_LEFT:
+			if(cursX>0)
+				cursX--;
+			break;
+		default:break;
+	}
+	return;
 }
 
 void MemoryBoard::print(){
