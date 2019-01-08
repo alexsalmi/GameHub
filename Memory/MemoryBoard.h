@@ -1,6 +1,8 @@
 #ifndef MEMORYBOARD_H
 #define MEMORYBOARD_H
 
+#include <cstdlib> 				// Used for rng 
+#include <ctime>				// Used for setting seeds in rng
 #include <iostream>
 #include <unordered_map>
 #include "../libs/dispANSI.h"
@@ -13,8 +15,8 @@ using namespace std;
 #define KEY_LEFT 75
 #define KEY_RIGHT 77
 
-const string SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~@$%&+?!¤#ÅÄÖåäö";
-const int NUMSYMBOLS = 68;
+const string SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~@$%&+?!#ÅÄÖåäö";
+const int NUMSYMBOLS = 67;
 
 class MemoryBoard{
 public:
@@ -36,7 +38,7 @@ private:
 	int cursX;		// Current x position of cursor
 	int cursY;		// Current y position of cursor
 	unordered_map<char, bool> symbolsUsed;
-	
+
 
 	dispANSI ansi;
 };
