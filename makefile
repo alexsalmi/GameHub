@@ -16,6 +16,9 @@ SimonSays: .\SimonSays\SimonSays.cpp .\SimonSays\SimonSays.h
 Memory: .\Memory\Memory.cpp .\Memory\Memory.h .\Memory\MemoryBoard.cpp .\Memory\MemoryBoard.h
 	+$(MAKE) -C Memory
 
+ConnectFour: .\ConnectFour\ConnectFour.cpp .\ConnectFour\ConnectFour.h
+	+$(MAKE) -C ConnectFour
+
 # Cleans solution
 clean: 
 	$(RM) gamehub *.o *~
