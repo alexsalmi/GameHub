@@ -34,6 +34,10 @@ int main(){
 			Memory memory;
 			memory.start();
 		}
+		else if(menuChoice==4){
+			ConnectFour connectfour;
+			connectfour.start();
+		}
 	}while(menuChoice!=0);
 
 	ansi.textReset();
@@ -96,7 +100,7 @@ int mainMenu(){
 			cin.clear();
         	cin.ignore();
 		}
-		else if(menuChoice <= 3 && menuChoice >= 0)
+		else if(menuChoice <= 4 && menuChoice >= 0)
 			return menuChoice;		
 	}
 }
