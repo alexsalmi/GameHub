@@ -143,11 +143,11 @@ void Memory::endgame(MemoryBoard gameBoard){
 
 	ansi.textColor("green");
 	ansi.textAttr("bold");
-	cout << "\n\n\n";
+	cout << "\n";
 	cout << "                                Congratulations, you won! Good memory                                " << endl;
 
 	// Exit to memory menu
-	cout << "\n\n\n";
+	cout << "\n\n";
 	cout << "                                 Press any key to return to the menu                                 " << endl;
 	getch();
 	ansi.textReset();
