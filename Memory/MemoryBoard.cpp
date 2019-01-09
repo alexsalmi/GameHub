@@ -60,6 +60,8 @@ void MemoryBoard::init(){
 			}
 		}
 		board[r][c] = syms[i];
+		r = rand()%(rows);
+		c = rand()%(cols);
 		while(board[r][c]!=' '){
 			c++;
 			if(c==cols){
