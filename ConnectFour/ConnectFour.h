@@ -5,6 +5,8 @@
 #include <cstdlib> 				// Used for rng 
 #include <ctime>				// Used for setting seeds in rng
 #include <iostream>
+#include "../libs/dispANSI.h"
+
 
 using namespace std;
 
@@ -20,15 +22,15 @@ private:
 	// Displays menu and takes input from user	
 	int menu();
 	// Main game loop 
-	void play(Difficult diff);
+	void play();
 	// Displays post game screen
-	void endgame(MemoryBoard gameBoard);
+	void endgame();
 	// Prints memory header to cmd window
 	void printHeader();	
 	// Displays the rules of the game
 	void rules();
 
 	dispANSI ansi;						// For ansi excape commands
-}
+};
 
 #endif
