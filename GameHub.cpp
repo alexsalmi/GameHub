@@ -1,6 +1,7 @@
 #include "TicTacToe/TicTacToe.h"
 #include "SimonSays/SimonSays.h"
 #include "Memory/Memory.h"
+#include "ConnectFour/ConnectFour.h"
 
 using namespace std;
 
@@ -67,13 +68,23 @@ int mainMenu(){
 
 		// Print the menu options to the cmd window
 		cout << "                                        Welcome to GameHub!                                        \n" 
-				"                                 What game would you like to play?                                 \n" << endl;
+				"                                 What game would you like to play?                               \n\n" << endl;
 
 		cout << "                                 (1) Tic Tac Toe                                                   \n"
 				"                                 (2) Simon Says                                                    \n" 
-				"                                 (3) Memory                                                        \n" << endl;
-		
-		cout << "                                 ( ) More games coming soon!                    				    \n"<< endl;
+				"                                 (3) Memory                                                        \n"
+				"                                 (4) Connect Four ";
+		ansi.textAttr("-bold");
+		cout << "(In Progress)\n";
+		ansi.textAttr("bold"); 
+		cout << "                                 ( ) Mastermind   ";
+		ansi.textAttr("-bold");
+		cout << "(Coming Soon!)\n";
+		ansi.textAttr("bold"); 	 
+		cout << "                                 ( ) Hangman      ";
+		ansi.textAttr("-bold");
+		cout << "(Coming Soon!)\n\n\n";
+		ansi.textAttr("bold"); 
 
 		cout << "                                 (0) Quit GameHub			                                         " << endl;
 		ansi.textReset();
