@@ -53,10 +53,29 @@ int ConnectFour::menu(){
 
 void ConnectFour::play(){
 	CFBoard gameBoard;
+	int moveKey;
 
-	printHeader();
-	cout << "\n\n\n";
-	gameBoard.print();
+	while(true){
+		printHeader();
+		gameBoard.print();
+		ansi.textColor("green");
+		ansi.textAttr("bold");
+		cout << "\n\n\n";
+
+		ansi.textAttr("-bold");
+		cout << "                  [Arrow Keys] - Move     [Spacebar] - Choose tile     [q] - Quit                  " << endl;
+
+		ansi.textReset();
+
+		// Get character key input from user and update the gameboard accordingly
+		moveKey = getch();		
+		if(moveKey==224)
+			moveKey = getch();
+		gameBoard.update(moveKey);
+
+		if(moveKey=='q')
+			return;
+	}
 }
 
 void ConnectFour::printHeader(){

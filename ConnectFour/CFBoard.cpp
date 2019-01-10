@@ -27,6 +27,20 @@ void CFBoard::init(){
 	}
 }
 
+void CFBoard::update(int moveKey){
+	switch(moveKey){
+		case KEY_LEFT:
+			if(cursor>0)
+				cursor--;
+			break;
+		case KEY_RIGHT:
+			if(cursor<cols-1)
+				cursor++;
+			break;
+		default:break;
+	}
+}
+
 void CFBoard::print(){
 	ansi.textColor("green");
 	ansi.textAttr("bold");
@@ -70,6 +84,4 @@ void CFBoard::print(){
 		cout << "___|";
 	cout << "\n";
 	ansi.textReset();
-
-	getch();
 }
