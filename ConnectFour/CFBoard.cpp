@@ -3,7 +3,6 @@
 CFBoard::CFBoard(){
 	rows = 6;
 	cols = 7;
-	cursor = rows/2;
 
 	init();
 }
@@ -11,13 +10,14 @@ CFBoard::CFBoard(){
 CFBoard::CFBoard(int r, int c){
 	rows = r;
 	cols = c;
-	cursor = rows/2;
 
 	init();
 }
 
 void CFBoard::init(){
 	int r, c;
+
+	cursor = cols/2;
 	std::vector<int> vec;
 	for(r=0; r<rows; r++){
 		vec = {};
@@ -31,6 +31,15 @@ void CFBoard::print(){
 	ansi.textColor("green");
 	ansi.textAttr("bold");
 	int i, r, c;
+	cout << "                                    ";
+	for(i=0; i<cols; i++){
+		if(cursor==i)
+			cout << " v  ";
+		else
+			cout << "    ";
+	}
+	cout << "\n";
+
 	cout << "                                   ";
 	for(i=0; i<(cols*4)+1; i++)
 		cout << "_";
