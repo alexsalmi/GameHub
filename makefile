@@ -16,7 +16,7 @@ SimonSays: .\SimonSays\SimonSays.cpp .\SimonSays\SimonSays.h
 Memory: .\Memory\Memory.cpp .\Memory\Memory.h .\Memory\MemoryBoard.cpp .\Memory\MemoryBoard.h
 	+$(MAKE) -C Memory
 
-ConnectFour: .\ConnectFour\ConnectFour.cpp .\ConnectFour\ConnectFour.h
+ConnectFour: .\ConnectFour\ConnectFour.cpp .\ConnectFour\ConnectFour.h .\ConnectFour\CFBoard.cpp .\ConnectFour\CFBoard.h
 	+$(MAKE) -C ConnectFour
 
 # Cleans solution

@@ -10,7 +10,7 @@ Memory:  Memory.o MemoryBoard.o
 Memory.o:  Memory.cpp Memory.h MemoryBoard.o
 	$(CC) -c Memory.cpp
 
-# Compiles Memory class
+# Compiles MemoryBoard class
 MemoryBoard.o:  MemoryBoard.cpp MemoryBoard.h
 	$(CC) -c MemoryBoard.cpp
 

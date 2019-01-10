@@ -51,7 +51,7 @@ void mainScreen(){
 	string name;
 	printTitle();
     ansi.textColor("green");
-	cout << " |                 Version 1.0                 |           Created By: Alex Salmi                |" << endl;
+	cout << " |                 Version 1.4                 |           Created By: Alex Salmi                |" << endl;
 	cout << " \\_____________________________________________|_________________________________________________/" << endl;
 	cout << "\n\n\n\n\n\n";
 	ansi.textAttr("bold");
