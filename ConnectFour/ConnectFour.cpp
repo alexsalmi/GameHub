@@ -54,6 +54,7 @@ int ConnectFour::menu(){
 void ConnectFour::play(){
 	CFBoard gameBoard;
 	int moveKey;
+	playerTurn = 1;
 
 	while(true){
 		printHeader();
@@ -71,7 +72,8 @@ void ConnectFour::play(){
 		moveKey = getch();		
 		if(moveKey==224)
 			moveKey = getch();
-		gameBoard.update(moveKey);
+		if(gameBoard.update(moveKey, playerTurn))
+			playerTurn = ((playerTurn)%2)+1;
 
 		if(moveKey=='q')
 			return;

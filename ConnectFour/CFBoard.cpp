@@ -27,7 +27,7 @@ void CFBoard::init(){
 	}
 }
 
-void CFBoard::update(int moveKey){
+bool CFBoard::update(int moveKey, int playerTurn){
 	switch(moveKey){
 		case KEY_LEFT:
 			if(cursor>0)
@@ -37,14 +37,30 @@ void CFBoard::update(int moveKey){
 			if(cursor<cols-1)
 				cursor++;
 			break;
+		case ' ':
+			return makeMove(playerTurn);
 		default:break;
 	}
+	return false;
+}
+
+bool CFBoard::makeMove(int playerTurn){
+	if(board[0][cursor]==0){
+		int i;
+		for(i=0; i<rows; i++){
+			if(board[i][cursor]!=0)
+				break;
+		}
+		board[i-1][cursor] = playerTurn;
+		return true;
+	}
+	return false;
 }
 
 void CFBoard::print(){
 	ansi.textColor("green");
 	ansi.textAttr("bold");
-	int i, r, c;
+	int i, r, c; 
 	cout << "                                    ";
 	for(i=0; i<cols; i++){
 		if(cursor==i)
@@ -68,9 +84,10 @@ void CFBoard::print(){
 				case 1: ansi.textColor("blue"); break;
 				case 2: ansi.textColor("red"); break;
 			}
-			cout << " O |";
+			cout << " O ";
+			ansi.textColor("green");
+			cout << "|";
 		}
-		ansi.textColor("green");
 		cout << "\n                                   ";
 		if(r!=(rows-1)){
 			cout << "|";

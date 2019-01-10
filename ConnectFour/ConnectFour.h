@@ -27,6 +27,7 @@ private:
 	// Displays the rules of the game
 	void rules();
 
+	int playerTurn;
 	dispANSI ansi;						// For ansi excape commands
 };
 

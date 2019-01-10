@@ -21,8 +21,9 @@ public:
 	// Prints the board to the cmd window
 	void print();
 	// Updates the board after a move is made or the cursor is moved
-	void update(int moveKey);
+	bool update(int moveKey, int playerTurn);
 	// Decides wether a move is a match and resets the board if not
+	bool makeMove(int playerTurn);
 
 private:
 	int rows;		// Size of the board
