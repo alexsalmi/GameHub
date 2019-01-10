@@ -1,13 +1,9 @@
 #ifndef CONNECTFOUR_H
 #define CONNECTFOUR_H
 
+#include "CFBoard.h"
 #include <conio.h>				// Used for getch() (reading character key inputs)
-#include <cstdlib> 				// Used for rng 
-#include <ctime>				// Used for setting seeds in rng
 #include <iostream>
-#include "../libs/dispANSI.h"
- 
-
 
 using namespace std;
 

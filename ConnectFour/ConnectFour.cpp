@@ -49,12 +49,14 @@ int ConnectFour::menu(){
 			return menuChoice;
 		}
 	}
-
-	return 0;
 }
 
 void ConnectFour::play(){
+	CFBoard gameBoard;
 
+	printHeader();
+	cout << "\n\n\n";
+	gameBoard.print();
 }
 
 void ConnectFour::printHeader(){
