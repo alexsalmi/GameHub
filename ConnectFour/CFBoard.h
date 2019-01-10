@@ -25,12 +25,12 @@ public:
 	// Decides wether a move is a match and resets the board if not
 	bool makeMove(int playerTurn);
 
-private:
 	int rows;		// Size of the board
 	int cols;
-	int cursor;		// Cursor position
-
 	std::vector<std::vector<int>> board;
+
+private:
+	int cursor;		// Cursor position
 
 	dispANSI ansi;
 };

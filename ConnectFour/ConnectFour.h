@@ -20,8 +20,10 @@ private:
 	int menu();
 	// Main game loop 
 	void play();
+	// Checks if the game is over or not
+	int isGameOver(CFBoard gameBoard);
 	// Displays post game screen
-	void endgame();
+	void endgame(CFBoard gameBoard, int winner);
 	// Prints memory header to cmd window
 	void printHeader();	
 	// Displays the rules of the game
