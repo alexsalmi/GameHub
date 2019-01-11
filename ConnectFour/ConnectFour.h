@@ -30,6 +30,7 @@ private:
 	void rules();
 
 	int playerTurn;
+	int movesLeft;
 	dispANSI ansi;						// For ansi excape commands
 };
 

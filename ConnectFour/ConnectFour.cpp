@@ -55,6 +55,7 @@ void ConnectFour::play(){
 	CFBoard gameBoard;
 	int moveKey;
 	playerTurn = 1;
+	movesLeft = gameBoard.rows*gameBoard.cols;
 
 	while(true){
 		printHeader();
@@ -73,6 +74,7 @@ void ConnectFour::play(){
 		if(moveKey==224)
 			moveKey = getch();
 		if(gameBoard.update(moveKey, playerTurn)){
+			movesLeft--;
 			int winner = isGameOver(gameBoard);
 			if(winner!=0){
 				endgame(gameBoard, winner);
@@ -88,6 +90,9 @@ void ConnectFour::play(){
 
 int ConnectFour::isGameOver(CFBoard gameBoard){
 	int r, c;
+	if(movesLeft==0)
+		return 3;
+
 	for (r=0; r<gameBoard.rows; r++){
 		for(c=0; c<gameBoard.cols-3; c++){
 			if(gameBoard.board[r][c]==gameBoard.board[r][c+1] && gameBoard.board[r][c]==gameBoard.board[r][c+2] 
@@ -127,7 +132,10 @@ void ConnectFour::endgame(CFBoard gameBoard, int winner){
 	ansi.textColor("green");
 	cout << "\n\n\n";
 
-	cout << "                                  Congratulations player " << winner << ", you won!\n";
+	if(winner==3)
+		cout << "                                      No moves left, it's a tie!\n";
+	else
+		cout << "                                  Congratulations player " << winner << ", you won!\n";
 
 	// Exit to tic tac toe menu
 	cout << "\n\n\n";
