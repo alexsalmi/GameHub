@@ -90,29 +90,29 @@ int ConnectFour::isGameOver(CFBoard gameBoard){
 	int r, c;
 	for (r=0; r<gameBoard.rows; r++){
 		for(c=0; c<gameBoard.cols-3; c++){
-			if(gameBoard.board[r][c]==gameBoard.board[r][c+1] || 
-				gameBoard.board[r][c]==gameBoard.board[r][c+2] || gameBoard.board[r][c]==gameBoard.board[r][c+3])
+			if(gameBoard.board[r][c]==gameBoard.board[r][c+1] && gameBoard.board[r][c]==gameBoard.board[r][c+2] 
+				&& gameBoard.board[r][c]==gameBoard.board[r][c+3] && gameBoard.board[r][c]!=0)
 				return gameBoard.board[r][c];
 		}
 	}
 	for (r=0; r<gameBoard.rows-3; r++){
 		for(c=0; c<gameBoard.cols; c++){
-			if(gameBoard.board[r][c]==gameBoard.board[r+1][c] || 
-				gameBoard.board[r][c]==gameBoard.board[r+2][c] || gameBoard.board[r][c]==gameBoard.board[r+3][c])
+			if(gameBoard.board[r][c]==gameBoard.board[r+1][c] && gameBoard.board[r][c]==gameBoard.board[r+2][c] 
+				&& gameBoard.board[r][c]==gameBoard.board[r+3][c] && gameBoard.board[r][c]!=0)
 				return gameBoard.board[r][c];
 		}
 	}
 	for (r=0; r<gameBoard.rows-3; r++){
 		for(c=0; c<gameBoard.cols-3; c++){
-			if(gameBoard.board[r][c]==gameBoard.board[r+1][c+1] || 
-				gameBoard.board[r][c]==gameBoard.board[r+2][c+2] || gameBoard.board[r][c]==gameBoard.board[r+3][c+3])
+			if(gameBoard.board[r][c]==gameBoard.board[r+1][c+1] && gameBoard.board[r][c]==gameBoard.board[r+2][c+2] 
+				&& gameBoard.board[r][c]==gameBoard.board[r+3][c+3] && gameBoard.board[r][c]!=0)
 				return gameBoard.board[r][c];
 		}
 	}
 	for (r=3; r<gameBoard.rows; r++){
 		for(c=0; c<gameBoard.cols-3; c++){
-			if(gameBoard.board[r][c]==gameBoard.board[r-1][c+1] || 
-				gameBoard.board[r][c]==gameBoard.board[r-2][c+2] || gameBoard.board[r][c]==gameBoard.board[r-3][c+3])
+			if(gameBoard.board[r][c]==gameBoard.board[r-1][c+1] && gameBoard.board[r][c]==gameBoard.board[r-2][c+2] 
+				&& gameBoard.board[r][c]==gameBoard.board[r-3][c+3] && gameBoard.board[r][c]!=0)
 				return gameBoard.board[r][c];
 		}
 	}
