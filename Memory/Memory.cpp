@@ -98,7 +98,10 @@ void Memory::play(Difficult diff){
 		gameBoard->print();
 		ansi.textColor("green");
 		ansi.textAttr("bold");
-		cout << "\n";
+		if(diff==h)
+			cout << "\n";
+		else 
+			cout << "\n\n";
 
 		switch(gameBoard->choice){
 			case first:
@@ -117,7 +120,12 @@ void Memory::play(Difficult diff){
 		}
 		cout << "\n";
 		cout << "                                        Pairs remaining: " << gameBoard->pairsLeft << endl;
-		cout << "\n\n";
+		if(diff==e)
+			cout << "\n\n\n\n\n";
+		else if(diff==m)
+			cout << "\n\n\n\n";
+		else
+			cout << "\n\n";
 		ansi.textAttr("-bold");
 		cout << "                  [Arrow Keys] - Move     [Spacebar] - Choose tile     [q] - Quit                  " << endl;
 
@@ -133,20 +141,26 @@ void Memory::play(Difficult diff){
 			return;
 	}
 
-	endgame(*gameBoard);
+	endgame(*gameBoard, diff);
 	delete gameBoard;
 }
 // Displays post game screen
-void Memory::endgame(MemoryBoard gameBoard){
+void Memory::endgame(MemoryBoard gameBoard, Difficult diff){
 	printHeader();
 	gameBoard.print();
 
 	ansi.textColor("green");
 	ansi.textAttr("bold");
-	cout << "\n";
+	if(diff==e)
+		cout << "\n\n\n\n\n";
+	else if(diff==m)
+		cout << "\n\n\n\n";
+	else
+		cout << "\n";
 	cout << "                                Congratulations, you won! Good memory                                " << endl;
 
 	// Exit to memory menu
+	ansi.textAttr("-bold");
 	cout << "\n\n";
 	cout << "                                 Press any key to return to the menu                                 " << endl;
 	getch();

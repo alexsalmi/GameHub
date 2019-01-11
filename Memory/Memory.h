@@ -24,7 +24,7 @@ private:
 	// Main game loop 
 	void play(Difficult diff);
 	// Displays post game screen
-	void endgame(MemoryBoard gameBoard);
+	void endgame(MemoryBoard gameBoard, Difficult diff);
 	// Prints memory header to cmd window
 	void printHeader();	
 	// Displays the rules of the game

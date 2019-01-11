@@ -9,8 +9,7 @@ void ConnectFour::start(){
 
 		switch(menuChoice){
 			case 1: play(); break;
-			case 2: play(); break;
-			case 3: rules(); break;
+			case 2: rules(); break;
 			default: break;
 		}
 	}while(menuChoice!=0);
@@ -30,10 +29,9 @@ int ConnectFour::menu(){
 		cout << "                                       Welcome to Connect Four!                                    \n" 
 				"                             Please select an option from the menu below:                          \n" << endl << endl;
 
-		cout << "                             (1) Play Connect Four vs. the CPU    (1 Player)                       \n"
-				"                             (2) Play Connect Four vs. a friend   (2 Player)                       \n" << endl;
+		cout << "                             (1) Play Connect Four                                                 \n" << endl;
 		
-		cout <<	"                             (3) View game rules and controls\n" << endl;
+		cout <<	"                             (2) View game rules and controls\n" << endl;
 
 		cout << "                             (0) Return to GameHub							                         " << endl;
 		ansi.textReset();
@@ -45,7 +43,7 @@ int ConnectFour::menu(){
 			cin.clear();
         	cin.ignore();
 		}
-		else if(menuChoice<=3 && menuChoice>=0){
+		else if(menuChoice<=2 && menuChoice>=0){
 			return menuChoice;
 		}
 	}
@@ -62,7 +60,14 @@ void ConnectFour::play(){
 		gameBoard.print();
 		ansi.textColor("green");
 		ansi.textAttr("bold");
-		cout << "\n\n\n";
+		cout << "\n\n";
+
+		if(playerTurn==1)
+			cout << "                                           Player 1";
+		else
+			cout << "                                           Player 2";
+
+		cout << "'s turn\n\n";
 
 		ansi.textAttr("-bold");
 		cout << "                  [Arrow Keys] - Move     [Spacebar] - Choose tile     [q] - Quit                  " << endl;
@@ -130,7 +135,8 @@ void ConnectFour::endgame(CFBoard gameBoard, int winner){
 	printHeader();
 	gameBoard.print();	
 	ansi.textColor("green");
-	cout << "\n\n\n";
+	ansi.textAttr("bold");
+	cout << "\n\n";
 
 	if(winner==3)
 		cout << "                                      No moves left, it's a tie!\n";
@@ -138,6 +144,7 @@ void ConnectFour::endgame(CFBoard gameBoard, int winner){
 		cout << "                                  Congratulations player " << winner << ", you won!\n";
 
 	// Exit to tic tac toe menu
+	ansi.textAttr("-bold");
 	cout << "\n\n\n";
 	cout << "                                 Press any key to return to the menu                                 " << endl;
 	getch();

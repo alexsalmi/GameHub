@@ -74,23 +74,14 @@ int mainMenu(){
 		cout << "                                        Welcome to GameHub!                                        \n" 
 				"                                 What game would you like to play?                               \n\n" << endl;
 
-		cout << "                                 (1) Tic Tac Toe                                                   \n"
-				"                                 (2) Simon Says                                                    \n" 
-				"                                 (3) Memory                                                        \n"
-				"                                 (4) Connect Four ";
-		ansi.textAttr("-bold");
-		cout << "(In Progress)\n";
-		ansi.textAttr("bold"); 
-		cout << "                                 ( ) Mastermind   ";
-		ansi.textAttr("-bold");
-		cout << "(Coming Soon!)\n";
-		ansi.textAttr("bold"); 	 
-		cout << "                                 ( ) Hangman      ";
-		ansi.textAttr("-bold");
-		cout << "(Coming Soon!)\n\n\n";
-		ansi.textAttr("bold"); 
+		cout << "                                 1-Player:         2-Player:                                       \n" << endl;
 
-		cout << "                                 (0) Quit GameHub			                                         " << endl;
+		cout << "                                 (1) Simon Says    (3) Tic Tac Toe                                 \n" 
+				"                                 (2) Memory        ( ) Mastermind                                  \n" 
+				"                                 (3) Tic Tac Toe   (4) Connect Four                                \n"
+				"                                 ( ) Mastermind    ( ) Hangman                                 \n\n\n" << endl;
+
+		cout << "                                        (0) Quit GameHub			                                  " << endl;
 		ansi.textReset();
 
 		// Accept the user's input

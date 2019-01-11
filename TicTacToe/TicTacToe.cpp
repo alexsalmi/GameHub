@@ -300,6 +300,7 @@ void TicTacToe::endgame(Winner winner, TTTBoard gameBoard){
 	printHeader();
 	gameBoard.print();	
 	ansi.textColor("green");
+	ansi.textAttr("bold");
 	cout << "\n\n\n";
 
 	// Print out who won the game
@@ -319,6 +320,7 @@ void TicTacToe::endgame(Winner winner, TTTBoard gameBoard){
 	}
 
 	// Exit to tic tac toe menu
+	ansi.textAttr("-bold");
 	cout << "\n\n\n";
 	cout << "                                 Press any key to return to the menu                                 " << endl;
 	getch();
