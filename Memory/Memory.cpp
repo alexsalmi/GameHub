@@ -61,15 +61,21 @@ int Memory::menu(){
 			cin.clear();
         	cin.ignore();
 		}
+		// If we are not in the difficulty menu yet
 		else if(!diffMenu){
+			// If user wants to play memory, switch to the difficulty menu
 			if(menuChoice == 1)
 				diffMenu = true;
+			// Otherwise return the menu choice
 			else if(menuChoice<=2 && menuChoice>=0)
 				return menuChoice;		// Return the mune choice to start()
 		}
+		// If we are i the difficulty menu
 		else if(menuChoice<=3 && menuChoice>=0){
+			// Switch back to the first menu if they choose 0
 			if(menuChoice == 0)
 				diffMenu = false;
+			// Otherwise, return the difficulty choice
 			else if(menuChoice<=3 && menuChoice>=1)
 				return menuChoice + 10;
 		}
@@ -98,11 +104,14 @@ void Memory::play(Difficult diff){
 		gameBoard->print();
 		ansi.textColor("green");
 		ansi.textAttr("bold");
+
+		// Adjust height of board on screen based on board sixe/difficulty
 		if(diff==h)
 			cout << "\n";
 		else 
 			cout << "\n\n";
 
+		// Output correct message based on which choice is being made
 		switch(gameBoard->choice){
 			case first:
 				cout << "                                      Choose your first tile                                       " << endl;
@@ -120,6 +129,8 @@ void Memory::play(Difficult diff){
 		}
 		cout << "\n";
 		cout << "                                        Pairs remaining: " << gameBoard->pairsLeft << endl;
+
+		// Adjust height of bottom message on screen based on board sixe/difficulty
 		if(diff==e)
 			cout << "\n\n\n\n\n";
 		else if(diff==m)
@@ -151,6 +162,8 @@ void Memory::endgame(MemoryBoard gameBoard, Difficult diff){
 
 	ansi.textColor("green");
 	ansi.textAttr("bold");
+	
+	// Adjust height of message on screen based on board size/difficulty
 	if(diff==e)
 		cout << "\n\n\n\n\n";
 	else if(diff==m)
