@@ -23,29 +23,31 @@ int main(){
 	do{
 		menuChoice = mainMenu();
 
+
 		if(menuChoice==1){
-			TicTacToe ticTac;
-			ticTac.start();
+			SimonSays* simonSays = new SimonSays();
+			simonSays->start();
+			delete simonSays;
 		}
 		else if(menuChoice==2){
-			SimonSays simonSays;
-			simonSays.start();
+			Memory* memory = new Memory();
+			memory->start();
+			delete memory;
 		}
 		else if(menuChoice==3){
-			Memory memory;
-			memory.start();
+			TicTacToe* ticTac = new TicTacToe();
+			ticTac->start();
+			delete ticTac;
 		}
 		else if(menuChoice==4){
-			ConnectFour connectfour;
-			connectfour.start();
-		}
-		else if(menuChoice==4){
-			ConnectFour connectfour;
-			connectfour.start();
+			ConnectFour* connectfour = new ConnectFour();
+			connectfour->start();
+			delete connectfour;
 		}
 		else if(menuChoice==5){
-			Hangman hangman;
-			hangman.start();
+			Hangman* hangman = new Hangman();
+			hangman->start();
+			delete hangman;
 		}
 	}while(menuChoice!=0);
 
