@@ -1,6 +1,7 @@
 #ifndef HANGMAN_H
 #define HANGMAN_H
 
+#include "..\libs\dispANSI.h"
 #include <conio.h>				// Used for getch() (reading character key inputs)
 #include <iostream>
 
@@ -25,6 +26,8 @@ private:
 	void printHeader();	
 	// Displays the rules of the game
 	void rules();
+
+	dispANSI ansi;
 };
 
 #endif
