@@ -24,13 +24,14 @@ private:
 	// Prints the hanged man
 	void printMan();
 	// Displays post game screen
-	void endgame();
+	void endgame(bool didGuess);
 	// Prints memory header to cmd window
 	void printHeader();	
 	// Displays the rules of the game
 	void rules();
 
-	int limbsRemain = 6;
+	int limbsRemain = 6, lettersToGuess;
+	std::string legalChars = "abcdefghijklmnopqrstuvwxyz";
 	unordered_map<char, bool> charPool;
 	string word;
 	dispANSI ansi;

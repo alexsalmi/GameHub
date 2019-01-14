@@ -2,9 +2,7 @@
 
 //Constructor
 Hangman::Hangman(){
-	std::string chars = "abcdefghijklmnopqrstuvwxyz";
-
-	for(char c : chars)
+	for(char c : legalChars)
 		charPool[c] = true;
 }
 
@@ -57,6 +55,13 @@ int Hangman::menu(){
 }
 
 void Hangman::play(){
+	char guess;
+	bool correct;
+	std::string spaces;
+	limbsRemain = 6;
+	for(char c : legalChars)
+		charPool[c] = true;
+
 	printHeader();
 	ansi.textColor("green");
 	ansi.textAttr("bold");
@@ -70,6 +75,12 @@ void Hangman::play(){
     	cin.ignore();
 	}
 
+	lettersToGuess = word.length();
+	for(char c: word){
+		if(c==' ' || c==',' || c=='.' || c=='!' || c=='?' || c=='-')
+			lettersToGuess--;		
+	}
+
 	while(limbsRemain>0){
 		printHeader();
 		ansi.textColor("green");
@@ -77,29 +88,147 @@ void Hangman::play(){
 
 		printMan();
 
-		cout << "                                Press any key to return to the menu                                \n" << endl;
-		getch();
+		spaces = "";
+		for(int i=0; i<(50-(word.length()/2)); i++){
+			spaces += " ";
+		}
+		cout << spaces;
+		for(char c: word){
+			if(c==' ' || c==',' || c=='.' || c=='!' || c=='?' || c=='-')
+				cout << c;
+			else if(charPool[c])
+				cout << '#';
+			else
+				cout << c;
+		}
+		cout << "\n\n";
+
+		cout << "                        ";
+		for(char c : legalChars){
+			if(!charPool[c])
+				ansi.textAttr("-bold");
+			cout << c << " ";
+			ansi.textAttr("bold");
+		}
+
+		cout << "\n\n";
+
+		cout << "                           Player 1, please choose a letter to guess: ";
+		cin >> guess;
+		// Error check for invalid input
+		if(cin.fail()){
+			cin.clear();
+	    	cin.ignore();
+		}
+		if(charPool[guess]){
+			charPool[guess] = false;
+
+			correct = false;
+			for(char c: word){
+				if(c==guess){
+					correct = true;
+					lettersToGuess--;
+				}
+			}
+
+			if(!correct)
+				limbsRemain--;
+
+			if(limbsRemain==0){
+				endgame(false);
+				return;
+			}
+			else if(lettersToGuess==0){
+				endgame(true);
+				return;
+			}
+		}
 	}
+}
+
+void Hangman::endgame(bool didGuess){
+	printHeader();
+	ansi.textColor("green");
+	ansi.textAttr("bold");
+
+	printMan();
+
+	if(didGuess)
+		cout << "                                  Congratulations player 2, you won!\n\n";
+	else
+		cout << "                                  Congratulations player 1, you won!\n\n";
+
+	cout << "                                Press any key to return to the menu                                \n" << endl;
+	getch();
+	ansi.textReset();
 }
 
 void Hangman::printMan(){
 	cout << "                                        XXXXXXXXXX           \n"
-			"                                        X        X           \n"
-			"                                        X      XXXXX         \n"
-			"                                        X     X     X        \n"
-	        "                                        X     X     X        \n"
-	        "                                        X      XXXXX         \n"
-	        "                                        X        X           \n"
-	        "                                        X       XXX          \n"
-	        "                                        X      X X X         \n"
-	        "                                        X     X  X  X        \n"
-	        "                                        X    X   X   X       \n"
-	        "                                        X        X           \n"
-	        "                                        X       X X          \n"
-	        "                                        X      X   X         \n"
-	        "                                        X    XX     XX       \n"
-	        "                                      XXXXX                  \n" << endl;  
+			"                                        X        X           \n";
+	if(limbsRemain<6){
+		cout << "                                        X      XXXXX         \n"
+				"                                        X     X     X        \n"
+		        "                                        X     X     X        \n"
+		        "                                        X      XXXXX         \n";
 	}
+	else{
+		cout << "                                        X                    \n"
+				"                                        X                    \n"
+		        "                                        X                    \n"
+		        "                                        X                    \n";
+
+	}
+	if(limbsRemain<3){
+		cout << "                                        X        X           \n"
+		        "                                        X       XXX          \n"
+		        "                                        X      X X X         \n"
+		        "                                        X     X  X  X        \n"
+		        "                                        X    X   X   X       \n";
+	}
+	else if(limbsRemain<4){
+		cout << "                                        X        X           \n"
+		        "                                        X       XX           \n"
+		        "                                        X      X X           \n"
+		        "                                        X     X  X           \n"
+		        "                                        X    X   X           \n";
+	}
+	else if(limbsRemain<5){
+		cout << "                                        X        X           \n"
+		        "                                        X        X           \n"
+		        "                                        X        X           \n"
+		        "                                        X        X           \n"
+		        "                                        X        X           \n";
+	}
+	else{
+		cout << "                                        X                    \n"
+		        "                                        X                    \n"
+		        "                                        X                    \n"
+		        "                                        X                    \n"
+		        "                                        X                    \n";
+	}
+	if(limbsRemain<1){
+		cout << "                                        X        X           \n"
+		        "                                        X       X X          \n"
+		        "                                        X      X   X         \n"
+		        "                                        X    XX     XX       \n"
+		        "                                      XXXXX                  \n" << endl;
+	}
+	else if(limbsRemain<2){
+		cout << "                                        X        X           \n"
+		        "                                        X       X            \n"
+		        "                                        X      X             \n"
+		        "                                        X    XX              \n"
+		        "                                      XXXXX                  \n" << endl;
+	}
+	else{
+		cout << "                                        X                    \n"
+		        "                                        X                    \n"
+		        "                                        X                    \n"
+		        "                                        X                    \n"
+		        "                                      XXXXX                  \n" << endl;
+	}  
+}
 
 // Prints the header
 void Hangman::printHeader(){
