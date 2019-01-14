@@ -2,6 +2,7 @@
 #include "SimonSays/SimonSays.h"
 #include "Memory/Memory.h"
 #include "ConnectFour/ConnectFour.h"
+#include "Hangman/Hangman.h"
 
 using namespace std;
 
@@ -38,6 +39,14 @@ int main(){
 			ConnectFour connectfour;
 			connectfour.start();
 		}
+		else if(menuChoice==4){
+			ConnectFour connectfour;
+			connectfour.start();
+		}
+		else if(menuChoice==5){
+			Hangman hangman;
+			hangman.start();
+		}
 	}while(menuChoice!=0);
 
 	ansi.textReset();
@@ -51,7 +60,7 @@ void mainScreen(){
 	string name;
 	printTitle();
     ansi.textColor("green");
-	cout << " |                 Version 1.4                 |           Created By: Alex Salmi                |" << endl;
+	cout << " |                 Version 1.5                 |           Created By: Alex Salmi                |" << endl;
 	cout << " \\_____________________________________________|_________________________________________________/" << endl;
 	cout << "\n\n\n\n\n\n";
 	ansi.textAttr("bold");
@@ -79,7 +88,7 @@ int mainMenu(){
 		cout << "                                 (1) Simon Says    (3) Tic Tac Toe                                 \n" 
 				"                                 (2) Memory        ( ) Mastermind                                  \n" 
 				"                                 (3) Tic Tac Toe   (4) Connect Four                                \n"
-				"                                 ( ) Mastermind    ( ) Hangman                                 \n\n\n" << endl;
+				"                                 ( ) Mastermind    (5) Hangman                                 \n\n\n" << endl;
 
 		cout << "                                        (0) Quit GameHub			                                  " << endl;
 		ansi.textReset();
@@ -91,7 +100,7 @@ int mainMenu(){
 			cin.clear();
         	cin.ignore();
 		}
-		else if(menuChoice <= 4 && menuChoice >= 0)
+		else if(menuChoice <= 5 && menuChoice >= 0)
 			return menuChoice;		
 	}
 }
