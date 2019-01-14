@@ -4,6 +4,7 @@
 #include "..\libs\dispANSI.h"
 #include <conio.h>				// Used for getch() (reading character key inputs)
 #include <iostream>
+#include <unordered_map>
 
 using namespace std;
 
@@ -20,6 +21,8 @@ private:
 	int menu();
 	// Main game loop 
 	void play();
+	// Prints the hanged man
+	void printMan();
 	// Displays post game screen
 	void endgame();
 	// Prints memory header to cmd window
@@ -27,6 +30,9 @@ private:
 	// Displays the rules of the game
 	void rules();
 
+	int limbsRemain = 6;
+	unordered_map<char, bool> charPool;
+	string word;
 	dispANSI ansi;
 };
 

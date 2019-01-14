@@ -1,7 +1,12 @@
 #include "Hangman.h"
 
 //Constructor
-Hangman::Hangman(){}
+Hangman::Hangman(){
+	std::string chars = "abcdefghijklmnopqrstuvwxyz";
+
+	for(char c : chars)
+		charPool[c] = true;
+}
 
 // Begin the Hangman application
 void Hangman::start(){
@@ -12,8 +17,8 @@ void Hangman::start(){
 		menuChoice = menu();
 
 		switch(menuChoice){
-			case 1: play(); break;				// Play Simon Says
-			case 2: rules(); break;				// Rules of Simon Says
+			case 1: play(); break;				// Play Hangman
+			case 2: rules(); break;				// Rules of Hangman
 			default: break;
 		}
 	}while(menuChoice!=0);
@@ -52,8 +57,49 @@ int Hangman::menu(){
 }
 
 void Hangman::play(){
+	printHeader();
+	ansi.textColor("green");
+	ansi.textAttr("bold");
 
+	cout << "               Player 1, please enter a word or phrase for Player 2 to try to guess:               \n"
+			"               ";
+	cin >> word;
+	// Error check for invalid input
+	if(cin.fail()){
+		cin.clear();
+    	cin.ignore();
+	}
+
+	while(limbsRemain>0){
+		printHeader();
+		ansi.textColor("green");
+		ansi.textAttr("bold");
+
+		printMan();
+
+		cout << "                                Press any key to return to the menu                                \n" << endl;
+		getch();
+	}
 }
+
+void Hangman::printMan(){
+	cout << "                                        XXXXXXXXXX           \n"
+			"                                        X        X           \n"
+			"                                        X      XXXXX         \n"
+			"                                        X     X     X        \n"
+	        "                                        X     X     X        \n"
+	        "                                        X      XXXXX         \n"
+	        "                                        X        X           \n"
+	        "                                        X       XXX          \n"
+	        "                                        X      X X X         \n"
+	        "                                        X     X  X  X        \n"
+	        "                                        X    X   X   X       \n"
+	        "                                        X        X           \n"
+	        "                                        X       X X          \n"
+	        "                                        X      X   X         \n"
+	        "                                        X    XX     XX       \n"
+	        "                                      XXXXX                  \n" << endl;  
+	}
 
 // Prints the header
 void Hangman::printHeader(){
