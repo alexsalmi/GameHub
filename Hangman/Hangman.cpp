@@ -68,7 +68,7 @@ void Hangman::play(){
 
 	cout << "               Player 1, please enter a word or phrase for Player 2 to try to guess:               \n"
 			"               ";
-	cin >> word;
+	std::getline(std::cin >> std::ws, word);
 	// Error check for invalid input
 	if(cin.fail()){
 		cin.clear();
