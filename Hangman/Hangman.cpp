@@ -77,7 +77,7 @@ void Hangman::play(){
 
 	lettersToGuess = word.length();
 	for(char c: word){
-		if(c==' ' || c==',' || c=='.' || c=='!' || c=='?' || c=='-')
+		if(c==' ' || c==',' || c=='.' || c=='!' || c=='?' || c=='-' || c=='\'')
 			lettersToGuess--;		
 	}
 
@@ -89,13 +89,19 @@ void Hangman::play(){
 		printMan();
 
 		spaces = "";
-		for(int i=0; i<(50-(word.length()/2)); i++){
+		for(int i=0; i<(50-(word.length()/2)); i++)
 			spaces += " ";
-		}
+
 		cout << spaces;
 		for(char c: word){
 			if(c==' ' || c==',' || c=='.' || c=='!' || c=='?' || c=='-')
 				cout << c;
+			else if((c-'A')>=0 && (c-'A')<26){
+				if(charPool[c+32])
+					cout << '#';
+				else
+					cout << c;
+			}
 			else if(charPool[c])
 				cout << '#';
 			else
@@ -120,12 +126,14 @@ void Hangman::play(){
 			cin.clear();
 	    	cin.ignore();
 		}
+		if((guess-'A')>=0 && (guess-'A')<26)
+			guess = guess + 32;
 		if(charPool[guess]){
 			charPool[guess] = false;
 
 			correct = false;
 			for(char c: word){
-				if(c==guess){
+				if(c==guess || (c+32)==guess){
 					correct = true;
 					lettersToGuess--;
 				}
@@ -154,9 +162,9 @@ void Hangman::endgame(bool didGuess){
 	printMan();
 
 	if(didGuess)
-		cout << "                                  Congratulations player 2, you won!\n\n";
+		cout << "                                 Congratulations player 2, you won!\n\n";
 	else
-		cout << "                                  Congratulations player 1, you won!\n\n";
+		cout << "                                 Congratulations player 1, you won!\n\n";
 
 	cout << "                                Press any key to return to the menu                                \n" << endl;
 	getch();
