@@ -1,3 +1,6 @@
+// GameHub
+// Author: Alex Salmi
+
 #include "TicTacToe/TicTacToe.h"
 #include "SimonSays/SimonSays.h"
 #include "Memory/Memory.h"
@@ -6,6 +9,7 @@
 
 using namespace std;
 
+// For ansi escape commands
 dispANSI ansi;
 
 void printTitle();
@@ -13,17 +17,22 @@ void mainScreen();
 int mainMenu();
 
 int main(){
+	// Prepare the window
 	system("CLS");
 	ansi.windowSize(100, 33);
 	ansi.showCursor(false);
 
+	// Print the welcome screen
 	mainScreen();
 
+	// Print the menu and get the user's menu choice, starting the corresponding game
 	int menuChoice;
+	// Menu loop
 	do{
+		// Print menu
 		menuChoice = mainMenu();
 
-
+		// Start the game corresponding to the user's input
 		if(menuChoice==1){
 			SimonSays* simonSays = new SimonSays();
 			simonSays->start();
@@ -49,8 +58,9 @@ int main(){
 			hangman->start();
 			delete hangman;
 		}
-	}while(menuChoice!=0);
+	}while(menuChoice!=0);	// If the user enters 0, game is over
 
+	// Reset the window
 	ansi.textReset();
 	ansi.clearScreen();
 	ansi.showCursor(true);
@@ -58,6 +68,7 @@ int main(){
 	return 0;
 }
 
+// Prints the welcome screen
 void mainScreen(){
 	string name;
 	printTitle();
@@ -66,12 +77,15 @@ void mainScreen(){
 	cout << " \\_____________________________________________|_________________________________________________/" << endl;
 	cout << "\n\n\n\n\n\n";
 	ansi.textAttr("bold");
+
+	// Wait for the user to press a key to enter app
 	cout << "                                    Press any button to begin                                     " << endl;
 	ansi.textReset();
 
-	getch();
+	getch(); 	// Reads key presses
 }
 
+// Prints the menu
 int mainMenu(){
 	int menuChoice;
 	while(true){
@@ -107,6 +121,7 @@ int mainMenu(){
 	}
 }
 
+// Prints the header
 void printTitle(){
     ansi.clearScreen();
     ansi.textAttr("bold");
