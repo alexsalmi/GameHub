@@ -184,11 +184,13 @@ void Hangman::endgame(bool didGuess){
 
 	printMan();
 
+	// Tell the players who won
 	if(didGuess)
 		cout << "                                 Congratulations player 2, you won!\n\n";
 	else
 		cout << "                                 Congratulations player 1, you won!\n\n";
 
+	// Prompt user to return to the menu
 	cout << "                                Press any key to return to the menu                                \n" << endl;
 	getch();
 	ansi.textReset();

@@ -29,9 +29,11 @@ private:
 	// Displays the rules of the game
 	void rules();
 
-	int playerTurn;
-	int movesLeft;
-	dispANSI ansi;						// For ansi excape commands
+	int playerTurn;		// To keep track of who's turn it is
+	int movesLeft;		// Keeps track of how many spaces are available on the board
+
+	// For ansi excape commands
+	dispANSI ansi;				
 };
 
 #endif

@@ -27,11 +27,12 @@ public:
 
 	int rows;		// Size of the board
 	int cols;
-	std::vector<std::vector<int>> board;
+	std::vector<std::vector<int>> board;	// board itself
 
 private:
 	int cursor;		// Cursor position
 
+	// For ansi escape commands
 	dispANSI ansi;
 };
 
