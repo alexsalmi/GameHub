@@ -78,7 +78,7 @@ void ConnectFour::play(){
 		cout << "'s turn\n\n";
 
 		ansi.textAttr("-bold");
-		cout << "                  [Arrow Keys] - Move     [Spacebar] - Choose tile     [q] - Quit                  " << endl;
+		cout << "                 [Arrow Keys] - Move     [Spacebar] - Choose column     [q] - Quit                 " << endl;
 
 		ansi.textReset();
 
@@ -192,5 +192,29 @@ void ConnectFour::printHeader(){
 
 // Prints the game rules
 void ConnectFour::rules(){
+	printHeader();
+	ansi.textColor("green");
+	ansi.textAttr("bold");
+	cout << "                                              RULES:                                               \n" << endl;
+	ansi.textAttr("-bold");
+	
+	cout << "              Connect Four is a two player game, each playing either blue or red,                  \n" 
+			"              where the players take turns to drop their piece into a (typically) 6x7              \n"
+			"              grid. The player who gets four of their pieces in a row first wins.                  \n"
+			"              The four characters can be horizontal, vertical, or diagonal.                        \n"
+			"              Player 1 will start, playing as blue, and player 2 will follow, playing	            \n"
+			"              as red.                                                                              \n" << endl;
 
+	ansi.textAttr("bold");
+	cout << "                                             CONTROLS:                                             \n" << endl;
+	ansi.textAttr("-bold");
+
+	cout << "                                    [Arrow keys] - Move cursor left/right                          \n"
+			"                                     [Spacebar]  - Place piece in column                         \n\n" << endl;
+
+	ansi.textAttr("bold");
+	cout << "                                Press any key to return to the menu                                \n" << endl;
+	ansi.textAttr("-bold");
+	getch();
+	ansi.textReset();
 }
