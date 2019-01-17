@@ -289,26 +289,28 @@ void Hangman::rules(){
 	cout << "                                              RULES:                                               \n" << endl;
 	ansi.textAttr("-bold");
 	
-	/*cout << "              Simon Says is a game where you will be shown a series of button presses              \n" 
-			"              which you must then repeat back. The buttons used will be the four                   \n"
-			"              arrow keys, presented to you in a random order.                                      \n"
-			"              You must repeat back the same arrow keys in the exact same order they                \n"
-			"              were presented to you.\n"
-			"              Every turn, if you correctly enter the keys in the correct order, the                \n"
-			"              displayed keys will all flash to signify that you repeated the sequence              \n"
-			"              correctly.\n"
-			"              When you fail to press the keys in the correct order, the game will be               \n"
-			"              over, and your final score will be the number of turns you survived.                 \n"<< endl;
-	*/
+	cout << "              Hangman is a game where one player must enter a word or a phrase for                 \n" 
+			"              the second player to guess, one letter at a time. As the game starts,                \n"
+			"              Player 1 is prompted to enter their wod or phrase. After this, Player 2              \n"
+			"              can start guessing. The word or phrase that needs to be guessed is                   \n"
+			"              represented by a series of hashtags (#). If Player 2 correctly guesses a             \n"
+			"              letter in the word or phrase, the letter will show itself. If Player 2               \n"
+			"              guesses incorrectly, a body part will be added to the hanged man,                    \n"
+			"              increasing his suffering.                                                            \n"
+			"              If the full word or phrase is uncovered, Player 2 wins. However, if all              \n"
+			"              six body parts are added to the image before the word or phrase is                   \n"
+			"              guessed, Player 1 wins.                                                              \n"<< endl;
+	
 	ansi.textAttr("bold");
 	cout << "                                            CONTROLS:                                              \n" << endl;
 	ansi.textAttr("-bold");
-	/*
-	cout << "                                 [Arrow keys] - Copy Simon's moves                                 \n" << endl;
+
+	cout << "                            [Keyboard] - Enter word or phrase (Player 1)                           \n"
+			"                            [Keyboard] - Enter letters to guess (Player 2)                         \n" << endl;
 
 	ansi.textAttr("bold");
     cout << "\n\n\n";
-    */
+
 	cout << "                                Press any key to return to the menu                                \n" << endl;
 	ansi.textAttr("-bold");
 	getch();
