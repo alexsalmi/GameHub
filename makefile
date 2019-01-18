@@ -3,8 +3,8 @@ CC = g++
 all: gamehub
 
 # Compiles entire app
-gamehub:  GameHub.cpp TicTacToe SimonSays Memory ConnectFour Hangman
-	$(CC) -o GameHub GameHub.cpp ./TicTacToe/_TicTacToe.o ./SimonSays/_SimonSays.o ./Memory/_Memory.o ./ConnectFour/_ConnectFour.o ./Hangman/_Hangman.o ./libs/dispANSI.o
+gamehub:  main.cpp TicTacToe SimonSays Memory ConnectFour Hangman
+	$(CC) -o GameHub main.cpp ./TicTacToe/_TicTacToe.o ./SimonSays/_SimonSays.o ./Memory/_Memory.o ./ConnectFour/_ConnectFour.o ./Hangman/_Hangman.o ./libs/dispANSI.o
 
 # Compiles TicTacToe module
 TicTacToe: .\TicTacToe\TicTacToe.cpp .\TicTacToe\TicTacToe.h .\TicTacToe\TTTBoard.cpp .\TicTacToe\TTTBoard.h
