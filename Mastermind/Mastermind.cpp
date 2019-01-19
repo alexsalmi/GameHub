@@ -19,7 +19,7 @@ void Mastermind::start(){
 	}while(menuChoice!=0);
 }
 
-void Mastermind::menu(){
+int Mastermind::menu(){
 	int menuChoice;
 	while(true){
 		// Print header and change text attributes
@@ -53,22 +53,17 @@ void Mastermind::menu(){
 }
 
 // Main game loop 
-void play(){
+void Mastermind::play(){
 
 }
 
 // Displays post game screen
-void endgame(){
+void Mastermind::endgame(){
 
 }
 
 // Prints mastermind header to cmd window
-void printHeader(){
-
-}	
-
-// Displays the rules of the game
-void rules(){
+void Mastermind::printHeader(){
     ansi.clearScreen();
     ansi.textColor("green");
     ansi.textAttr("bold");
@@ -82,5 +77,8 @@ void rules(){
 			"|                                                                                                 |\n"
 			"+-------------------------------------------------------------------------------------------------+\n" << endl;
 	ansi.textReset();
+}	
 
+// Displays the rules of the game
+void Mastermind::rules(){
 }
