@@ -6,6 +6,7 @@
 #include "Memory/Memory.h"
 #include "ConnectFour/ConnectFour.h"
 #include "Hangman/Hangman.h"
+#include "Mastermind/Mastermind.h"
 
 using namespace std;
 
@@ -49,11 +50,16 @@ int main(){
 			delete ticTac;
 		}
 		else if(menuChoice==4){
+			Mastermind* mastermind = new Mastermind();
+			mastermind->start();
+			delete mastermind;
+		}
+		else if(menuChoice==5){
 			ConnectFour* connectfour = new ConnectFour();
 			connectfour->start();
 			delete connectfour;
 		}
-		else if(menuChoice==5){
+		else if(menuChoice==6){
 			Hangman* hangman = new Hangman();
 			hangman->start();
 			delete hangman;
@@ -102,9 +108,9 @@ int mainMenu(){
 		cout << "                                 1-Player:         2-Player:                                       \n" << endl;
 
 		cout << "                                 (1) Simon Says    (3) Tic Tac Toe                                 \n" 
-				"                                 (2) Memory        ( ) Mastermind                                  \n" 
-				"                                 (3) Tic Tac Toe   (4) Connect Four                                \n"
-				"                                 ( ) Mastermind    (5) Hangman                                 \n\n\n" << endl;
+				"                                 (2) Memory        (4) Mastermind                                  \n" 
+				"                                 (3) Tic Tac Toe   (5) Connect Four                                \n"
+				"                                 (4) Mastermind    (6) Hangman                                 \n\n\n" << endl;
 
 		cout << "                                        (0) Quit GameHub			                                  " << endl;
 		ansi.textReset();
