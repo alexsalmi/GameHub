@@ -27,7 +27,7 @@ Hangman: .\Hangman\Hangman.cpp .\Hangman\Hangman.h
 	+$(MAKE) -C Hangman
 
 # Compiles Mastermind module
-Mastermind: .\Mastermind\Mastermind.cpp .\Mastermind\Mastermind.h
+Mastermind: .\Mastermind\Mastermind.cpp .\Mastermind\Mastermind.h .\Mastermind\MMBoard.cpp .\Mastermind\MMBoard.h
 	+$(MAKE) -C Mastermind
 
 # Cleans solution
