@@ -12,8 +12,9 @@ void Mastermind::start(){
 		menuChoice = menu();
 
 		switch(menuChoice){
-			case 1: play(); break;				// Play Mastermind
-			case 2: rules(); break;				// Rules of Mastermind
+			case 1: play(false); break;				// Play Mastermind in Single Player mode
+			case 2: play(true); break;				// Play Mastermind in Multiplayer mode
+			case 3: rules(); break;					// Rules of Mastermind
 			default: break;
 		}
 	}while(menuChoice!=0);
@@ -32,9 +33,10 @@ int Mastermind::menu(){
 		cout << "                                      Welcome to Mastermind!                                       \n" 
 				"                             Please select an option from the menu below:                          \n" << endl << endl;
 
-		cout << "                             (1) Play Mastermind                                                   \n" << endl;
+		cout << "                             (1) Play Mastermind vs. the CPU    (1 Player)                         \n"
+				"                             (2) Play Mastermind vs. a friend   (2 Player)                         \n" << endl;
 		
-		cout << "                             (2) View game rules and controls\n" << endl;
+		cout << "                             (3) View game rules and controls\n" << endl;
 
 		cout << "                             (0) Return to GameHub							                         " << endl;
 		ansi.textReset();
@@ -46,14 +48,60 @@ int Mastermind::menu(){
 			cin.clear();
         	cin.ignore();
 		}
-		else if(menuChoice<=2 && menuChoice>=0)
+		else if(menuChoice<=3 && menuChoice>=0)
 			return menuChoice;
 	}
 
 }
 
 // Main game loop 
-void Mastermind::play(){
+void Mastermind::play(bool mult){
+	multiplayer = mult;
+	int i, color;
+
+	if(!multiplayer){
+		srand((unsigned)time(0));
+		for(i=0; i<solLength; i++){
+			color = rand()%NUM_OF_COLORS;
+			switch(color){
+				case 0: solution[i] = Red; break;
+				case 1: solution[i] = Blue; break;
+				case 2: solution[i] = Green; break;
+				case 3: solution[i] = Yellow; break;
+				case 4: solution[i] = White; break;
+				case 5: solution[i] = Cyan; break;
+			}
+		}
+	}
+	else{
+	}
+
+	while(true){
+		printHeader();
+		ansi.textColor("green");
+		ansi.textAttr("bold");
+
+		for(i=0; i<solLength; i++){
+			switch(solution[i]){
+				case Red: ansi.textColor("red"); break;
+				case Blue: ansi.textColor("blue"); break;
+				case Green: ansi.textColor("green"); break;
+				case Yellow: ansi.textColor("yellow"); break;
+				case White: ansi.textColor("white"); break;
+				case Cyan: ansi.textColor("cyan"); break;
+			}
+
+			cout << "O ";
+		}
+
+		ansi.textColor("green");
+
+		cout << "\n\n\n"
+				"Press any button to continue";
+
+		getch();
+		return;
+	}
 
 }
 
