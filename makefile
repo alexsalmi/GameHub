@@ -4,7 +4,7 @@ all: gamehub
 
 # Compiles entire app
 gamehub:  main.cpp TicTacToe SimonSays Memory ConnectFour Hangman Mastermind
-	$(CC) -o GameHub main.cpp ./TicTacToe/_TicTacToe.o ./SimonSays/_SimonSays.o ./Memory/_Memory.o ./ConnectFour/_ConnectFour.o ./Hangman/_Hangman.o ./libs/dispANSI.o
+	$(CC) -o GameHub main.cpp ./TicTacToe/_TicTacToe.o ./SimonSays/_SimonSays.o ./Memory/_Memory.o ./ConnectFour/_ConnectFour.o ./Hangman/_Hangman.o ./Mastermind/_Mastermind.o ./libs/dispANSI.o
 
 # Compiles TicTacToe module
 TicTacToe: .\TicTacToe\TicTacToe.cpp .\TicTacToe\TicTacToe.h .\TicTacToe\TTTBoard.cpp .\TicTacToe\TTTBoard.h
