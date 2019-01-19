@@ -76,7 +76,9 @@ void Mastermind::play(bool mult){
 	else{
 	}
 
-	while(true){
+	MMBoard *gameBoard = new MMBoard(solution);
+
+	while(turnsLeft>0){
 		printHeader();
 		ansi.textColor("green");
 		ansi.textAttr("bold");
@@ -95,6 +97,9 @@ void Mastermind::play(bool mult){
 		}
 
 		ansi.textColor("green");
+
+		cout << "\n\n\n";
+		gameBoard->print();
 
 		cout << "\n\n\n"
 				"Press any button to continue";

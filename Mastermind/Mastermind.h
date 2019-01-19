@@ -1,15 +1,12 @@
 #ifndef MASTERMIND_H
 #define MASTERMIND_H
 
-#include "..\libs\dispANSI.h"
-#include <conio.h>				// Used for getch() (reading character key inputs)
+#include "MMBoard.h"
 #include <cstdlib> 				// Used for rng 
 #include <ctime>				// Used for setting seeds in rng
-#include <iostream>
 
 using namespace std;
 
-enum Colors {Red, Blue, Green, Yellow, White, Cyan};
 const int NUM_OF_COLORS = 6;
 
 class Mastermind{
@@ -32,10 +29,13 @@ private:
 	// Displays the rules of the game
 	void rules();
 
-	Colors solution[4];
-	Colors guess[4];
-	int solLength = 4;
+	const static int solLength = 4;
+	Colors solution[solLength];
+	Colors guess[solLength];
+	int turnsLeft = 7;
 	bool multiplayer;
+
+	// For ANSI escape commands
 	dispANSI ansi;
 };
 
