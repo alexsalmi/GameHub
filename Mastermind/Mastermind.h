@@ -21,7 +21,7 @@ private:
 	void play();
 	// Displays post game screen
 	void endgame();
-	// Prints memory header to cmd window
+	// Prints mastermind header to cmd window
 	void printHeader();	
 	// Displays the rules of the game
 	void rules();
