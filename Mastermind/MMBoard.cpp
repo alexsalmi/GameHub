@@ -1,10 +1,10 @@
 #include "MMBoard.h"
 
-MMBoard::MMBoard(Colors sol[4]){
+MMBoard::MMBoard(string sol[4]){
 	for(int i=0; i<length; i++){
 		solution[i] = sol[i];
 		for(int j=0; j<guesses; j++){
-			guessBoard[j][i] = None;
+			guessBoard[j][i] = "none";
 			feedback[j][i] = 0;
 		}
 	}
@@ -12,22 +12,16 @@ MMBoard::MMBoard(Colors sol[4]){
 
 void MMBoard::print(){
 	int i, j;
-	cout << "_____________________\n";
+	cout << "                                       _____________________                                       \n";
 
 	for(i=0; i<guesses; i++){
-		cout << "| ";
-		if(guessBoard[i][0]==None)
+		cout << "                                       |         |         |\n"
+				"                                       | ";
+		if(guessBoard[i][0]=="none")
 			cout << "        |         ";
 		else{
 			for(j=0; j<length; j++){
-				switch(guessBoard[i][j]){
-					case Red: ansi.textColor("red"); break;
-					case Blue: ansi.textColor("blue"); break;
-					case Green: ansi.textColor("green"); break;
-					case Yellow: ansi.textColor("yellow"); break;
-					case White: ansi.textColor("white"); break;
-					case Cyan: ansi.textColor("cyan"); break; 
-				}
+				ansi.textColor(guessBoard[i][j]);
 				cout << "O ";
 			}
 			ansi.textColor("green");
@@ -43,10 +37,10 @@ void MMBoard::print(){
 		}
 		cout << "|\n";
 	}
-	cout << "|_________|_________|\n" << endl;
+	cout << "                                       |_________|_________|                                       \n" << endl;
 }
 
-bool MMBoard::update(Colors guess[4]){
+void MMBoard::update(string guess[4]){
 	for(int i=0; i<length; i++){
 		if(guess[i]==guessBoard[currentGuess][i])
 			feedback[currentGuess][i] = 2;
@@ -62,5 +56,4 @@ bool MMBoard::update(Colors guess[4]){
 	}
 
 	currentGuess++;
-	return 0;
 }

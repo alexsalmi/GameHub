@@ -56,6 +56,7 @@ int Mastermind::menu(){
 
 // Main game loop 
 void Mastermind::play(bool mult){
+	int moveKey;
 	multiplayer = mult;
 	int i, color;
 
@@ -64,12 +65,12 @@ void Mastermind::play(bool mult){
 		for(i=0; i<solLength; i++){
 			color = rand()%NUM_OF_COLORS;
 			switch(color){
-				case 0: solution[i] = Red; break;
-				case 1: solution[i] = Blue; break;
-				case 2: solution[i] = Green; break;
-				case 3: solution[i] = Yellow; break;
-				case 4: solution[i] = White; break;
-				case 5: solution[i] = Cyan; break;
+				case 0: solution[i] = "red"; break;
+				case 1: solution[i] = "blue"; break;
+				case 2: solution[i] = "green"; break;
+				case 3: solution[i] = "yellow"; break;
+				case 4: solution[i] = "white"; break;
+				case 5: solution[i] = "cyan"; break;
 			}
 		}
 	}
@@ -84,15 +85,7 @@ void Mastermind::play(bool mult){
 		ansi.textAttr("bold");
 
 		for(i=0; i<solLength; i++){
-			switch(solution[i]){
-				case Red: ansi.textColor("red"); break;
-				case Blue: ansi.textColor("blue"); break;
-				case Green: ansi.textColor("green"); break;
-				case Yellow: ansi.textColor("yellow"); break;
-				case White: ansi.textColor("white"); break;
-				case Cyan: ansi.textColor("cyan"); break;
-			}
-
+			ansi.textColor(solution[i]);
 			cout << "O ";
 		}
 
@@ -101,13 +94,53 @@ void Mastermind::play(bool mult){
 		cout << "\n\n\n";
 		gameBoard->print();
 
-		cout << "\n\n\n"
-				"Press any button to continue";
+		cout << "                                         ";
+		for(i=0; i<solLength; i++){
+			if(currentChoice==i)
+				ansi.textColor(colorChoice);
+			else if(currentChoice<i)
+				ansi.textColor(guess[i]);
+			else 
+				ansi.textColor("black");
+			cout << "O ";			
+		}
 
-		getch();
-		return;
+		cout << "\n\n\n"
+				"Choose your next color";
+
+		do{
+			moveKey = getch();
+			if(moveKey==224)
+				moveKey = getch();
+		}while(moveKey!=KEY_LEFT && moveKey!=KEY_RIGHT && moveKey!=' ');
+
+		makeMove(moveKey, gameBoard);
 	}
 
+}
+
+// Make a move based on user's key press
+void Mastermind::makeMove(int moveKey, MMBoard* gameBoard){
+	switch(moveKey){
+		case KEY_RIGHT:
+			colorIndex = (colorIndex+1)%NUM_OF_COLORS;
+			colorChoice = colors[colorIndex];
+			break;
+		case KEY_LEFT:
+			if(colorIndex==0)
+				colorIndex = NUM_OF_COLORS;
+			colorIndex = (colorIndex-1)%NUM_OF_COLORS;
+			colorChoice = colors[colorIndex];
+			break;
+		case ' ':
+			guess[currentChoice] = colorChoice;
+			currentChoice++;
+			break;
+	}
+	if(currentChoice==4){
+		currentChoice==0;
+		gameBoard->update(guess);
+	}
 }
 
 // Displays post game screen

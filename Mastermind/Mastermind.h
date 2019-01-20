@@ -7,6 +7,9 @@
 
 using namespace std;
 
+#define KEY_LEFT 75
+#define KEY_RIGHT 77
+
 const int NUM_OF_COLORS = 6;
 
 class Mastermind{
@@ -22,6 +25,8 @@ private:
 	int menu();
 	// Main game loop 
 	void play(bool mult);
+	// Make a move based on user's key press
+	void makeMove(int moveKey, MMBoard* gameBoard);
 	// Displays post game screen
 	void endgame();
 	// Prints mastermind header to cmd window
@@ -30,10 +35,13 @@ private:
 	void rules();
 
 	const static int solLength = 4;
-	Colors solution[solLength];
-	Colors guess[solLength];
+	string solution[solLength];
+	string guess[solLength];
 	int turnsLeft = 7;
 	bool multiplayer;
+	int currentChoice = 0;
+	string colorChoice = "red"; 
+	int colorIndex = 0;
 
 	// For ANSI escape commands
 	dispANSI ansi;
