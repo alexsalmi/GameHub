@@ -4,8 +4,8 @@ MMBoard::MMBoard(Colors sol[4]){
 	for(int i=0; i<length; i++){
 		solution[i] = sol[i];
 		for(int j=0; j<guesses; j++){
-			guessBoard[guesses][length] = None;
-			feedback[guesses][length] = None;
+			guessBoard[j][i] = None;
+			feedback[j][i] = 0;
 		}
 	}
 }
@@ -16,7 +16,9 @@ void MMBoard::print(){
 
 	for(i=0; i<guesses; i++){
 		cout << "| ";
-		if(guessBoard[i][0]!=None){
+		if(guessBoard[i][0]==None)
+			cout << "        |         ";
+		else{
 			for(j=0; j<length; j++){
 				switch(guessBoard[i][j]){
 					case Red: ansi.textColor("red"); break;
@@ -32,15 +34,13 @@ void MMBoard::print(){
 			cout << "| ";
 			for(j=0; j<length; j++){
 				switch(feedback[i][j]){
-					case 0: cout << "X ";
-					case 1: cout << "/ ";
-					case 2: cout << "O ";
+					case 0: cout << "X "; break;
+					case 1: cout << "/ "; break;
+					case 2: cout << "O "; break;
 				}
 			}
 			cout << "| ";
 		}
-		else
-			cout << "        |         ";
 		cout << "|\n";
 	}
 	cout << "|_________|_________|\n" << endl;

@@ -18,7 +18,7 @@ public:
 
 private:
 	const static int guesses=7, length=4;
-	int guessBoard[guesses][length];
+	Colors guessBoard[guesses][length];
 	int feedback[guesses][length];
 	int currentGuess=1;
 	Colors solution[length];
