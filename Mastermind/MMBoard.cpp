@@ -42,12 +42,13 @@ void MMBoard::print(){
 
 void MMBoard::update(string guess[4]){
 	for(int i=0; i<length; i++){
-		if(guess[i]==guessBoard[currentGuess][i])
+		guessBoard[currentGuess][i] = guess[i];
+		if(guess[i]==solution[i])
 			feedback[currentGuess][i] = 2;
 		else{
 			feedback[currentGuess][i] = 0;
 			for(int j=0; j<length; j++){
-				if(guess[i]==guessBoard[currentGuess][j]){
+				if(guess[i]==solution[j]){
 					feedback[currentGuess][i] = 1;
 					break;
 				}
@@ -56,4 +57,13 @@ void MMBoard::update(string guess[4]){
 	}
 
 	currentGuess++;
+}
+
+// Checks if the game is over or not
+bool MMBoard::isGameOver(string guess[4]){
+	for(int i=0; i<length; i++){
+		if(guess[i]!=solution[i])
+			return false;
+	}
+	return true;
 }

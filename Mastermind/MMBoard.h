@@ -15,12 +15,14 @@ public:
 	void print();
 	// Updates the board after a guess is made
 	void update(string guess[4]);
+	// Checks if the game is over or not
+	bool isGameOver(string guess[4]);
 
 private:
 	const static int guesses=7, length=4;
 	string guessBoard[guesses][length];
 	int feedback[guesses][length];
-	int currentGuess=1;
+	int currentGuess=0;
 	string solution[length];
 
 	// For ANSI escape commands
