@@ -122,7 +122,7 @@ int mainMenu(){
 			cin.clear();
         	cin.ignore();
 		}
-		else if(menuChoice <= 5 && menuChoice >= 0)
+		else if(menuChoice <= 6 && menuChoice >= 0)
 			return menuChoice;		
 	}
 }
