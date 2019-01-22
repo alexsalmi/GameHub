@@ -33,7 +33,6 @@ void MMBoard::print(){
 					case 2: cout << "O "; break;
 				}
 			}
-			cout << "| ";
 		}
 		cout << "|\n";
 	}
