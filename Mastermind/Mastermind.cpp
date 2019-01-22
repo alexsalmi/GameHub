@@ -98,7 +98,7 @@ void Mastermind::play(bool mult){
 		for(i=0; i<solLength; i++){
 			if(currentChoice==i)
 				ansi.textColor(colorChoice);
-			else if(currentChoice<i)
+			else if(currentChoice>i)
 				ansi.textColor(guess[i]);
 			else 
 				ansi.textColor("black");
@@ -112,9 +112,16 @@ void Mastermind::play(bool mult){
 			moveKey = getch();
 			if(moveKey==224)
 				moveKey = getch();
+			if(moveKey=='q')
+				return;
 		}while(moveKey!=KEY_LEFT && moveKey!=KEY_RIGHT && moveKey!=' ');
 
 		makeMove(moveKey, gameBoard);
+
+		if(gameBoard->isGameOver(guess) && currentChoice==0){
+			endgame();
+			return;
+		}
 	}
 
 }
@@ -129,7 +136,7 @@ void Mastermind::makeMove(int moveKey, MMBoard* gameBoard){
 		case KEY_LEFT:
 			if(colorIndex==0)
 				colorIndex = NUM_OF_COLORS;
-			colorIndex = (colorIndex-1)%NUM_OF_COLORS;
+			colorIndex = colorIndex-1;
 			colorChoice = colors[colorIndex];
 			break;
 		case ' ':
@@ -138,7 +145,7 @@ void Mastermind::makeMove(int moveKey, MMBoard* gameBoard){
 			break;
 	}
 	if(currentChoice==4){
-		currentChoice==0;
+		currentChoice=0;
 		gameBoard->update(guess);
 	}
 }
