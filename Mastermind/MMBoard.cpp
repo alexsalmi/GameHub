@@ -12,6 +12,9 @@ MMBoard::MMBoard(string sol[4]){
 
 void MMBoard::print(){
 	int i, j;
+	
+	ansi.textColor("green");
+	ansi.textAttr("bold");
 	cout << "                                       _____________________                                       \n";
 
 	for(i=0; i<guesses; i++){
@@ -37,6 +40,7 @@ void MMBoard::print(){
 		cout << "|\n";
 	}
 	cout << "                                       |_________|_________|                                       \n" << endl;
+	ansi.textReset();
 }
 
 void MMBoard::update(string guess[4]){

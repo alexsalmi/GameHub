@@ -89,10 +89,9 @@ void Mastermind::play(bool mult){
 			cout << "O ";
 		}
 
-		ansi.textColor("green");
-
 		cout << "\n\n\n";
 		gameBoard->print();
+		ansi.textAttr("bold");
 
 		cout << "                                         ";
 		for(i=0; i<solLength; i++){
@@ -105,6 +104,7 @@ void Mastermind::play(bool mult){
 			cout << "O ";			
 		}
 
+		ansi.textColor("green");
 		cout << "\n\n\n"
 				"Choose your next color";
 
@@ -119,7 +119,8 @@ void Mastermind::play(bool mult){
 		makeMove(moveKey, gameBoard);
 
 		if(gameBoard->isGameOver(guess) && currentChoice==0){
-			endgame();
+			endgame(gameBoard);
+			delete gameBoard;
 			return;
 		}
 	}
@@ -151,8 +152,24 @@ void Mastermind::makeMove(int moveKey, MMBoard* gameBoard){
 }
 
 // Displays post game screen
-void Mastermind::endgame(){
+void Mastermind::endgame(MMBoard *gameBoard){
+	// Print the board of the finished game and change text atrributes
+	printHeader();
+	gameBoard->print();	
+	ansi.textColor("green");
+	ansi.textAttr("bold");
+	cout << "\n";
 
+	// Print out who won the game
+	if(!multiplayer)
+		cout << "                              Congratulations, you guessed the pattern!                            " << endl;
+
+	// Exit to tic tac toe menu
+	ansi.textAttr("-bold");
+	cout << "\n\n";
+	cout << "                                 Press any key to return to the menu                                 " << endl;
+	getch();
+	ansi.textReset();
 }
 
 // Prints mastermind header to cmd window

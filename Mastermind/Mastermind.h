@@ -28,7 +28,7 @@ private:
 	// Make a move based on user's key press
 	void makeMove(int moveKey, MMBoard* gameBoard);
 	// Displays post game screen
-	void endgame();
+	void endgame(MMBoard *gameBoard);
 	// Prints mastermind header to cmd window
 	void printHeader();	
 	// Displays the rules of the game
