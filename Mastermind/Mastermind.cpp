@@ -155,7 +155,7 @@ void Mastermind::play(bool mult){
 
 		makeMove(moveKey, gameBoard);
 
-		if(gameBoard->isGameOver(guess) && currentChoice==0){
+		if((gameBoard->isGameOver(guess) && currentChoice==0) || gameBoard->currentGuess == 7){
 			endgame(gameBoard);
 			delete gameBoard;
 			return;
