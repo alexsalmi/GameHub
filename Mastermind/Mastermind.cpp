@@ -114,7 +114,7 @@ void Mastermind::play(bool mult){
 				moveKey = getch();
 			if(moveKey=='q')
 				return;
-		}while(moveKey!=KEY_LEFT && moveKey!=KEY_RIGHT && moveKey!=' ');
+		}while(moveKey!=KEY_LEFT && moveKey!=KEY_RIGHT && moveKey!=' ' && moveKey!='u');
 
 		makeMove(moveKey, gameBoard);
 
@@ -139,6 +139,12 @@ void Mastermind::makeMove(int moveKey, MMBoard* gameBoard){
 				colorIndex = NUM_OF_COLORS;
 			colorIndex = colorIndex-1;
 			colorChoice = colors[colorIndex];
+			break;
+		case 'u':
+			if(currentChoice>0){
+				currentChoice--;
+				colorChoice = guess[currentChoice];
+			}
 			break;
 		case ' ':
 			guess[currentChoice] = colorChoice;
