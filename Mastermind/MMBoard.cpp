@@ -31,11 +31,13 @@ void MMBoard::print(){
 			cout << "| ";
 			for(j=0; j<length; j++){
 				switch(feedback[i][j]){
-					case 0: cout << "X "; break;
-					case 1: cout << "/ "; break;
-					case 2: cout << "O "; break;
+					case 0: ansi.textColor("red"); break;
+					case 1: ansi.textColor("white"); break;
+					case 2: ansi.textColor("green"); break;
 				}
+				cout << "O ";
 			}
+			ansi.textColor("green");
 		}
 		cout << "|\n";
 	}
