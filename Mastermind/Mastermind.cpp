@@ -75,6 +75,43 @@ void Mastermind::play(bool mult){
 		}
 	}
 	else{
+		bool isDone = false;
+		while(!isDone){
+			printHeader();
+			ansi.textColor("green");
+			ansi.textAttr("bold");
+
+			cout << "                        Player 1, choose a pattern for your opponent to guess:               \n" << endl;
+
+			cout << "                                         ";
+			for(i=0; i<solLength; i++){
+				if(currentChoice==i)
+					ansi.textColor(colorChoice);
+				else if(currentChoice>i)
+					ansi.textColor(solution[i]);
+				else 
+					ansi.textColor("black");
+				cout << "O ";			
+			}
+			do{
+				moveKey = getch();
+				if(moveKey==224)
+					moveKey = getch();
+				if(moveKey=='q')
+					return;
+				if(moveKey==' '){
+					solution[currentChoice] = colorChoice;
+					currentChoice++;
+					if(currentChoice==4){
+						currentChoice = 0;
+						isDone = true;
+					}
+				}
+				else{
+					makeMove(moveKey, NULL);
+				}
+			}while(moveKey!=KEY_LEFT && moveKey!=KEY_RIGHT && moveKey!=' ' && moveKey!='u');
+		}
 	}
 
 	MMBoard *gameBoard = new MMBoard(solution);
