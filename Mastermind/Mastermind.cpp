@@ -118,16 +118,8 @@ void Mastermind::play(bool mult){
 
 	while(turnsLeft>0){
 		printHeader();
-		ansi.textColor("green");
-		ansi.textAttr("bold");
-
-		for(i=0; i<solLength; i++){
-			ansi.textColor(solution[i]);
-			cout << "O ";
-		}
-
-		cout << "\n\n\n";
 		gameBoard->print();
+		ansi.textColor("green");
 		ansi.textAttr("bold");
 
 		cout << "                                         ";
@@ -142,8 +134,11 @@ void Mastermind::play(bool mult){
 		}
 
 		ansi.textColor("green");
-		cout << "\n\n\n"
-				"Choose your next color";
+		cout << "\n\n"
+				"                                       Choose your next color\n\n";
+
+		ansi.textAttr("-bold");
+		cout << "         [Arrow Keys] - Cycle between colors     [Spacebar] - Choose color     [q] - Quit          " << endl;
 
 		do{
 			moveKey = getch();
