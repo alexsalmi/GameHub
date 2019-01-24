@@ -201,11 +201,17 @@ void Mastermind::endgame(MMBoard *gameBoard){
 	gameBoard->print();	
 	ansi.textColor("green");
 	ansi.textAttr("bold");
-	cout << "\n";
 
 	// Print out who won the game
 	if(!multiplayer)
 		cout << "                              Congratulations, you guessed the pattern!                            " << endl;
+	else{
+		if(!gameBoard->isGameOver(guess))
+			cout << "                 Sorry player 2, you couldn't guess the pattern. Player 1, you win!                " << endl;
+		else
+			cout << "                             You guessed the pattern, player 2, you win!                           " << endl;
+
+	}
 
 	// Exit to tic tac toe menu
 	ansi.textAttr("-bold");
