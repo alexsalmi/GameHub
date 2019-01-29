@@ -138,7 +138,8 @@ void Mastermind::play(bool mult){
 				"                                       Choose your next color\n\n";
 
 		ansi.textAttr("-bold");
-		cout << "         [Arrow Keys] - Cycle between colors     [Spacebar] - Choose color     [q] - Quit          " << endl;
+		cout << "      [Arrow Keys] - Cycle between colors     [Spacebar] - Choose color     [u] - Undo move        "
+				"                                              [q] - Quit                                           " << endl;
 
 		do{
 			moveKey = getch();
@@ -235,4 +236,40 @@ void Mastermind::printHeader(){
 
 // Displays the rules of the game
 void Mastermind::rules(){
+	printHeader();
+	ansi.textColor("green");
+	ansi.textAttr("bold");
+	cout << "                                              RULES:                                               \n" << endl;
+	ansi.textAttr("-bold");
+	
+	cout << "              Mastermind is a game where a player must guess a pattern of four colors              \n" 
+			"              in their correct order in a certain number of attempts. Each time the                \n"
+			"              player makes a guess, they will recieve feedback on their guess. This                \n"
+			"              feedback will be given for each of the four guessed colors, each turn.               \n"
+			"              If the feedback for a color is red, this means that the color does not               \n"
+			"              exist in the pattern. If the feedback for a color is white, this means               \n"
+			"              the color exists in the pattern, but is in the wrong place in the order              \n"
+			"              If the feedback for the color is green, this means the guessed color is              \n"
+			"              in the correct place in the order. If the player does not guess the correct          \n"
+			"              pattern after 7 turns, they lose.                                                    \n"
+			"              If you play a single player game of mastermind, the game will choose a               \n"
+			"              pattern and you must guess the correct pattern as specified above. If you            \n"
+			"              play a multiplayer game of mastermind, player 1 will choose the pattern,             \n"
+			"              and player 2 must guess it.                                                          \n"<< endl;
+	
+	ansi.textAttr("bold");
+	cout << "                                            CONTROLS:                                              \n" << endl;
+	ansi.textAttr("-bold");
+
+	cout << "                            [Keyboard] - Choose between colors                           \n"
+			"                            [Spacebar] - Select a color                                  \n"
+			"                                   [u] - Undo a guessed color                            \n" << endl;
+
+	ansi.textAttr("bold");
+
+	cout << "                                Press any key to return to the menu                                \n" << endl;
+	ansi.textAttr("-bold");
+	getch();
+	ansi.textReset();
+
 }
