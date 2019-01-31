@@ -1,6 +1,7 @@
 #ifndef MASTERMIND_H
 #define MASTERMIND_H
 
+#include "..\libs\Game.h"
 #include "MMBoard.h"
 #include <cstdlib> 				// Used for rng 
 #include <ctime>				// Used for setting seeds in rng
@@ -12,7 +13,7 @@ using namespace std;
 
 const int NUM_OF_COLORS = 6;
 
-class Mastermind{
+class Mastermind : Game{
 public:
 	// Constructor
 	Mastermind();
