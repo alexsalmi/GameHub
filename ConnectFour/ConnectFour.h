@@ -1,14 +1,13 @@
 #ifndef CONNECTFOUR_H
 #define CONNECTFOUR_H
 
-#include "..\libs\Game.h"
 #include "CFBoard.h"
 #include <conio.h>				// Used for getch() (reading character key inputs)
 #include <iostream>
 
 using namespace std;
 
-class ConnectFour : Game{
+class ConnectFour{
 public:
 	//Constructor
 	ConnectFour();

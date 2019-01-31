@@ -1,7 +1,6 @@
 #ifndef HANGMAN_H
 #define HANGMAN_H
 
-#include "..\libs\Game.h"
 #include "..\libs\dispANSI.h"
 #include <conio.h>				// Used for getch() (reading character key inputs)
 #include <iostream>
@@ -9,7 +8,7 @@
 
 using namespace std;
 
-class Hangman : Game{
+class Hangman{
 public:
 	//Constructor
 	Hangman();

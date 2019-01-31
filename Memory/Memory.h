@@ -1,7 +1,6 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
-#include "..\libs\Game.h"
 #include "MemoryBoard.h"
 #include <conio.h>				// Used for getch() (reading character key inputs)
 #include <cstdlib> 				// Used for rng 
@@ -12,7 +11,7 @@ using namespace std;
 
 enum Difficult {e, m, h}; // Used to keep track of the difficulty of the CPU
 
-class Memory : Game{
+class Memory{
 public:
 	// Constructor
 	Memory();

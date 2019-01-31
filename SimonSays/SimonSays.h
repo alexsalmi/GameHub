@@ -1,7 +1,6 @@
 #ifndef SIMONSAYS_H
 #define SIMONSAYS_H
 
-#include "..\libs\Game.h"
 #include "..\libs\dispANSI.h"
 #include <conio.h>				// Used for getch() (reading character key inputs)
 #include <cstdlib> 				// Used for rng 
@@ -23,7 +22,7 @@ using namespace std;
 
 enum Move {moveup, movedown, moveleft, moveright, movenone, moveall}; // Used to keep track of the moves to be played
 
-class SimonSays : Game{
+class SimonSays{
 public:
 	// Constructor
 	SimonSays();
