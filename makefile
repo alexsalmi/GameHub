@@ -3,7 +3,7 @@ CC = g++
 all: gamehub
 
 # Compiles entire app
-gamehub:  main.cpp TicTacToe SimonSays Memory ConnectFour Hangman Mastermind
+gamehub:  main.cpp dispANSI TicTacToe SimonSays Memory ConnectFour Hangman Mastermind
 	$(CC) -o GameHub main.cpp ./TicTacToe/_TicTacToe.o ./SimonSays/_SimonSays.o ./Memory/_Memory.o ./ConnectFour/_ConnectFour.o ./Hangman/_Hangman.o ./Mastermind/_Mastermind.o ./libs/dispANSI.o
 
 # Compiles TicTacToe module
@@ -30,6 +30,10 @@ Hangman: .\Hangman\Hangman.cpp .\Hangman\Hangman.h
 Mastermind: .\Mastermind\Mastermind.cpp .\Mastermind\Mastermind.h .\Mastermind\MMBoard.cpp .\Mastermind\MMBoard.h
 	+$(MAKE) -C Mastermind
 
+# Compiles Mastermind module
+Mastermind: .\libs\dispANSI.cpp .\libs\dispANSI.h
+	+$(MAKE) -C libs
+
 # Cleans solution
-clean: 
+clean:
 	$(RM) gamehub *.o *~
