@@ -3,6 +3,10 @@
 A collection of classic games for the command window environment
 
 ## How to use
+
+### Requirements:
+Unfortunately only works on Windows. Need to have make installed (I used gnuwin32), as well as the gcc compiler g++ (MinGW).
+
 ### Steps:
 1. Download Repository
 
@@ -10,7 +14,7 @@ A collection of classic games for the command window environment
 
 3. Compile the project using the command 'make'
 
-4. Start the program by starting the main.exe file
+4. Start the program by starting the GameHub.exe file
 
 ## Games
 This program consists of a total of 6 games:
