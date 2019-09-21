@@ -3,35 +3,35 @@ CC = g++
 all: gamehub
 
 # Compiles entire app
-gamehub:  main.cpp dispANSI TicTacToe SimonSays Memory ConnectFour Hangman Mastermind
-	$(CC) -o GameHub main.cpp ./TicTacToe/_TicTacToe.o ./SimonSays/_SimonSays.o ./Memory/_Memory.o ./ConnectFour/_ConnectFour.o ./Hangman/_Hangman.o ./Mastermind/_Mastermind.o ./libs/dispANSI.o
+gamehub:  main.cpp ./libs/_dispANSI.o ./TicTacToe/_TicTacToe.o ./SimonSays/_SimonSays.o ./Memory/_Memory.o ./ConnectFour/_ConnectFour.o ./Hangman/_Hangman.o ./Mastermind/_Mastermind.o
+	$(CC) -o GameHub main.cpp ./TicTacToe/_TicTacToe.o ./SimonSays/_SimonSays.o ./Memory/_Memory.o ./ConnectFour/_ConnectFour.o ./Hangman/_Hangman.o ./Mastermind/_Mastermind.o ./libs/_dispANSI.o
 
 # Compiles TicTacToe module
-TicTacToe: .\TicTacToe\TicTacToe.cpp .\TicTacToe\TicTacToe.h .\TicTacToe\TTTBoard.cpp .\TicTacToe\TTTBoard.h
+./TicTacToe/_TicTacToe.o: .\TicTacToe\TicTacToe.cpp .\TicTacToe\TicTacToe.h .\TicTacToe\TTTBoard.cpp .\TicTacToe\TTTBoard.h
 	+$(MAKE) -C TicTacToe
 
 # Compiles SimonSays module
-SimonSays: .\SimonSays\SimonSays.cpp .\SimonSays\SimonSays.h
+./SimonSays/_SimonSays.o: .\SimonSays\SimonSays.cpp .\SimonSays\SimonSays.h
 	+$(MAKE) -C SimonSays
 
 # Compiles Memory module
-Memory: .\Memory\Memory.cpp .\Memory\Memory.h .\Memory\MemoryBoard.cpp .\Memory\MemoryBoard.h
+./Memory/_Memory.o: .\Memory\Memory.cpp .\Memory\Memory.h .\Memory\MemoryBoard.cpp .\Memory\MemoryBoard.h
 	+$(MAKE) -C Memory
 
 # Compiles ConnectFour module
-ConnectFour: .\ConnectFour\ConnectFour.cpp .\ConnectFour\ConnectFour.h .\ConnectFour\CFBoard.cpp .\ConnectFour\CFBoard.h
+./ConnectFour/_ConnectFour.o: .\ConnectFour\ConnectFour.cpp .\ConnectFour\ConnectFour.h .\ConnectFour\CFBoard.cpp .\ConnectFour\CFBoard.h
 	+$(MAKE) -C ConnectFour
 
 # Compiles Hangman module
-Hangman: .\Hangman\Hangman.cpp .\Hangman\Hangman.h
+./Hangman/_Hangman.o: .\Hangman\Hangman.cpp .\Hangman\Hangman.h
 	+$(MAKE) -C Hangman
 
 # Compiles Mastermind module
-Mastermind: .\Mastermind\Mastermind.cpp .\Mastermind\Mastermind.h .\Mastermind\MMBoard.cpp .\Mastermind\MMBoard.h
+./Mastermind/_Mastermind.o: .\Mastermind\Mastermind.cpp .\Mastermind\Mastermind.h .\Mastermind\MMBoard.cpp .\Mastermind\MMBoard.h
 	+$(MAKE) -C Mastermind
 
 # Compiles Mastermind module
-Mastermind: .\libs\dispANSI.cpp .\libs\dispANSI.h
+./libs/_dispANSI.o: .\libs\dispANSI.cpp .\libs\dispANSI.h
 	+$(MAKE) -C libs
 
 # Cleans solution
